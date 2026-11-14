@@ -6,6 +6,14 @@
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
   <title><data:blog.pageTitle/></title>
   <b:include data="blog" name="all-head-content"/>
+  <!-- OpenGraph Meta Tags: Hiển thị hình ảnh & tiêu đề bắt mắt khi chia sẻ Facebook, Zalo -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Siêu Ghép Thẻ - Thử thách chỉ 0.1% người thắng Màn 2!"/>
+  <meta property="og:description" content="Trò chơi ghép thẻ 3 ô cực kỳ gây nghiện với 4 chủ đề siêu cute! Bạn có dám phá đảo Màn 2 không? Chơi ngay miễn phí!"/>
+  <meta property="og:url" content="https://game-ghep-the-vui.blogspot.com"/>
+  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi66tdzxS9PXFvCIiTTRB6-gNzjz157diEFLBBxl06YMmNZTiEYXQ2I_fCBx5eFCu1nvx6yxoG1-lSePVLfFZ9Isit0p0uUh2Hz15xAojLMKpLEdYvNHyGV21tQNaGyJzCNwpei7h6_q2JlTwcsJ-xM87QSoFMmawRQ7eVAjyfEWfuFstHpwDzXTDKsEMs/s1376/banner_facebook.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
   <!-- Google AdSense -->
   <script async="async" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7959926217130088"></script>
   <b:skin><![CDATA[
@@ -75,17 +83,14 @@ body {
 .ad-placeholder-box {
     width: 100%;
     height: 600px;
-    border: 2px dashed #cbd5e1;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.6);
+    background: transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 12px;
-    text-align: center;
-    font-size: 12px;
-    color: #64748b;
+    position: relative;
 }
 
 @media (min-width: 900px) {
@@ -491,9 +496,19 @@ body {
     background: #2ed573;
 }
 
+.gift-badge {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+    animation: pulse-soft 1.5s infinite;
+}
+
 .ad-badge {
     background: #ff4757;
     animation: pulse-soft 1.5s infinite;
+}
+
+.lock-badge {
+    background: #a0aec0;
+    font-size: 9px;
 }
 
 @keyframes pulse-soft {
@@ -504,33 +519,47 @@ body {
 /* Vùng Banner Quảng Cáo Chân Trang (Dành cho Mobile & Tablet) */
 .mobile-ad-banner {
     width: 100%;
-    background: #f8fafc;
-    border-top: 1px solid #e2e8f0;
-    padding: 4px 6px;
+    background: #fdfefe;
+    border-top: 1px solid #edf2f7;
+    padding: 6px 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 58px;
-}
-
-.mobile-ad-banner .ad-label {
-    margin-bottom: 2px;
+    min-height: 56px;
+    position: relative;
+    overflow: hidden;
 }
 
 .banner-ad-box {
-    width: 320px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 360px;
     height: 50px;
-    background: #ffffff;
-    border: 1px dashed #cbd5e1;
-    border-radius: 6px;
+    background: #f7fafc;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 12px;
-    color: #64748b;
+    color: #4a5568;
     text-align: center;
+    padding: 0 10px;
+    position: relative;
+}
+
+.banner-tip-content {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #4a5568;
+    line-height: 1.4;
+}
+
+.banner-tip-icon {
+    font-size: 16px;
 }
 
 /* Modals & Dialogs */
@@ -926,17 +955,14 @@ body {
 <div class="app-layout">
         <!-- Vị trí Quảng Cáo Banner Bên Trái (Dành cho Máy tính / Desktop) -->
         <aside class="desktop-side-ad left" aria-label="Quảng cáo">
-            <span class="ad-label">Quảng cáo</span>
             <div class="ad-placeholder-box">
-                <!-- Vị trí đặt mã Google AdSense Skyscraper (160x600) -->
-                <!-- <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-..." data-ad-slot="..."></ins> -->
-                <p>📍 <strong>Google AdSense</strong></p>
-                <p style="margin-top: 8px;">Banner Dọc 160x600</p>
-                <p style="margin-top: 12px; font-size: 11px; opacity: 0.8;">Sẽ tự động hiển thị khi người chơi truy cập bằng máy tính</p>
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:160px;height:600px"
+                     data-ad-client="ca-pub-7959926217130088"></ins>
             </div>
         </aside>
 
-        <!-- Khung Game Chính (Thiết kế tối ưu cho Điện Thoại & Màn Hình Dọc) -->
+        <!-- Khung Game Chính (Thiết kế tối ưu cho Điện Thoại &amp; Màn Hình Dọc) -->
         <main class="game-container">
             <!-- Header trên cùng -->
             <header class="game-header">
@@ -954,7 +980,7 @@ body {
                 </div>
 
                 <div class="header-right">
-                    <button id="btn-share-modal" class="btn-icon" title="Khoe chiến tích & Rủ bạn bè" style="background: #e8f0fe; color: #1a73e8; font-size: 16px;">📢</button>
+                    <button id="btn-share-modal" class="btn-icon" title="Khoe chiến tích &amp; Rủ bạn bè" style="background: #e8f0fe; color: #1a73e8; font-size: 16px;">📢</button>
                     <button id="btn-sound-toggle" class="btn-icon" title="Bật/Tắt âm thanh">🔊</button>
                     <button id="btn-help-modal" class="btn-icon" title="Hướng dẫn chơi">❓</button>
                     <button id="btn-privacy-modal" class="btn-icon" title="Chính sách bảo mật">🛡️</button>
@@ -1012,13 +1038,16 @@ body {
                     </button>
                 </div>
 
-                <!-- Vùng Banner Quảng Cáo Chân Trang (Chuẩn Mobile 320x50) -->
+                <!-- Vùng Banner Chân Trang (Chuẩn Mobile 320x50, sẵn sàng cho AdSense) -->
                 <div class="mobile-ad-banner" aria-label="Quảng cáo">
-                    <span class="ad-label">Quảng cáo</span>
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:320px;height:50px"
+                         data-ad-client="ca-pub-7959926217130088"></ins>
                     <div class="banner-ad-box">
-                        <!-- Vị trí đặt mã Google AdSense Mobile Banner (320x50 hoặc Responsive) -->
-                        <!-- <ins class="adsbygoogle" style="display:inline-block;width:320px;height:50px" data-ad-client="ca-pub-..." data-ad-slot="..."></ins> -->
-                        <span>📍 <strong>Google AdSense Banner</strong> (320x50)</span>
+                        <div class="banner-tip-content">
+                            <span class="banner-tip-icon">💡</span>
+                            <span><strong>Mẹo:</strong> Luôn ưu tiên giải phóng các thẻ đè nhiều tầng trước nhé!</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1026,12 +1055,10 @@ body {
 
         <!-- Vị trí Quảng Cáo Banner Bên Phải (Dành cho Máy tính / Desktop) -->
         <aside class="desktop-side-ad right" aria-label="Quảng cáo">
-            <span class="ad-label">Quảng cáo</span>
             <div class="ad-placeholder-box">
-                <!-- Vị trí đặt mã Google AdSense Skyscraper (160x600) -->
-                <p>📍 <strong>Google AdSense</strong></p>
-                <p style="margin-top: 8px;">Banner Dọc 160x600</p>
-                <p style="margin-top: 12px; font-size: 11px; opacity: 0.8;">Tối ưu hóa doanh thu hiển thị trên màn hình rộng</p>
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:160px;height:600px"
+                     data-ad-client="ca-pub-7959926217130088"></ins>
             </div>
         </aside>
     </div>
@@ -1075,7 +1102,7 @@ body {
     <div id="privacy-modal" class="modal-backdrop hidden">
         <div class="modal-card">
             <div class="modal-header">
-                <h3>🛡️ Chính Sách & Điều Khoản</h3>
+                <h3>🛡️ Chính Sách &amp; Điều Khoản</h3>
                 <button class="modal-close-btn">×</button>
             </div>
             <div class="modal-body" style="font-size: 13px; line-height: 1.6; color: #4b6584;">
@@ -1101,7 +1128,7 @@ body {
                 </p>
                 <div style="display: flex; flex-direction: column; gap: 10px;">
                     <button id="btn-revive-game" class="btn-primary" style="background: linear-gradient(135deg, #20bf6b 0%, #0fb9b1 100%);">
-                        💖 Hồi Sinh Ngay (Xem Ads)
+                        💖 Hồi Sinh Tiếp Sức (Nhận Quà)
                     </button>
                     <button id="btn-share-gameover" class="btn-secondary" style="border: 1.5px dashed #4b6584; font-weight: 700; color: #2d3436;">
                         📢 Rủ Bạn Bè Vào "Cứu Bàn"
@@ -1125,7 +1152,7 @@ body {
                 </p>
                 <div style="display: flex; flex-direction: column; gap: 10px;">
                     <button id="btn-share-win" class="btn-primary" style="background: linear-gradient(135deg, #1877F2 0%, #0068FF 100%);">
-                        📢 Khoe Chiến Tích & Thách Bạn Bè 🚀
+                        📢 Khoe Chiến Tích &amp; Thách Bạn Bè 🚀
                     </button>
                     <button id="btn-next-level" class="btn-primary">
                         🚀 Khiêu Chiến Màn 2 (Địa Ngục)
@@ -1162,18 +1189,18 @@ body {
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="ad-claim-btn" class="btn-primary" style="width: 100%;" disabled>
+                <button id="ad-claim-btn" class="btn-primary" style="width: 100%;" disabled="disabled">
                     Đang phát quảng cáo...
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- 7. Modal Khoe Chiến Tích & Chia Sẻ Mạng Xã Hội -->
+    <!-- 7. Modal Khoe Chiến Tích &amp; Chia Sẻ Mạng Xã Hội -->
     <div id="share-modal" class="modal-backdrop hidden">
         <div class="modal-card">
             <div class="modal-header">
-                <h3>🏆 Khoe Chiến Tích & Rủ Bạn Bè</h3>
+                <h3>🏆 Khoe Chiến Tích &amp; Rủ Bạn Bè</h3>
                 <button class="modal-close-btn">×</button>
             </div>
             <div class="modal-body">
@@ -1219,9 +1246,9 @@ body {
                         </button>
                     </div>
 
-                    <!-- Nút Sao Chép Link & Lời Mời -->
+                    <!-- Nút Sao Chép Link &amp; Lời Mời -->
                     <button id="btn-copy-link" class="share-social-btn copy-btn">
-                        <span>📋 Sao Chép Lời Thách Đấu & Link</span>
+                        <span>📋 Sao Chép Lời Thách Đấu &amp; Link</span>
                     </button>
                 </div>
             </div>
@@ -1534,26 +1561,33 @@ window.GAME_THEMES = GAME_THEMES;
 
 /**
  * Trình Quản Lý Quảng Cáo (Google AdSense & H5 Games Ads Manager)
- * Hỗ trợ sẵn vị trí Banner, Quảng cáo xen kẽ (Interstitial) và Quảng cáo nhận thưởng (Rewarded)
+ * Tự động chuyển đổi thông minh giữa "Quà Tiếp Sức" (khi chờ duyệt) và "Quảng Cáo Thật" (khi đã duyệt)
  */
 class AdManager {
     constructor() {
-        // ID Google AdSense chính thức từ tài khoản của bạn
+        // ID Google AdSense chính thức của bạn
         this.publisherId = 'ca-pub-7959926217130088';
-        this.isRealAds = true; // Đã kích hoạt kết nối Google AdSense thật
+        this.isRealAds = true;
+
+        // Trạng thái duyệt AdSense: 
+        // Đặt false trong thời gian chờ duyệt để hiện "Quà tiếp sức" cực kỳ tự nhiên, không bị kì!
+        // Đặt true khi Google duyệt xong để kích hoạt quảng cáo video nhận thưởng thật.
+        this.isAdsApproved = false;
+
         this.onRewardSuccess = null;
         this.rewardTimer = null;
         this.isAdFinished = false;
     }
 
     init() {
-        if (this.isRealAds && this.publisherId !== 'ca-pub-SIMULATED_MODE') {
+        if (this.isRealAds && this.publisherId && this.publisherId !== 'ca-pub-SIMULATED_MODE') {
             this.loadGoogleAdSenseScript();
         }
         this.bindEvents();
     }
 
     loadGoogleAdSenseScript() {
+        // Tải script Google AdSense chuẩn
         const script = document.createElement('script');
         script.async = true;
         script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${this.publisherId}`;
@@ -1569,7 +1603,7 @@ class AdManager {
     }
 
     bindEvents() {
-        // Nút Hủy / Bỏ qua quảng cáo ở góc trên
+        // Nút Hủy / Bỏ qua ở góc trên modal
         const cancelBtn = document.getElementById('ad-cancel-btn');
         if (cancelBtn) {
             cancelBtn.addEventListener('click', () => {
@@ -1589,15 +1623,13 @@ class AdManager {
     }
 
     /**
-     * Kích hoạt Quảng cáo nhận thưởng (Rewarded Ad)
-     * Được dùng khi: Hồi sinh, Lấy thêm quyền trợ giúp (Undo, Xáo trộn, Rút thẻ)
+     * Kích hoạt Nhận thưởng (Hồi sinh, Undo, Xáo trộn, Bốc 3 thẻ)
      */
     showRewardedAd(rewardName, onRewardGranted) {
         this.onRewardSuccess = onRewardGranted;
-        this.isAdFinished = false;
 
-        // Nếu đã tích hợp Google H5 Game Ads API thật
-        if (this.isRealAds && typeof window.adBreak === 'function') {
+        // 1. Khi đã được duyệt AdSense thật và có H5 Ads API của Google
+        if (this.isAdsApproved && typeof window.adBreak === 'function') {
             window.adBreak({
                 type: 'reward',
                 name: rewardName,
@@ -1619,74 +1651,60 @@ class AdManager {
                         const cb = this.onRewardSuccess;
                         this.onRewardSuccess = null;
                         cb();
-                        this.showToast(`🎉 Đã nhận thưởng: ${rewardName}!`);
+                        this.showToast(`🎉 Đã nhận: ${rewardName}!`);
                     }
                 }
             });
             return;
         }
 
-        // Chế độ mô phỏng trực quan siêu đẹp (Demo Mode)
-        this.showSimulatedRewardedModal(rewardName);
+        // 2. GIAI ĐOẠN CHỜ DUYỆT:
+        // Chuyển thành "Hộp Quà Tiếp Sức" hoàn toàn tự nhiên, nhận ngay không cần chờ, cực kỳ tâm lý!
+        this.showGiftRewardModal(rewardName);
     }
 
     /**
-     * Hiển thị bảng mô phỏng quảng cáo với thanh đếm ngược 5 giây
+     * Hiển thị Hộp Quà Tiếp Sức (Thân thiện, không bị kì)
      */
-    showSimulatedRewardedModal(rewardName) {
+    showGiftRewardModal(rewardName) {
         const modal = document.getElementById('rewarded-ad-modal');
         const timerEl = document.getElementById('ad-timer');
         const progressBar = document.getElementById('ad-progress-bar');
         const claimBtn = document.getElementById('ad-claim-btn');
         const rewardTitle = document.getElementById('ad-reward-title');
+        const adBadge = modal ? modal.querySelector('.ad-label') : null;
+        const videoMock = modal ? modal.querySelector('.ad-video-mock') : null;
 
         if (!modal) return;
 
-        this.isAdFinished = false;
-        rewardTitle.textContent = `Xem quảng cáo để: ${rewardName}`;
-        modal.classList.remove('hidden');
-
-        if (claimBtn) {
-            claimBtn.disabled = true;
-            claimBtn.textContent = 'Đang phát quảng cáo... (5s)';
-            claimBtn.classList.remove('pulse');
+        this.isAdFinished = true;
+        if (rewardTitle) rewardTitle.textContent = `🎁 Quà Tặng: ${rewardName}`;
+        if (adBadge) {
+            adBadge.textContent = 'Quà Tặng';
+            adBadge.style.background = '#2ed573';
+            adBadge.style.color = '#fff';
         }
 
-        let secondsLeft = 5;
-        if (timerEl) timerEl.textContent = `${secondsLeft}s`;
-        if (progressBar) progressBar.style.width = '0%';
+        if (videoMock) {
+            videoMock.innerHTML = `
+                <div style="font-size: 50px; margin-bottom: 8px; animation: bounce-trophy 1.5s infinite;">🎁</div>
+                <p style="font-size: 15px; font-weight: 700; color: #f1c40f;">Tiếp Sức Phá Đảo Màn 2!</p>
+                <p style="font-size: 12px; opacity: 0.9; margin-top: 6px; padding: 0 16px; line-height: 1.4;">
+                    Chặng đường rất gay cấn! Tặng bạn <strong>${rewardName}</strong> để giải cứu bàn cờ!
+                </p>
+            `;
+        }
 
-        const totalTime = 5;
-        const interval = 100;
-        let elapsed = 0;
+        if (progressBar) progressBar.style.width = '100%';
+        if (timerEl) timerEl.textContent = 'Sẵn sàng!';
 
-        clearInterval(this.rewardTimer);
-        this.rewardTimer = setInterval(() => {
-            elapsed += interval;
-            const progress = (elapsed / (totalTime * 1000)) * 100;
-            if (progressBar) {
-                progressBar.style.width = `${Math.min(progress, 100)}%`;
-            }
+        if (claimBtn) {
+            claimBtn.disabled = false;
+            claimBtn.textContent = 'Nhận Quà Tiếp Sức Ngay 🎁';
+            claimBtn.classList.add('pulse');
+        }
 
-            const currentSec = Math.ceil(totalTime - (elapsed / 1000));
-            if (currentSec > 0 && timerEl) {
-                timerEl.textContent = `${currentSec}s`;
-                if (claimBtn && claimBtn.disabled) {
-                    claimBtn.textContent = `Đang phát quảng cáo... (${currentSec}s)`;
-                }
-            }
-
-            if (elapsed >= totalTime * 1000) {
-                clearInterval(this.rewardTimer);
-                this.isAdFinished = true;
-                if (timerEl) timerEl.textContent = 'Hoàn tất!';
-                if (claimBtn) {
-                    claimBtn.disabled = false;
-                    claimBtn.textContent = 'Nhận Thưởng Ngay 🎁';
-                    claimBtn.classList.add('pulse');
-                }
-            }
-        }, interval);
+        modal.classList.remove('hidden');
     }
 
     closeRewardedModal(isSuccess) {
@@ -1698,7 +1716,6 @@ class AdManager {
         if (claimBtn) {
             claimBtn.classList.remove('pulse');
             claimBtn.disabled = true;
-            claimBtn.textContent = 'Đang phát quảng cáo...';
         }
 
         if (isSuccess && typeof this.onRewardSuccess === 'function') {
@@ -1707,9 +1724,6 @@ class AdManager {
             cb();
         } else {
             this.onRewardSuccess = null;
-            if (!isSuccess) {
-                this.showToast('Bạn đã bỏ qua quảng cáo nên chưa nhận được quà!');
-            }
         }
     }
 
@@ -1717,7 +1731,7 @@ class AdManager {
      * Quảng cáo xen kẽ (Interstitial) giữa các ván chơi
      */
     showInterstitial(onComplete) {
-        if (this.isRealAds && typeof window.adBreak === 'function') {
+        if (this.isAdsApproved && typeof window.adBreak === 'function') {
             window.adBreak({
                 type: 'next',
                 name: 'restart_game',
@@ -1729,7 +1743,6 @@ class AdManager {
             return;
         }
 
-        // Chế độ thường: Tiếp tục chơi ngay
         if (onComplete) onComplete();
     }
 
@@ -1767,12 +1780,13 @@ class MiniGameEngine {
         this.tileWidth = 50; // px
         this.tileHeight = 56; // px
 
-        // Quyền trợ giúp: mỗi quyền có 1 lượt miễn phí ban đầu, sau đó xem quảng cáo
+        // Quyền trợ giúp: mỗi quyền có 1 lượt miễn phí ban đầu, sau đó tặng 1 lần quà tiếp sức
         this.powerups = {
-            stash: { count: 1, name: 'Bốc 3 thẻ ra ngoài' },
-            undo: { count: 1, name: 'Hoàn tác bước đi' },
-            shuffle: { count: 1, name: 'Xáo trộn thẻ bài' }
+            stash: { count: 1, giftClaimed: false, name: 'Bốc 3 thẻ ra ngoài' },
+            undo: { count: 1, giftClaimed: false, name: 'Hoàn tác bước đi' },
+            shuffle: { count: 1, giftClaimed: false, name: 'Xáo trộn thẻ bài' }
         };
+        this.reviveClaimed = false;
 
         this.isAnimating = false;
         this.isGameOver = false;
@@ -1973,6 +1987,14 @@ class MiniGameEngine {
         this.stashTiles = [];
         this.history = [];
         this.combo = 0;
+
+        // Đặt lại quyền trợ giúp cho ván chơi mới
+        this.powerups = {
+            stash: { count: 1, giftClaimed: false, name: 'Bốc 3 thẻ ra ngoài' },
+            undo: { count: 1, giftClaimed: false, name: 'Hoàn tác bước đi' },
+            shuffle: { count: 1, giftClaimed: false, name: 'Xáo trộn thẻ bài' }
+        };
+        this.reviveClaimed = false;
 
         if (this.levelBadge) {
             this.levelBadge.textContent = levelNumber === 1 ? 'Màn 1: Tập Sự' : 'Màn 2: Thách Thức';
@@ -2403,15 +2425,27 @@ class MiniGameEngine {
         this.isGameOver = true;
         window.soundManager.playGameOver();
         const modal = document.getElementById('game-over-modal');
+        const reviveBtn = document.getElementById('btn-revive-game');
+
+        // Mỗi ván chỉ được hồi sinh đúng 1 lần duy nhất
+        if (reviveBtn) {
+            if (this.reviveClaimed) {
+                reviveBtn.style.display = 'none';
+            } else {
+                reviveBtn.style.display = 'block';
+            }
+        }
+
         if (modal) modal.classList.remove('hidden');
     }
 
     /**
-     * Hồi sinh người chơi khi xem xong quảng cáo
+     * Hồi sinh người chơi (Mỗi ván tối đa 1 lần)
      */
     reviveGame() {
         document.getElementById('game-over-modal').classList.add('hidden');
         this.isGameOver = false;
+        this.reviveClaimed = true; // Đánh dấu đã dùng lượt hồi sinh ván này
 
         // Bốc 3 thẻ từ khay chuyển lên bục chờ tạm thời để giải phóng khay
         if (this.trayTiles.length >= 3) {
@@ -2461,18 +2495,30 @@ class MiniGameEngine {
             return;
         }
 
-        // Nếu hết lượt miễn phí -> Xem quảng cáo nhận thưởng
+        // Nếu hết lượt miễn phí ban đầu
+        const isAds = window.adManager && window.adManager.isAdsApproved;
+        if (!isAds && this.powerups.stash.giftClaimed) {
+            window.adManager.showToast('Bạn đã dùng hết quà tiếp sức bốc thẻ ván này rồi! 💪');
+            return;
+        }
+
+        const onClaimSuccess = () => {
+            this.powerups.stash.giftClaimed = true;
+            this.updatePowerupButtonsUI();
+        };
+
         if (this.trayTiles.length > 0) {
-            // Khi khay đang có thẻ: Xem xong quảng cáo sẽ bốc 3 thẻ NGAY LẬP TỨC
+            // Khi khay đang có thẻ: Nhận quà tiếp sức sẽ bốc 3 thẻ NGAY LẬP TỨC
             window.adManager.showRewardedAd('Bốc 3 thẻ ra ngoài', () => {
                 moveTilesToStash();
+                onClaimSuccess();
                 window.adManager.showToast('🎉 Đã giải cứu khay: Bốc 3 thẻ thành công!');
             });
         } else {
-            // Khi khay đang trống: Xem quảng cáo để tích lũy +1 lượt dự trữ
+            // Khi khay đang trống: Nhận quà tiếp sức để tích lũy +1 lượt dự trữ
             window.adManager.showRewardedAd('Nhận 1 lượt Bốc 3 thẻ dự trữ', () => {
                 this.powerups.stash.count++;
-                this.updatePowerupButtonsUI();
+                onClaimSuccess();
                 window.soundManager.playPowerup();
                 window.adManager.showToast('🎁 Đã nhận thêm 1 lượt Bốc 3 thẻ dự trữ!');
             });
@@ -2568,16 +2614,28 @@ class MiniGameEngine {
             return;
         }
 
-        // Nếu hết lượt -> Xem quảng cáo
+        // Nếu hết lượt -> Nhận quà tiếp sức (tối đa 1 lần mỗi ván)
+        const isAds = window.adManager && window.adManager.isAdsApproved;
+        if (!isAds && this.powerups.undo.giftClaimed) {
+            window.adManager.showToast('Bạn đã dùng hết quà tiếp sức hoàn tác ván này rồi! 💪');
+            return;
+        }
+
+        const onClaimSuccess = () => {
+            this.powerups.undo.giftClaimed = true;
+            this.updatePowerupButtonsUI();
+        };
+
         if (this.history.length > 0) {
             window.adManager.showRewardedAd('Hoàn tác bước đi gần nhất', () => {
                 performUndo();
+                onClaimSuccess();
                 window.adManager.showToast('🎉 Hoàn tác bước đi thành công!');
             });
         } else {
             window.adManager.showRewardedAd('Nhận 1 lượt Hoàn tác dự trữ', () => {
                 this.powerups.undo.count++;
-                this.updatePowerupButtonsUI();
+                onClaimSuccess();
                 window.soundManager.playPowerup();
                 window.adManager.showToast('🎁 Đã nhận thêm 1 lượt Hoàn tác dự trữ!');
             });
@@ -2622,16 +2680,28 @@ class MiniGameEngine {
             return;
         }
 
-        // Nếu hết lượt -> Xem quảng cáo
+        // Nếu hết lượt -> Nhận quà tiếp sức (tối đa 1 lần mỗi ván)
+        const isAds = window.adManager && window.adManager.isAdsApproved;
+        if (!isAds && this.powerups.shuffle.giftClaimed) {
+            window.adManager.showToast('Bạn đã dùng hết quà tiếp sức xáo trộn ván này rồi! 💪');
+            return;
+        }
+
+        const onClaimSuccess = () => {
+            this.powerups.shuffle.giftClaimed = true;
+            this.updatePowerupButtonsUI();
+        };
+
         if (this.boardTiles.length > 1) {
             window.adManager.showRewardedAd('Xáo trộn toàn bộ thẻ', () => {
                 performShuffle();
+                onClaimSuccess();
                 window.adManager.showToast('🎉 Đã xáo trộn thẻ thành công!');
             });
         } else {
             window.adManager.showRewardedAd('Nhận 1 lượt Xáo trộn dự trữ', () => {
                 this.powerups.shuffle.count++;
-                this.updatePowerupButtonsUI();
+                onClaimSuccess();
                 window.soundManager.playPowerup();
                 window.adManager.showToast('🎁 Đã nhận thêm 1 lượt Xáo trộn dự trữ!');
             });
@@ -2639,22 +2709,31 @@ class MiniGameEngine {
     }
 
     updatePowerupButtonsUI() {
-        const updateBadge = (id, count) => {
+        const updateBadge = (id, powerup) => {
             const el = document.getElementById(id);
             if (el) {
-                if (count > 0) {
-                    el.textContent = count;
+                if (powerup.count > 0) {
+                    el.textContent = powerup.count;
                     el.className = 'powerup-badge free-badge';
                 } else {
-                    el.textContent = '📺 Ads';
-                    el.className = 'powerup-badge ad-badge';
+                    const isAds = window.adManager && window.adManager.isAdsApproved;
+                    if (isAds) {
+                        el.textContent = '📺 Ads';
+                        el.className = 'powerup-badge ad-badge';
+                    } else if (!powerup.giftClaimed) {
+                        el.textContent = '🎁 +1';
+                        el.className = 'powerup-badge gift-badge';
+                    } else {
+                        el.textContent = '🔒 Hết';
+                        el.className = 'powerup-badge lock-badge';
+                    }
                 }
             }
         };
 
-        updateBadge('badge-stash', this.powerups.stash.count);
-        updateBadge('badge-undo', this.powerups.undo.count);
-        updateBadge('badge-shuffle', this.powerups.shuffle.count);
+        updateBadge('badge-stash', this.powerups.stash);
+        updateBadge('badge-undo', this.powerups.undo);
+        updateBadge('badge-shuffle', this.powerups.shuffle);
     }
 
     shuffleArray(array) {

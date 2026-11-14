@@ -14,12 +14,13 @@ class MiniGameEngine {
         this.tileWidth = 50; // px
         this.tileHeight = 56; // px
 
-        // Quyền trợ giúp: mỗi quyền có 1 lượt miễn phí ban đầu, sau đó xem quảng cáo
+        // Quyền trợ giúp: mỗi quyền có 1 lượt miễn phí ban đầu, sau đó tặng 1 lần quà tiếp sức
         this.powerups = {
-            stash: { count: 1, name: 'Bốc 3 thẻ ra ngoài' },
-            undo: { count: 1, name: 'Hoàn tác bước đi' },
-            shuffle: { count: 1, name: 'Xáo trộn thẻ bài' }
+            stash: { count: 1, giftClaimed: false, name: 'Bốc 3 thẻ ra ngoài' },
+            undo: { count: 1, giftClaimed: false, name: 'Hoàn tác bước đi' },
+            shuffle: { count: 1, giftClaimed: false, name: 'Xáo trộn thẻ bài' }
         };
+        this.reviveClaimed = false;
 
         this.isAnimating = false;
         this.isGameOver = false;
@@ -220,6 +221,14 @@ class MiniGameEngine {
         this.stashTiles = [];
         this.history = [];
         this.combo = 0;
+
+        // Đặt lại quyền trợ giúp cho ván chơi mới
+        this.powerups = {
+            stash: { count: 1, giftClaimed: false, name: 'Bốc 3 thẻ ra ngoài' },
+            undo: { count: 1, giftClaimed: false, name: 'Hoàn tác bước đi' },
+            shuffle: { count: 1, giftClaimed: false, name: 'Xáo trộn thẻ bài' }
+        };
+        this.reviveClaimed = false;
 
         if (this.levelBadge) {
             this.levelBadge.textContent = levelNumber === 1 ? 'Màn 1: Tập Sự' : 'Màn 2: Thách Thức';
@@ -650,15 +659,27 @@ class MiniGameEngine {
         this.isGameOver = true;
         window.soundManager.playGameOver();
         const modal = document.getElementById('game-over-modal');
+        const reviveBtn = document.getElementById('btn-revive-game');
+
+        // Mỗi ván chỉ được hồi sinh đúng 1 lần duy nhất
+        if (reviveBtn) {
+            if (this.reviveClaimed) {
+                reviveBtn.style.display = 'none';
+            } else {
+                reviveBtn.style.display = 'block';
+            }
+        }
+
         if (modal) modal.classList.remove('hidden');
     }
 
     /**
-     * Hồi sinh người chơi khi xem xong quảng cáo
+     * Hồi sinh người chơi (Mỗi ván tối đa 1 lần)
      */
     reviveGame() {
         document.getElementById('game-over-modal').classList.add('hidden');
         this.isGameOver = false;
+        this.reviveClaimed = true; // Đánh dấu đã dùng lượt hồi sinh ván này
 
         // Bốc 3 thẻ từ khay chuyển lên bục chờ tạm thời để giải phóng khay
         if (this.trayTiles.length >= 3) {
@@ -708,18 +729,30 @@ class MiniGameEngine {
             return;
         }
 
-        // Nếu hết lượt miễn phí -> Xem quảng cáo nhận thưởng
+        // Nếu hết lượt miễn phí ban đầu
+        const isAds = window.adManager && window.adManager.isAdsApproved;
+        if (!isAds && this.powerups.stash.giftClaimed) {
+            window.adManager.showToast('Bạn đã dùng hết quà tiếp sức bốc thẻ ván này rồi! 💪');
+            return;
+        }
+
+        const onClaimSuccess = () => {
+            this.powerups.stash.giftClaimed = true;
+            this.updatePowerupButtonsUI();
+        };
+
         if (this.trayTiles.length > 0) {
-            // Khi khay đang có thẻ: Xem xong quảng cáo sẽ bốc 3 thẻ NGAY LẬP TỨC
+            // Khi khay đang có thẻ: Nhận quà tiếp sức sẽ bốc 3 thẻ NGAY LẬP TỨC
             window.adManager.showRewardedAd('Bốc 3 thẻ ra ngoài', () => {
                 moveTilesToStash();
+                onClaimSuccess();
                 window.adManager.showToast('🎉 Đã giải cứu khay: Bốc 3 thẻ thành công!');
             });
         } else {
-            // Khi khay đang trống: Xem quảng cáo để tích lũy +1 lượt dự trữ
+            // Khi khay đang trống: Nhận quà tiếp sức để tích lũy +1 lượt dự trữ
             window.adManager.showRewardedAd('Nhận 1 lượt Bốc 3 thẻ dự trữ', () => {
                 this.powerups.stash.count++;
-                this.updatePowerupButtonsUI();
+                onClaimSuccess();
                 window.soundManager.playPowerup();
                 window.adManager.showToast('🎁 Đã nhận thêm 1 lượt Bốc 3 thẻ dự trữ!');
             });
@@ -815,16 +848,28 @@ class MiniGameEngine {
             return;
         }
 
-        // Nếu hết lượt -> Xem quảng cáo
+        // Nếu hết lượt -> Nhận quà tiếp sức (tối đa 1 lần mỗi ván)
+        const isAds = window.adManager && window.adManager.isAdsApproved;
+        if (!isAds && this.powerups.undo.giftClaimed) {
+            window.adManager.showToast('Bạn đã dùng hết quà tiếp sức hoàn tác ván này rồi! 💪');
+            return;
+        }
+
+        const onClaimSuccess = () => {
+            this.powerups.undo.giftClaimed = true;
+            this.updatePowerupButtonsUI();
+        };
+
         if (this.history.length > 0) {
             window.adManager.showRewardedAd('Hoàn tác bước đi gần nhất', () => {
                 performUndo();
+                onClaimSuccess();
                 window.adManager.showToast('🎉 Hoàn tác bước đi thành công!');
             });
         } else {
             window.adManager.showRewardedAd('Nhận 1 lượt Hoàn tác dự trữ', () => {
                 this.powerups.undo.count++;
-                this.updatePowerupButtonsUI();
+                onClaimSuccess();
                 window.soundManager.playPowerup();
                 window.adManager.showToast('🎁 Đã nhận thêm 1 lượt Hoàn tác dự trữ!');
             });
@@ -869,16 +914,28 @@ class MiniGameEngine {
             return;
         }
 
-        // Nếu hết lượt -> Xem quảng cáo
+        // Nếu hết lượt -> Nhận quà tiếp sức (tối đa 1 lần mỗi ván)
+        const isAds = window.adManager && window.adManager.isAdsApproved;
+        if (!isAds && this.powerups.shuffle.giftClaimed) {
+            window.adManager.showToast('Bạn đã dùng hết quà tiếp sức xáo trộn ván này rồi! 💪');
+            return;
+        }
+
+        const onClaimSuccess = () => {
+            this.powerups.shuffle.giftClaimed = true;
+            this.updatePowerupButtonsUI();
+        };
+
         if (this.boardTiles.length > 1) {
             window.adManager.showRewardedAd('Xáo trộn toàn bộ thẻ', () => {
                 performShuffle();
+                onClaimSuccess();
                 window.adManager.showToast('🎉 Đã xáo trộn thẻ thành công!');
             });
         } else {
             window.adManager.showRewardedAd('Nhận 1 lượt Xáo trộn dự trữ', () => {
                 this.powerups.shuffle.count++;
-                this.updatePowerupButtonsUI();
+                onClaimSuccess();
                 window.soundManager.playPowerup();
                 window.adManager.showToast('🎁 Đã nhận thêm 1 lượt Xáo trộn dự trữ!');
             });
@@ -886,22 +943,31 @@ class MiniGameEngine {
     }
 
     updatePowerupButtonsUI() {
-        const updateBadge = (id, count) => {
+        const updateBadge = (id, powerup) => {
             const el = document.getElementById(id);
             if (el) {
-                if (count > 0) {
-                    el.textContent = count;
+                if (powerup.count > 0) {
+                    el.textContent = powerup.count;
                     el.className = 'powerup-badge free-badge';
                 } else {
-                    el.textContent = '📺 Ads';
-                    el.className = 'powerup-badge ad-badge';
+                    const isAds = window.adManager && window.adManager.isAdsApproved;
+                    if (isAds) {
+                        el.textContent = '📺 Ads';
+                        el.className = 'powerup-badge ad-badge';
+                    } else if (!powerup.giftClaimed) {
+                        el.textContent = '🎁 +1';
+                        el.className = 'powerup-badge gift-badge';
+                    } else {
+                        el.textContent = '🔒 Hết';
+                        el.className = 'powerup-badge lock-badge';
+                    }
                 }
             }
         };
 
-        updateBadge('badge-stash', this.powerups.stash.count);
-        updateBadge('badge-undo', this.powerups.undo.count);
-        updateBadge('badge-shuffle', this.powerups.shuffle.count);
+        updateBadge('badge-stash', this.powerups.stash);
+        updateBadge('badge-undo', this.powerups.undo);
+        updateBadge('badge-shuffle', this.powerups.shuffle);
     }
 
     shuffleArray(array) {

@@ -1,25 +1,32 @@
 /**
  * Trình Quản Lý Quảng Cáo (Google AdSense & H5 Games Ads Manager)
- * Hỗ trợ sẵn vị trí Banner, Quảng cáo xen kẽ (Interstitial) và Quảng cáo nhận thưởng (Rewarded)
+ * Tự động chuyển đổi thông minh giữa "Quà Tiếp Sức" (khi chờ duyệt) và "Quảng Cáo Thật" (khi đã duyệt)
  */
 class AdManager {
     constructor() {
-        // ID Google AdSense chính thức từ tài khoản của bạn
+        // ID Google AdSense chính thức của bạn
         this.publisherId = 'ca-pub-7959926217130088';
-        this.isRealAds = true; // Đã kích hoạt kết nối Google AdSense thật
+        this.isRealAds = true;
+
+        // Trạng thái duyệt AdSense: 
+        // Đặt false trong thời gian chờ duyệt để hiện "Quà tiếp sức" cực kỳ tự nhiên, không bị kì!
+        // Đặt true khi Google duyệt xong để kích hoạt quảng cáo video nhận thưởng thật.
+        this.isAdsApproved = false;
+
         this.onRewardSuccess = null;
         this.rewardTimer = null;
         this.isAdFinished = false;
     }
 
     init() {
-        if (this.isRealAds && this.publisherId !== 'ca-pub-SIMULATED_MODE') {
+        if (this.isRealAds && this.publisherId && this.publisherId !== 'ca-pub-SIMULATED_MODE') {
             this.loadGoogleAdSenseScript();
         }
         this.bindEvents();
     }
 
     loadGoogleAdSenseScript() {
+        // Tải script Google AdSense chuẩn
         const script = document.createElement('script');
         script.async = true;
         script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${this.publisherId}`;
@@ -35,7 +42,7 @@ class AdManager {
     }
 
     bindEvents() {
-        // Nút Hủy / Bỏ qua quảng cáo ở góc trên
+        // Nút Hủy / Bỏ qua ở góc trên modal
         const cancelBtn = document.getElementById('ad-cancel-btn');
         if (cancelBtn) {
             cancelBtn.addEventListener('click', () => {
@@ -55,15 +62,13 @@ class AdManager {
     }
 
     /**
-     * Kích hoạt Quảng cáo nhận thưởng (Rewarded Ad)
-     * Được dùng khi: Hồi sinh, Lấy thêm quyền trợ giúp (Undo, Xáo trộn, Rút thẻ)
+     * Kích hoạt Nhận thưởng (Hồi sinh, Undo, Xáo trộn, Bốc 3 thẻ)
      */
     showRewardedAd(rewardName, onRewardGranted) {
         this.onRewardSuccess = onRewardGranted;
-        this.isAdFinished = false;
 
-        // Nếu đã tích hợp Google H5 Game Ads API thật
-        if (this.isRealAds && typeof window.adBreak === 'function') {
+        // 1. Khi đã được duyệt AdSense thật và có H5 Ads API của Google
+        if (this.isAdsApproved && typeof window.adBreak === 'function') {
             window.adBreak({
                 type: 'reward',
                 name: rewardName,
@@ -85,74 +90,60 @@ class AdManager {
                         const cb = this.onRewardSuccess;
                         this.onRewardSuccess = null;
                         cb();
-                        this.showToast(`🎉 Đã nhận thưởng: ${rewardName}!`);
+                        this.showToast(`🎉 Đã nhận: ${rewardName}!`);
                     }
                 }
             });
             return;
         }
 
-        // Chế độ mô phỏng trực quan siêu đẹp (Demo Mode)
-        this.showSimulatedRewardedModal(rewardName);
+        // 2. GIAI ĐOẠN CHỜ DUYỆT:
+        // Chuyển thành "Hộp Quà Tiếp Sức" hoàn toàn tự nhiên, nhận ngay không cần chờ, cực kỳ tâm lý!
+        this.showGiftRewardModal(rewardName);
     }
 
     /**
-     * Hiển thị bảng mô phỏng quảng cáo với thanh đếm ngược 5 giây
+     * Hiển thị Hộp Quà Tiếp Sức (Thân thiện, không bị kì)
      */
-    showSimulatedRewardedModal(rewardName) {
+    showGiftRewardModal(rewardName) {
         const modal = document.getElementById('rewarded-ad-modal');
         const timerEl = document.getElementById('ad-timer');
         const progressBar = document.getElementById('ad-progress-bar');
         const claimBtn = document.getElementById('ad-claim-btn');
         const rewardTitle = document.getElementById('ad-reward-title');
+        const adBadge = modal ? modal.querySelector('.ad-label') : null;
+        const videoMock = modal ? modal.querySelector('.ad-video-mock') : null;
 
         if (!modal) return;
 
-        this.isAdFinished = false;
-        rewardTitle.textContent = `Xem quảng cáo để: ${rewardName}`;
-        modal.classList.remove('hidden');
-
-        if (claimBtn) {
-            claimBtn.disabled = true;
-            claimBtn.textContent = 'Đang phát quảng cáo... (5s)';
-            claimBtn.classList.remove('pulse');
+        this.isAdFinished = true;
+        if (rewardTitle) rewardTitle.textContent = `🎁 Quà Tặng: ${rewardName}`;
+        if (adBadge) {
+            adBadge.textContent = 'Quà Tặng';
+            adBadge.style.background = '#2ed573';
+            adBadge.style.color = '#fff';
         }
 
-        let secondsLeft = 5;
-        if (timerEl) timerEl.textContent = `${secondsLeft}s`;
-        if (progressBar) progressBar.style.width = '0%';
+        if (videoMock) {
+            videoMock.innerHTML = `
+                <div style="font-size: 50px; margin-bottom: 8px; animation: bounce-trophy 1.5s infinite;">🎁</div>
+                <p style="font-size: 15px; font-weight: 700; color: #f1c40f;">Tiếp Sức Phá Đảo Màn 2!</p>
+                <p style="font-size: 12px; opacity: 0.9; margin-top: 6px; padding: 0 16px; line-height: 1.4;">
+                    Chặng đường rất gay cấn! Tặng bạn <strong>${rewardName}</strong> để giải cứu bàn cờ!
+                </p>
+            `;
+        }
 
-        const totalTime = 5;
-        const interval = 100;
-        let elapsed = 0;
+        if (progressBar) progressBar.style.width = '100%';
+        if (timerEl) timerEl.textContent = 'Sẵn sàng!';
 
-        clearInterval(this.rewardTimer);
-        this.rewardTimer = setInterval(() => {
-            elapsed += interval;
-            const progress = (elapsed / (totalTime * 1000)) * 100;
-            if (progressBar) {
-                progressBar.style.width = `${Math.min(progress, 100)}%`;
-            }
+        if (claimBtn) {
+            claimBtn.disabled = false;
+            claimBtn.textContent = 'Nhận Quà Tiếp Sức Ngay 🎁';
+            claimBtn.classList.add('pulse');
+        }
 
-            const currentSec = Math.ceil(totalTime - (elapsed / 1000));
-            if (currentSec > 0 && timerEl) {
-                timerEl.textContent = `${currentSec}s`;
-                if (claimBtn && claimBtn.disabled) {
-                    claimBtn.textContent = `Đang phát quảng cáo... (${currentSec}s)`;
-                }
-            }
-
-            if (elapsed >= totalTime * 1000) {
-                clearInterval(this.rewardTimer);
-                this.isAdFinished = true;
-                if (timerEl) timerEl.textContent = 'Hoàn tất!';
-                if (claimBtn) {
-                    claimBtn.disabled = false;
-                    claimBtn.textContent = 'Nhận Thưởng Ngay 🎁';
-                    claimBtn.classList.add('pulse');
-                }
-            }
-        }, interval);
+        modal.classList.remove('hidden');
     }
 
     closeRewardedModal(isSuccess) {
@@ -164,7 +155,6 @@ class AdManager {
         if (claimBtn) {
             claimBtn.classList.remove('pulse');
             claimBtn.disabled = true;
-            claimBtn.textContent = 'Đang phát quảng cáo...';
         }
 
         if (isSuccess && typeof this.onRewardSuccess === 'function') {
@@ -173,9 +163,6 @@ class AdManager {
             cb();
         } else {
             this.onRewardSuccess = null;
-            if (!isSuccess) {
-                this.showToast('Bạn đã bỏ qua quảng cáo nên chưa nhận được quà!');
-            }
         }
     }
 
@@ -183,7 +170,7 @@ class AdManager {
      * Quảng cáo xen kẽ (Interstitial) giữa các ván chơi
      */
     showInterstitial(onComplete) {
-        if (this.isRealAds && typeof window.adBreak === 'function') {
+        if (this.isAdsApproved && typeof window.adBreak === 'function') {
             window.adBreak({
                 type: 'next',
                 name: 'restart_game',
@@ -195,7 +182,6 @@ class AdManager {
             return;
         }
 
-        // Chế độ thường: Tiếp tục chơi ngay
         if (onComplete) onComplete();
     }
 
