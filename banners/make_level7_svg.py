@@ -100,7 +100,7 @@ svg = '''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewB
 
   <!-- Tagline nhỏ dưới logo -->
   <text x="62" y="112" font-family="Arial,sans-serif"
-        font-size="22" fill="rgba(255,255,255,0.65)">🎮  game-ghep-the-vui.blogspot.com</text>
+        font-size="22" fill="rgba(255,255,255,0.65)">🎮  gameghepthevui.blogspot.com</text>
 
   <!-- Ribbon level name -->
   <rect x="0" y="232" width="1200" height="82" fill="url(#ribbon)" opacity="0.95"/>
@@ -159,7 +159,7 @@ svg = '''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewB
   <!-- URL dưới cùng -->
   <text x="600" y="606" font-family="Arial,sans-serif" font-size="20"
         fill="rgba(255,255,255,0.55)" text-anchor="middle">
-    👉  game-ghep-the-vui.blogspot.com
+    👉  gameghepthevui.blogspot.com
   </text>
 </svg>'''
 

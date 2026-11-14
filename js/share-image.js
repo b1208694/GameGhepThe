@@ -189,7 +189,7 @@ function generateShareImageBlob(level, score, wins, themeEmoji = '') {
         ctx.font = '28px "Arial", sans-serif';
         ctx.fillStyle = 'rgba(255,255,255,0.75)';
         ctx.shadowBlur  = 6;
-        ctx.fillText('🎮 game-ghep-the-vui.blogspot.com', 173, 125);
+        ctx.fillText('🎮 gameghepthevui.blogspot.com', 173, 125);
 
         // ── 6. Thẻ cấp độ (level pill) ─────────────────────────────────────
         ctx.shadowBlur = 0;
@@ -268,7 +268,7 @@ function generateShareImageBlob(level, score, wins, themeEmoji = '') {
 
         ctx.font = '22px "Arial", sans-serif';
         ctx.fillStyle = 'rgba(255,255,255,0.80)';
-        ctx.fillText('👉 Chơi miễn phí tại: game-ghep-the-vui.blogspot.com', 44, 622);
+        ctx.fillText('👉 Chơi miễn phí tại: gameghepthevui.blogspot.com', 44, 622);
 
         // ── 11. Xuất Blob ────────────────────────────────────────────────────
         canvas.toBlob(blob => resolve(blob), 'image/jpeg', 0.92);

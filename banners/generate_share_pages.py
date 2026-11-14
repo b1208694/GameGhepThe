@@ -13,7 +13,7 @@ CÁCH DÙNG:
 
 import os
 
-GAME_URL = "https://game-ghep-the-vui.blogspot.com/"
+GAME_URL = "https://gameghepthevui.blogspot.com/"
 
 # ★ ĐIỀN URL ẢNH BLOGGER CDN VÀO ĐÂY sau khi upload xong ★
 BANNER_URLS = {

@@ -61,13 +61,13 @@ const MAX_LEVEL = LEVEL_CONFIGS.length; // 7
  * ★ Điền URL thực tế sau khi tạo trang Blogger xong ★
  */
 const LEVEL_PAGE_URLS = {
-    1: 'https://game-ghep-the-vui.blogspot.com/p/man-1-tap-su.html',
-    2: 'https://game-ghep-the-vui.blogspot.com/p/man-2-hoc-viec.html',
-    3: 'https://game-ghep-the-vui.blogspot.com/p/man-3-co-kinh-nghiem.html',
-    4: 'https://game-ghep-the-vui.blogspot.com/p/man-4-thach-thuc.html',
-    5: 'https://game-ghep-the-vui.blogspot.com/p/man-5-chuyen-gia.html',
-    6: 'https://game-ghep-the-vui.blogspot.com/p/man-6-sieu-cap.html',
-    7: 'https://game-ghep-the-vui.blogspot.com/p/man-7-huyen-thoai.html',
+    1: 'https://gameghepthevui.blogspot.com/p/man-1-tap-su.html',
+    2: 'https://gameghepthevui.blogspot.com/p/man-2-hoc-viec.html',
+    3: 'https://gameghepthevui.blogspot.com/p/man-3-co-kinh-nghiem.html',
+    4: 'https://gameghepthevui.blogspot.com/p/man-4-thach-thuc.html',
+    5: 'https://gameghepthevui.blogspot.com/p/man-5-chuyen-gia.html',
+    6: 'https://gameghepthevui.blogspot.com/p/man-6-sieu-cap.html',
+    7: 'https://gameghepthevui.blogspot.com/p/man-7-huyen-thoai.html',
 };
 
 const LEVEL_BANNER_URLS = {
@@ -1329,7 +1329,7 @@ class MiniGameEngine {
     getShareUrl() {
         // Trả về URL trang chia sẻ riêng của màn hiện tại
         // → Facebook sẽ đọc og:image từ trang đó → hiển thị ảnh đúng cấp độ
-        return LEVEL_PAGE_URLS[this.currentLevel] || 'https://game-ghep-the-vui.blogspot.com/';
+        return LEVEL_PAGE_URLS[this.currentLevel] || 'https://gameghepthevui.blogspot.com/';
     }
 
     shareNative() {

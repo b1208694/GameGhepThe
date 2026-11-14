@@ -54,7 +54,7 @@ $logoBrush.Dispose()
 # Subtitle logo
 $subLogoFont = New-Object System.Drawing.Font("Arial", 20, [System.Drawing.FontStyle]::Regular)
 $subLogoBrush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(200, 255, 255, 255))
-$g.DrawString("game-ghep-the-vui.blogspot.com", $subLogoFont, $subLogoBrush, 55, 115)
+$g.DrawString("gameghepthevui.blogspot.com", $subLogoFont, $subLogoBrush, 55, 115)
 $subLogoFont.Dispose()
 $subLogoBrush.Dispose()
 
