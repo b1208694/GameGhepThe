@@ -1,0 +1,2847 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css="false" b:defaultmessages="false" b:layoutsVersion="3" b:responsive="true" b:templateVersion="1.3.0" expr:dir="data:blog.languageDirection" xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://www.google.com/2005/gml/b" xmlns:data="http://www.google.com/2005/gml/data" xmlns:expr="http://www.google.com/2005/gml/expr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <title><data:blog.pageTitle/></title>
+  <b:include data="blog" name="all-head-content"/>
+  <!-- Google AdSense -->
+  <script async="async" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7959926217130088"></script>
+  <b:skin><![CDATA[
+:root {
+    --primary-color: #e67e22;
+    --accent-color: #d35400;
+    --bg-surface: #ffffff;
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --tray-bg: #e2d5c5;
+    --slot-border: #bfa78f;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --tile-w: 48px;
+    --tile-h: 54px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    color: var(--text-main);
+}
+
+/* Bố cục trang bao gồm khu vực Game và Banner quảng cáo 2 bên trên máy tính */
+.app-layout {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Khung quảng cáo hai bên dành riêng cho Desktop (Skyscraper Ads) */
+.desktop-side-ad {
+    display: none;
+    width: 160px;
+    padding: 20px 8px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ad-label {
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.ad-placeholder-box {
+    width: 100%;
+    height: 600px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    text-align: center;
+    font-size: 12px;
+    color: #64748b;
+}
+
+@media (min-width: 900px) {
+    .desktop-side-ad {
+        display: flex;
+    }
+}
+
+/* Khung ứng dụng chính (Chuẩn Mobile First) */
+.game-container {
+    width: 100%;
+    max-width: 440px;
+    height: 100vh;
+    height: 100dvh;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Thanh điều hướng trên cùng (Header) */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    z-index: 50;
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-icon {
+    background: #f1f2f6;
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 17px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.btn-icon:hover {
+    transform: scale(1.08);
+    background: #e4e7eb;
+}
+
+.btn-icon:active {
+    transform: scale(0.95);
+}
+
+.theme-pill-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #fdf0e6;
+    border: 1px solid var(--primary-color);
+    color: var(--accent-color);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.theme-pill-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.header-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.level-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    background: #2ed573;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 6px rgba(46, 213, 115, 0.3);
+}
+
+.level-badge.level-2 {
+    background: #ff4757;
+    box-shadow: 0 2px 6px rgba(255, 71, 87, 0.3);
+    animation: flame-pulse 2s infinite;
+}
+
+@keyframes flame-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.header-stats {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+/* Bàn chơi (Game Board Area) */
+.game-play-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.board-wrapper {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    min-height: 340px;
+}
+
+#game-board {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 340px;
+}
+
+/* Các thẻ bài xếp tầng */
+.game-tile {
+    position: absolute;
+    width: var(--tile-w);
+    height: var(--tile-h);
+    transition: transform 0.12s ease, opacity 0.15s ease, filter 0.15s ease;
+    cursor: pointer;
+}
+
+.tile-inner {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #dfe4ea;
+    border-bottom: 4px solid #ced6e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: all 0.15s ease;
+}
+
+/* Thẻ bài sáng - Được phép bấm */
+.game-tile.free .tile-inner {
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.game-tile.free:hover .tile-inner {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary-color);
+}
+
+/* Thẻ bài tối - Bị thẻ khác đè lên */
+.game-tile.blocked {
+    filter: brightness(0.65) saturate(0.8);
+    cursor: not-allowed;
+}
+
+.game-tile.blocked .tile-inner {
+    background: #dcdde1;
+    border-color: #bdc3c7;
+    border-bottom: 4px solid #95a5a6;
+    box-shadow: none;
+}
+
+/* Rung khi bấm thẻ bị chặn */
+.game-tile.shake {
+    animation: shake-anim 0.28s ease;
+}
+
+@keyframes shake-anim {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+/* Bục chờ tạm thời (Stash Area) - Hỗ trợ vuốt ngang khi có nhiều thẻ */
+.stash-wrapper {
+    width: 100%;
+    padding: 0 14px 4px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.stash-hint-bar {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #b7791f;
+    padding: 0 4px 3px 4px;
+}
+
+.stash-container {
+    width: 100%;
+    max-width: 400px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    background: #fffdf5;
+    border: 2px dashed #f6e05e;
+    border-radius: 14px;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    justify-content: flex-start;
+}
+
+/* Thanh cuộn ngang tinh tế */
+.stash-container::-webkit-scrollbar {
+    height: 5px;
+}
+
+.stash-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 4px;
+}
+
+.stash-container::-webkit-scrollbar-thumb {
+    background: #ecc94b;
+    border-radius: 4px;
+}
+
+.game-tile.in-stash {
+    position: relative;
+    width: 44px;
+    height: 50px;
+    flex-shrink: 0; /* Đảm bảo không bao giờ bị bẹp dúm khi có nhiều thẻ */
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+.game-tile.in-stash:hover {
+    transform: translateY(-2px) scale(1.05);
+}
+
+.game-tile.in-stash .tile-inner {
+    font-size: 24px;
+    border-color: #f6e05e;
+    border-bottom: 3px solid #d69e2e;
+    background: #ffffff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Khay chứa 7 ô (The 7-Slot Tray) */
+.tray-wrapper {
+    padding: 0 14px 8px 14px;
+    display: flex;
+    justify-content: center;
+}
+
+.game-tray {
+    width: 100%;
+    max-width: 400px;
+    height: 70px;
+    background: var(--tray-bg);
+    border: 3px solid var(--slot-border);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 4px 6px;
+    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.tray-slot {
+    width: 44px;
+    height: 54px;
+    border: 2px dashed rgba(160, 140, 120, 0.4);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.game-tile.in-tray {
+    position: relative;
+    width: 44px;
+    height: 52px;
+}
+
+.game-tile.in-tray .tile-inner {
+    font-size: 24px;
+    border-radius: 8px;
+    border-bottom: 3px solid #b2bec3;
+}
+
+/* Hiệu ứng nổ giải phóng khi gom đủ 3 thẻ */
+.match-explode {
+    animation: match-boom 0.25s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes match-boom {
+    0% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.35); filter: brightness(1.6) drop-shadow(0 0 10px #f1c40f); }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+/* Thanh Quyền Trợ Giúp (Power-ups Bar) */
+.powerups-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 6px 14px 10px 14px;
+    background: #ffffff;
+}
+
+.powerup-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.15s ease;
+}
+
+.powerup-btn:active {
+    transform: scale(0.92);
+}
+
+.powerup-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: #f1f2f6;
+    border: 2px solid #e4e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06);
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.powerup-btn:hover .powerup-icon-box {
+    border-color: var(--primary-color);
+    background: #fff8f0;
+}
+
+.powerup-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.powerup-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.free-badge {
+    background: #2ed573;
+}
+
+.ad-badge {
+    background: #ff4757;
+    animation: pulse-soft 1.5s infinite;
+}
+
+@keyframes pulse-soft {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Vùng Banner Quảng Cáo Chân Trang (Dành cho Mobile & Tablet) */
+.mobile-ad-banner {
+    width: 100%;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 4px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 58px;
+}
+
+.mobile-ad-banner .ad-label {
+    margin-bottom: 2px;
+}
+
+.banner-ad-box {
+    width: 320px;
+    max-width: 100%;
+    height: 50px;
+    background: #ffffff;
+    border: 1px dashed #cbd5e1;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #64748b;
+    text-align: center;
+}
+
+/* Modals & Dialogs */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+    transition: opacity 0.2s ease;
+}
+
+.modal-backdrop.hidden {
+    display: none;
+}
+
+.modal-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 380px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    animation: modal-enter 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modal-enter {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f1f2f6;
+}
+
+.modal-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #a4b0be;
+    line-height: 1;
+}
+
+.modal-close-btn:hover {
+    color: #2f3542;
+}
+
+.modal-body {
+    padding: 20px;
+    max-height: 65vh;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    padding: 12px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Danh sách chọn chủ đề */
+.theme-options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.theme-option-card {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.theme-option-card:hover {
+    border-color: var(--primary-color);
+    background: #fff8f0;
+}
+
+.theme-option-card.active {
+    border-color: var(--primary-color);
+    background: #fdf2e9;
+}
+
+.theme-card-icon {
+    font-size: 32px;
+    margin-right: 14px;
+}
+
+.theme-card-info h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.theme-card-info p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.theme-card-preview {
+    font-size: 16px;
+}
+
+/* Các nút bấm hành động (Buttons) */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: #fff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(230, 126, 34, 0.35);
+    transition: transform 0.15s, box-shadow 0.15s;
+    text-align: center;
+}
+
+.btn-primary:active {
+    transform: scale(0.97);
+}
+
+.btn-secondary {
+    background: #f1f2f6;
+    color: var(--text-main);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-align: center;
+}
+
+.btn-secondary:hover {
+    background: #e4e7eb;
+}
+
+/* Giao diện Quảng Cáo Giả Lập Đếm Ngược */
+.ad-sim-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.ad-video-mock {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    margin: 12px 0;
+}
+
+.ad-timer-pill {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.65);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.ad-progress-wrapper {
+    width: 100%;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.ad-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #2ed573;
+    transition: width 0.1s linear;
+}
+
+/* Toast Thông Báo Nhẹ */
+.toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-30px);
+    background: rgba(33, 37, 41, 0.95);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 2000;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Canvas pháo hoa */
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* =========================================
+   Giao diện Khoe Chiến Tích & Chia Sẻ Mạng Xã Hội
+   ========================================= */
+.share-trophy-card {
+    background: linear-gradient(135deg, #fdfbfb 0%, #f4f6f9 100%);
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    margin-bottom: 12px;
+}
+
+.trophy-badge {
+    font-size: 40px;
+    margin-bottom: 4px;
+    animation: bounce-trophy 2s infinite ease-in-out;
+}
+
+@keyframes bounce-trophy {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+.share-trophy-card h4 {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.share-stats-grid {
+    display: flex;
+    justify-content: space-around;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #edf2f7;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--accent-color);
+    margin-top: 2px;
+}
+
+.share-quote-box {
+    background: #fff8e1;
+    border-left: 4px solid #ffb300;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+}
+
+.share-buttons-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.share-social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.share-social-btn:active {
+    transform: scale(0.97);
+}
+
+.native-share-btn {
+    background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+    color: #ffffff;
+    font-size: 15px;
+    padding: 14px 16px;
+    box-shadow: 0 4px 14px rgba(0, 184, 148, 0.3);
+}
+
+.social-row {
+    display: flex;
+    gap: 10px;
+}
+
+.social-row .share-social-btn {
+    flex: 1;
+}
+
+.fb-btn {
+    background: #1877f2;
+    color: #ffffff;
+}
+
+.fb-btn:hover {
+    background: #1465d2;
+}
+
+.zalo-btn {
+    background: #0068ff;
+    color: #ffffff;
+}
+
+.zalo-btn:hover {
+    background: #0056d6;
+}
+
+.copy-btn {
+    background: #f1f2f6;
+    color: var(--text-main);
+    border: 1px solid #dcdde1;
+}
+
+.copy-btn:hover {
+    background: #e4e7eb;
+}
+
+  ]]></b:skin>
+</head>
+<body>
+  <b:section id="main-game" showaddelement="false"/>
+<div class="app-layout">
+        <!-- Vị trí Quảng Cáo Banner Bên Trái (Dành cho Máy tính / Desktop) -->
+        <aside class="desktop-side-ad left" aria-label="Quảng cáo">
+            <span class="ad-label">Quảng cáo</span>
+            <div class="ad-placeholder-box">
+                <!-- Vị trí đặt mã Google AdSense Skyscraper (160x600) -->
+                <!-- <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-..." data-ad-slot="..."></ins> -->
+                <p>📍 <strong>Google AdSense</strong></p>
+                <p style="margin-top: 8px;">Banner Dọc 160x600</p>
+                <p style="margin-top: 12px; font-size: 11px; opacity: 0.8;">Sẽ tự động hiển thị khi người chơi truy cập bằng máy tính</p>
+            </div>
+        </aside>
+
+        <!-- Khung Game Chính (Thiết kế tối ưu cho Điện Thoại & Màn Hình Dọc) -->
+        <main class="game-container">
+            <!-- Header trên cùng -->
+            <header class="game-header">
+                <div class="header-left">
+                    <button id="btn-theme-modal" class="theme-pill-btn" title="Đổi chủ đề hình ảnh">
+                        <span id="current-theme-name">🍜 Ẩm thực Việt</span>
+                    </button>
+                </div>
+
+                <div class="header-center">
+                    <div id="level-badge" class="level-badge level-1">Màn 1: Tập Sự</div>
+                    <div class="header-stats">
+                        🏆 Thắng: <span id="wins-display">0</span> | Điểm: <span id="score-display">0</span>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <button id="btn-share-modal" class="btn-icon" title="Khoe chiến tích & Rủ bạn bè" style="background: #e8f0fe; color: #1a73e8; font-size: 16px;">📢</button>
+                    <button id="btn-sound-toggle" class="btn-icon" title="Bật/Tắt âm thanh">🔊</button>
+                    <button id="btn-help-modal" class="btn-icon" title="Hướng dẫn chơi">❓</button>
+                    <button id="btn-privacy-modal" class="btn-icon" title="Chính sách bảo mật">🛡️</button>
+                </div>
+            </header>
+
+            <!-- Vùng Chơi Game -->
+            <section class="game-play-area">
+                <!-- Bàn cờ các thẻ bài xếp tầng -->
+                <div class="board-wrapper">
+                    <div id="game-board"></div>
+                </div>
+
+                <!-- Bục chờ tạm thời (Khi dùng quyền Rút 3 thẻ) - Vuốt ngang khi có nhiều thẻ -->
+                <div class="stash-wrapper" id="stash-wrapper" style="display: none;">
+                    <div class="stash-hint-bar">
+                        <span>📦 Bục chờ (<strong id="stash-count">0</strong> thẻ)</span>
+                        <span id="stash-scroll-hint" style="color: #d35400; font-size: 11px;">👈 Vuốt ngang 👉</span>
+                    </div>
+                    <div class="stash-container" id="game-stash" title="Khu vực giữ thẻ tạm thời (Chạm vào thẻ để đưa lại khay)"></div>
+                </div>
+
+                <!-- Khay chứa 7 ô -->
+                <div class="tray-wrapper">
+                    <div class="game-tray" id="game-tray"></div>
+                </div>
+
+                <!-- Thanh Quyền Trợ Giúp (Gắn kèm lượt xem quảng cáo) -->
+                <div class="powerups-bar">
+                    <!-- Trợ giúp 1: Bốc 3 thẻ ra ngoài -->
+                    <button id="btn-powerup-stash" class="powerup-btn" title="Chuyển 3 thẻ từ khay lên bục chờ">
+                        <div class="powerup-icon-box">
+                            <span>📦</span>
+                            <span id="badge-stash" class="powerup-badge free-badge">1</span>
+                        </div>
+                        <span class="powerup-label">Bốc 3 thẻ</span>
+                    </button>
+
+                    <!-- Trợ giúp 2: Hoàn tác 1 bước -->
+                    <button id="btn-powerup-undo" class="powerup-btn" title="Hoàn tác thẻ vừa bấm nhầm">
+                        <div class="powerup-icon-box">
+                            <span>↩️</span>
+                            <span id="badge-undo" class="powerup-badge free-badge">1</span>
+                        </div>
+                        <span class="powerup-label">Hoàn tác</span>
+                    </button>
+
+                    <!-- Trợ giúp 3: Xáo trộn toàn bộ thẻ -->
+                    <button id="btn-powerup-shuffle" class="powerup-btn" title="Đảo ngẫu nhiên các thẻ còn lại">
+                        <div class="powerup-icon-box">
+                            <span>🔀</span>
+                            <span id="badge-shuffle" class="powerup-badge free-badge">1</span>
+                        </div>
+                        <span class="powerup-label">Xáo trộn</span>
+                    </button>
+                </div>
+
+                <!-- Vùng Banner Quảng Cáo Chân Trang (Chuẩn Mobile 320x50) -->
+                <div class="mobile-ad-banner" aria-label="Quảng cáo">
+                    <span class="ad-label">Quảng cáo</span>
+                    <div class="banner-ad-box">
+                        <!-- Vị trí đặt mã Google AdSense Mobile Banner (320x50 hoặc Responsive) -->
+                        <!-- <ins class="adsbygoogle" style="display:inline-block;width:320px;height:50px" data-ad-client="ca-pub-..." data-ad-slot="..."></ins> -->
+                        <span>📍 <strong>Google AdSense Banner</strong> (320x50)</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Vị trí Quảng Cáo Banner Bên Phải (Dành cho Máy tính / Desktop) -->
+        <aside class="desktop-side-ad right" aria-label="Quảng cáo">
+            <span class="ad-label">Quảng cáo</span>
+            <div class="ad-placeholder-box">
+                <!-- Vị trí đặt mã Google AdSense Skyscraper (160x600) -->
+                <p>📍 <strong>Google AdSense</strong></p>
+                <p style="margin-top: 8px;">Banner Dọc 160x600</p>
+                <p style="margin-top: 12px; font-size: 11px; opacity: 0.8;">Tối ưu hóa doanh thu hiển thị trên màn hình rộng</p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- ==================== CÁC MODAL HỆ THỐNG ==================== -->
+
+    <!-- 1. Modal Chọn Chủ Đề (Themes) -->
+    <div id="theme-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>🎨 Chọn Chủ Đề Yêu Thích</h3>
+                <button class="modal-close-btn">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="theme-options-list" id="theme-options-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Modal Hướng Dẫn Chơi -->
+    <div id="help-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>📖 Hướng Dẫn Chơi</h3>
+                <button class="modal-close-btn">×</button>
+            </div>
+            <div class="modal-body" style="font-size: 14px; line-height: 1.6; color: #4b6584;">
+                <p><strong>1. Mục tiêu:</strong> Ăn hết toàn bộ các thẻ bài trên bàn cờ.</p>
+                <p style="margin-top: 8px;"><strong>2. Quy tắc chọn thẻ:</strong> Bạn chỉ có thể bấm vào những thẻ nằm ở lớp trên cùng (thẻ sáng rõ). Thẻ bị đè mờ bên dưới sẽ mở khóa khi thẻ trên nó được giải phóng.</p>
+                <p style="margin-top: 8px;"><strong>3. Ghép 3 (Match-3):</strong> Mỗi khi trong khay 7 ô có đủ <strong>3 thẻ giống nhau</strong>, chúng sẽ tự động nổ biến mất và giải phóng chỗ trống.</p>
+                <p style="margin-top: 8px;"><strong>4. Thua cuộc:</strong> Nếu khay bị đầy cả 7 ô mà không có bộ 3 nào để triệt tiêu, bạn sẽ thua!</p>
+                <p style="margin-top: 8px;"><strong>5. Quyền trợ giúp:</strong> Đừng quên tận dụng 3 quyền năng: Bốc 3 thẻ ra ngoài, Hoàn tác bước nhầm và Xáo trộn bài!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary modal-close-btn" style="width: 100%;">Đã Hiểu, Chiến Thôi! 🔥</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Modal Chính Sách Bảo Mật (Chuẩn điều kiện Google AdSense) -->
+    <div id="privacy-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>🛡️ Chính Sách & Điều Khoản</h3>
+                <button class="modal-close-btn">×</button>
+            </div>
+            <div class="modal-body" style="font-size: 13px; line-height: 1.6; color: #4b6584;">
+                <h4 style="color: #2c3e50; margin-bottom: 6px;">Chính Sách Quyền Riêng Tư (Privacy Policy)</h4>
+                <p>Website này tôn trọng quyền riêng tư của người dùng. Trò chơi không thu thập thông tin cá nhân danh tính của bạn. Dữ liệu kỷ lục điểm số và chủ đề được lưu trữ hoàn toàn nội bộ trên trình duyệt của bạn (LocalStorage).</p>
+                <h4 style="color: #2c3e50; margin: 12px 0 6px;">Quảng Cáo Google AdSense</h4>
+                <p>Trang web này sử dụng dịch vụ quảng cáo của bên thứ ba bao gồm Google AdSense. Google sử dụng cookie để phân phối quảng cáo dựa trên các lượt truy cập trước đó của người dùng vào trang web này hoặc các trang web khác trên Internet.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary modal-close-btn" style="width: 100%;">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Modal Thua Cuộc (Game Over) -->
+    <div id="game-over-modal" class="modal-backdrop hidden">
+        <div class="modal-card" style="text-align: center;">
+            <div class="modal-body" style="padding-top: 30px;">
+                <div style="font-size: 58px; margin-bottom: 10px;">😭</div>
+                <h2 style="font-size: 22px; color: #eb3b5a; margin-bottom: 8px;">Khay Đã Bị Đầy!</h2>
+                <p style="font-size: 14px; color: #778ca3; margin-bottom: 20px;">
+                    Chỉ còn một chút nữa thôi là thắng rồi! Bạn có muốn hồi sinh để tiếp tục không?
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button id="btn-revive-game" class="btn-primary" style="background: linear-gradient(135deg, #20bf6b 0%, #0fb9b1 100%);">
+                        💖 Hồi Sinh Ngay (Xem Ads)
+                    </button>
+                    <button id="btn-share-gameover" class="btn-secondary" style="border: 1.5px dashed #4b6584; font-weight: 700; color: #2d3436;">
+                        📢 Rủ Bạn Bè Vào "Cứu Bàn"
+                    </button>
+                    <button id="btn-restart-game" class="btn-secondary">
+                        🔄 Chơi Lại Ván Mới
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Modal Chiến Thắng (Victory) -->
+    <div id="win-modal" class="modal-backdrop hidden">
+        <div class="modal-card" style="text-align: center;">
+            <div class="modal-body" style="padding-top: 30px;">
+                <div style="font-size: 64px; margin-bottom: 12px;">🏆</div>
+                <h2 id="win-title" style="font-size: 22px; color: #20bf6b; margin-bottom: 8px;">CHIẾN THẮNG!</h2>
+                <p id="win-desc" style="font-size: 14px; color: #778ca3; margin-bottom: 24px;">
+                    Bạn đã xuất sắc vượt qua màn chơi!
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button id="btn-share-win" class="btn-primary" style="background: linear-gradient(135deg, #1877F2 0%, #0068FF 100%);">
+                        📢 Khoe Chiến Tích & Thách Bạn Bè 🚀
+                    </button>
+                    <button id="btn-next-level" class="btn-primary">
+                        🚀 Khiêu Chiến Màn 2 (Địa Ngục)
+                    </button>
+                    <button id="btn-replay-win" class="btn-secondary">
+                        🔄 Chơi Lại Từ Màn 1
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. Modal Giả Lập Quảng Cáo Nhận Thưởng (Rewarded Ad Simulator) -->
+    <div id="rewarded-ad-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="ad-reward-title" style="font-size: 15px;">Xem quảng cáo để nhận thưởng</h3>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="ad-label" style="background: #fed330; color: #000; padding: 2px 6px; border-radius: 4px;">Ads</span>
+                    <button id="ad-cancel-btn" class="modal-close-btn" title="Bỏ qua quảng cáo">×</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="ad-sim-content">
+                    <div class="ad-video-mock">
+                        <div class="ad-timer-pill" id="ad-timer">5s</div>
+                        <div style="font-size: 44px; margin-bottom: 6px;">🎬</div>
+                        <p style="font-size: 14px; font-weight: 600;">Google AdSense / H5 Video Ad</p>
+                        <p style="font-size: 12px; opacity: 0.7; margin-top: 4px;">(Đang phát video tài trợ...)</p>
+                    </div>
+                    <div class="ad-progress-wrapper">
+                        <div class="ad-progress-bar" id="ad-progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="ad-claim-btn" class="btn-primary" style="width: 100%;" disabled>
+                    Đang phát quảng cáo...
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. Modal Khoe Chiến Tích & Chia Sẻ Mạng Xã Hội -->
+    <div id="share-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>🏆 Khoe Chiến Tích & Rủ Bạn Bè</h3>
+                <button class="modal-close-btn">×</button>
+            </div>
+            <div class="modal-body">
+                <!-- Thẻ Chiến Tích Tự Hào -->
+                <div class="share-trophy-card">
+                    <div class="trophy-badge" id="share-trophy-icon">👑</div>
+                    <h4 id="share-card-title">Siêu Ghép Thẻ 2026</h4>
+                    <p id="share-card-subtitle" style="font-size: 12px; color: #636e72; margin: 4px 0 10px;">Thách thức chỉ 0.1% người vượt qua Màn 2!</p>
+                    <div class="share-stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Cấp Độ</span>
+                            <strong class="stat-value" id="share-stat-level">Màn 1</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Điểm Số</span>
+                            <strong class="stat-value" id="share-stat-score">0</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Tổng Thắng</span>
+                            <strong class="stat-value" id="share-stat-wins">0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lời thách đấu mẫu -->
+                <div class="share-quote-box">
+                    <p id="share-quote-text" style="font-size: 13px; line-height: 1.5; color: #2d3436; font-style: italic;"></p>
+                </div>
+
+                <!-- Nhóm các nút chia sẻ -->
+                <div class="share-buttons-group">
+                    <!-- Nút mở menu chia sẻ của điện thoại (Zalo, Tin nhắn, TikTok...) -->
+                    <button id="btn-native-share" class="share-social-btn native-share-btn">
+                        <span>📲 Gửi Cho Bạn Bè (Zalo, Messenger, TikTok...)</span>
+                    </button>
+
+                    <div class="social-row">
+                        <button id="btn-share-facebook" class="share-social-btn fb-btn">
+                            <span>📘 Facebook</span>
+                        </button>
+                        <button id="btn-share-zalo" class="share-social-btn zalo-btn">
+                            <span>💬 Zalo</span>
+                        </button>
+                    </div>
+
+                    <!-- Nút Sao Chép Link & Lời Mời -->
+                    <button id="btn-copy-link" class="share-social-btn copy-btn">
+                        <span>📋 Sao Chép Lời Thách Đấu & Link</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Canvas bắn pháo hoa chúc mừng -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Các file kịch bản JS -->
+  <script type="text/javascript">
+  //<![CDATA[
+/**
+ * Web Audio API Sound Synthesizer
+ * Tự động tạo hiệu ứng âm thanh sống động mà không cần tải file MP3 bên ngoài
+ */
+class SoundManager {
+    constructor() {
+        this.ctx = null;
+        this.enabled = true;
+    }
+
+    init() {
+        if (!this.ctx) {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+                this.ctx = new AudioContext();
+            }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+            this.ctx.resume();
+        }
+    }
+
+    toggle() {
+        this.enabled = !this.enabled;
+        return this.enabled;
+    }
+
+    // Tiếng click chọn thẻ
+    playClick() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sine';
+        const now = this.ctx.currentTime;
+        osc.frequency.setValueAtTime(480, now);
+        osc.frequency.exponentialRampToValueAtTime(760, now + 0.08);
+
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.08);
+    }
+
+    // Tiếng thẻ rơi vào khay
+    playDrop() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'triangle';
+        const now = this.ctx.currentTime;
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.exponentialRampToValueAtTime(180, now + 0.06);
+
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.06);
+    }
+
+    // Tiếng nổ Combo 3 thẻ (Thanh âm vui tươi, rực rỡ)
+    playMatch() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const now = this.ctx.currentTime;
+        const notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6 (Hợp âm Đô trưởng)
+
+        notes.forEach((freq, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+
+            osc.type = 'sine';
+            const startTime = now + idx * 0.04;
+            osc.frequency.setValueAtTime(freq, startTime);
+
+            gain.gain.setValueAtTime(0.2, startTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.18);
+
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+
+            osc.start(startTime);
+            osc.stop(startTime + 0.18);
+        });
+    }
+
+    // Tiếng dùng quyền trợ giúp (Undo, Xáo trộn, Bốc thẻ)
+    playPowerup() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sine';
+        const now = this.ctx.currentTime;
+        osc.frequency.setValueAtTime(300, now);
+        osc.frequency.linearRampToValueAtTime(900, now + 0.18);
+
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.2);
+    }
+
+    // Tiếng Game Over
+    playGameOver() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const now = this.ctx.currentTime;
+        const notes = [392.00, 369.99, 349.23, 311.13]; // G4, F#4, F4, D#4
+
+        notes.forEach((freq, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+
+            osc.type = 'sawtooth';
+            const startTime = now + idx * 0.12;
+            osc.frequency.setValueAtTime(freq, startTime);
+
+            gain.gain.setValueAtTime(0.18, startTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.2);
+
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+
+            osc.start(startTime);
+            osc.stop(startTime + 0.2);
+        });
+    }
+
+    // Tiếng Chiến Thắng Vang Dội
+    playWin() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const now = this.ctx.currentTime;
+        const melody = [523.25, 659.25, 783.99, 1046.5, 880.00, 1046.5];
+        const times = [0, 0.1, 0.2, 0.32, 0.45, 0.58];
+
+        melody.forEach((freq, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+
+            osc.type = 'triangle';
+            const startTime = now + times[idx];
+            osc.frequency.setValueAtTime(freq, startTime);
+
+            gain.gain.setValueAtTime(0.25, startTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.28);
+
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+
+            osc.start(startTime);
+            osc.stop(startTime + 0.28);
+        });
+    }
+}
+
+window.soundManager = new SoundManager();
+
+
+/**
+ * Hệ thống Chủ Đề (Themes) Đa Dạng
+ * Cho phép người chơi tự do lựa chọn giao diện & biểu tượng yêu thích
+ */
+const GAME_THEMES = {
+    vietnam_food: {
+        id: 'vietnam_food',
+        name: 'Ẩm thực Việt',
+        badge: '🍜',
+        description: 'Món ngon đường phố & đặc sản Việt Nam',
+        primaryColor: '#e67e22',
+        bgGradient: 'linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)',
+        accentColor: '#d35400',
+        items: [
+            { id: 'pho', icon: '🍜', name: 'Phở Bò' },
+            { id: 'banhmi', icon: '🥖', name: 'Bánh Mì' },
+            { id: 'trasua', icon: '🧋', name: 'Trà Sữa' },
+            { id: 'caphe', icon: '☕', name: 'Cà Phê Phin' },
+            { id: 'banhbao', icon: '🥟', name: 'Bánh Bao' },
+            { id: 'goicuon', icon: '🌯', name: 'Gỏi Cuốn' },
+            { id: 'tomnuong', icon: '🍤', name: 'Tôm Nướng' },
+            { id: 'comtam', icon: '🍖', name: 'Cơm Tấm' },
+            { id: 'kemdua', icon: '🥥', name: 'Kem Dừa' },
+            { id: 'xoailac', icon: '🥭', name: 'Xoài Lắc' },
+            { id: 'banhxeo', icon: '🌮', name: 'Bánh Xèo' },
+            { id: 'trungcut', icon: '🥚', name: 'Trứng Cút Lộn' },
+            { id: 'traxanh', icon: '🍵', name: 'Trà Đá' },
+            { id: 'kemque', icon: '🍦', name: 'Kem Ốc Quế' }
+        ]
+    },
+    cute_pets: {
+        id: 'cute_pets',
+        name: 'Thú cưng cute',
+        badge: '🐶',
+        description: 'Các bé cưng siêu đáng yêu & nghịch ngợm',
+        primaryColor: '#ff7675',
+        bgGradient: 'linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%)',
+        accentColor: '#d63031',
+        items: [
+            { id: 'dog', icon: '🐶', name: 'Cún Cưng' },
+            { id: 'cat', icon: '🐱', name: 'Mèo Lười' },
+            { id: 'rabbit', icon: '🐰', name: 'Thỏ Trắng' },
+            { id: 'hamster', icon: '🐹', name: 'Hamster' },
+            { id: 'panda', icon: '🐼', name: 'Gấu Trúc' },
+            { id: 'fox', icon: '🦊', name: 'Cáo Con' },
+            { id: 'bear', icon: '🐻', name: 'Gấu Nâu' },
+            { id: 'penguin', icon: '🐧', name: 'Cánh Cụt' },
+            { id: 'koala', icon: '🐨', name: 'Koala' },
+            { id: 'frog', icon: '🐸', name: 'Ếch Cốm' },
+            { id: 'duck', icon: '🐥', name: 'Vịt Vàng' },
+            { id: 'pig', icon: '🐷', name: 'Heo Hồng' },
+            { id: 'tiger', icon: '🐯', name: 'Hổ Con' },
+            { id: 'chick', icon: '🐣', name: 'Gà Con' }
+        ]
+    },
+    fresh_fruits: {
+        id: 'fresh_fruits',
+        name: 'Trái cây tươi',
+        badge: '🍉',
+        description: 'Nông trại trái cây nhiệt đới ngọt ngào',
+        primaryColor: '#2ed573',
+        bgGradient: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
+        accentColor: '#26af5f',
+        items: [
+            { id: 'watermelon', icon: '🍉', name: 'Dưa Hấu' },
+            { id: 'strawberry', icon: '🍓', name: 'Dâu Tây' },
+            { id: 'banana', icon: '🍌', name: 'Chuối Tiêu' },
+            { id: 'apple', icon: '🍎', name: 'Táo Đỏ' },
+            { id: 'grape', icon: '🍇', name: 'Nho Tím' },
+            { id: 'pineapple', icon: '🍍', name: 'Dứa Mật' },
+            { id: 'peach', icon: '🍑', name: 'Đào Tiên' },
+            { id: 'kiwi', icon: '🥝', name: 'Kiwi Xanh' },
+            { id: 'avocado', icon: '🥑', name: 'Quả Bơ' },
+            { id: 'cherry', icon: '🍒', name: 'Cherry' },
+            { id: 'orange', icon: '🍊', name: 'Cam Sành' },
+            { id: 'lemon', icon: '🍋', name: 'Chanh Vàng' },
+            { id: 'coconut', icon: '🥥', name: 'Dừa Xiêm' },
+            { id: 'pear', icon: '🍐', name: 'Lê Ngọt' }
+        ]
+    },
+    sweet_bakery: {
+        id: 'sweet_bakery',
+        name: 'Tiệm bánh ngọt',
+        badge: '🧁',
+        description: 'Những món bánh kem & tráng miệng mê mẩn',
+        primaryColor: '#fd79a8',
+        bgGradient: 'linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)',
+        accentColor: '#e84393',
+        items: [
+            { id: 'donut', icon: '🍩', name: 'Bánh Donut' },
+            { id: 'cupcake', icon: '🧁', name: 'Cupcake' },
+            { id: 'cake', icon: '🍰', name: 'Bánh Kem' },
+            { id: 'cookie', icon: '🍪', name: 'Bánh Quy' },
+            { id: 'pudding', icon: '🍮', name: 'Pudding' },
+            { id: 'waffle', icon: '🧇', name: 'Bánh Waffle' },
+            { id: 'pancake', icon: '🥞', name: 'Bánh Kẹp' },
+            { id: 'croissant', icon: '🥐', name: 'Sừng Bò' },
+            { id: 'chocolate', icon: '🍫', name: 'Sô-cô-la' },
+            { id: 'lollipop', icon: '🍭', name: 'Kẹo Mút' },
+            { id: 'candy', icon: '🍬', name: 'Kẹo Ngọt' },
+            { id: 'pie', icon: '🥧', name: 'Bánh Pie' },
+            { id: 'bread', icon: '🍞', name: 'Bánh Mì Gối' },
+            { id: 'popcorn', icon: '🍿', name: 'Bỏng Ngô' }
+        ]
+    }
+};
+
+window.GAME_THEMES = GAME_THEMES;
+
+
+/**
+ * Trình Quản Lý Quảng Cáo (Google AdSense & H5 Games Ads Manager)
+ * Hỗ trợ sẵn vị trí Banner, Quảng cáo xen kẽ (Interstitial) và Quảng cáo nhận thưởng (Rewarded)
+ */
+class AdManager {
+    constructor() {
+        // ID Google AdSense chính thức từ tài khoản của bạn
+        this.publisherId = 'ca-pub-7959926217130088';
+        this.isRealAds = true; // Đã kích hoạt kết nối Google AdSense thật
+        this.onRewardSuccess = null;
+        this.rewardTimer = null;
+        this.isAdFinished = false;
+    }
+
+    init() {
+        if (this.isRealAds && this.publisherId !== 'ca-pub-SIMULATED_MODE') {
+            this.loadGoogleAdSenseScript();
+        }
+        this.bindEvents();
+    }
+
+    loadGoogleAdSenseScript() {
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${this.publisherId}`;
+        script.crossOrigin = 'anonymous';
+        document.head.appendChild(script);
+
+        // Hỗ trợ Google H5 Games Ads API
+        const h5Script = document.createElement('script');
+        h5Script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+        h5Script.setAttribute("data-ad-client", this.publisherId);
+        h5Script.setAttribute("data-ad-frequency-hint", "30s");
+        document.head.appendChild(h5Script);
+    }
+
+    bindEvents() {
+        // Nút Hủy / Bỏ qua quảng cáo ở góc trên
+        const cancelBtn = document.getElementById('ad-cancel-btn');
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', () => {
+                this.closeRewardedModal(false);
+            });
+        }
+
+        // Nút Nhận thưởng dưới đáy modal
+        const claimBtn = document.getElementById('ad-claim-btn');
+        if (claimBtn) {
+            claimBtn.addEventListener('click', () => {
+                if (this.isAdFinished) {
+                    this.closeRewardedModal(true);
+                }
+            });
+        }
+    }
+
+    /**
+     * Kích hoạt Quảng cáo nhận thưởng (Rewarded Ad)
+     * Được dùng khi: Hồi sinh, Lấy thêm quyền trợ giúp (Undo, Xáo trộn, Rút thẻ)
+     */
+    showRewardedAd(rewardName, onRewardGranted) {
+        this.onRewardSuccess = onRewardGranted;
+        this.isAdFinished = false;
+
+        // Nếu đã tích hợp Google H5 Game Ads API thật
+        if (this.isRealAds && typeof window.adBreak === 'function') {
+            window.adBreak({
+                type: 'reward',
+                name: rewardName,
+                beforeAd: () => {
+                    if (window.soundManager) window.soundManager.enabled = false;
+                },
+                afterAd: () => {
+                    if (window.soundManager) window.soundManager.enabled = true;
+                },
+                beforeReward: (showAdFn) => {
+                    showAdFn();
+                },
+                adDismissed: () => {
+                    this.showToast('Bạn đã tắt quảng cáo sớm nên chưa nhận được phần thưởng!');
+                    this.onRewardSuccess = null;
+                },
+                adViewed: () => {
+                    if (typeof this.onRewardSuccess === 'function') {
+                        const cb = this.onRewardSuccess;
+                        this.onRewardSuccess = null;
+                        cb();
+                        this.showToast(`🎉 Đã nhận thưởng: ${rewardName}!`);
+                    }
+                }
+            });
+            return;
+        }
+
+        // Chế độ mô phỏng trực quan siêu đẹp (Demo Mode)
+        this.showSimulatedRewardedModal(rewardName);
+    }
+
+    /**
+     * Hiển thị bảng mô phỏng quảng cáo với thanh đếm ngược 5 giây
+     */
+    showSimulatedRewardedModal(rewardName) {
+        const modal = document.getElementById('rewarded-ad-modal');
+        const timerEl = document.getElementById('ad-timer');
+        const progressBar = document.getElementById('ad-progress-bar');
+        const claimBtn = document.getElementById('ad-claim-btn');
+        const rewardTitle = document.getElementById('ad-reward-title');
+
+        if (!modal) return;
+
+        this.isAdFinished = false;
+        rewardTitle.textContent = `Xem quảng cáo để: ${rewardName}`;
+        modal.classList.remove('hidden');
+
+        if (claimBtn) {
+            claimBtn.disabled = true;
+            claimBtn.textContent = 'Đang phát quảng cáo... (5s)';
+            claimBtn.classList.remove('pulse');
+        }
+
+        let secondsLeft = 5;
+        if (timerEl) timerEl.textContent = `${secondsLeft}s`;
+        if (progressBar) progressBar.style.width = '0%';
+
+        const totalTime = 5;
+        const interval = 100;
+        let elapsed = 0;
+
+        clearInterval(this.rewardTimer);
+        this.rewardTimer = setInterval(() => {
+            elapsed += interval;
+            const progress = (elapsed / (totalTime * 1000)) * 100;
+            if (progressBar) {
+                progressBar.style.width = `${Math.min(progress, 100)}%`;
+            }
+
+            const currentSec = Math.ceil(totalTime - (elapsed / 1000));
+            if (currentSec > 0 && timerEl) {
+                timerEl.textContent = `${currentSec}s`;
+                if (claimBtn && claimBtn.disabled) {
+                    claimBtn.textContent = `Đang phát quảng cáo... (${currentSec}s)`;
+                }
+            }
+
+            if (elapsed >= totalTime * 1000) {
+                clearInterval(this.rewardTimer);
+                this.isAdFinished = true;
+                if (timerEl) timerEl.textContent = 'Hoàn tất!';
+                if (claimBtn) {
+                    claimBtn.disabled = false;
+                    claimBtn.textContent = 'Nhận Thưởng Ngay 🎁';
+                    claimBtn.classList.add('pulse');
+                }
+            }
+        }, interval);
+    }
+
+    closeRewardedModal(isSuccess) {
+        clearInterval(this.rewardTimer);
+        const modal = document.getElementById('rewarded-ad-modal');
+        if (modal) modal.classList.add('hidden');
+
+        const claimBtn = document.getElementById('ad-claim-btn');
+        if (claimBtn) {
+            claimBtn.classList.remove('pulse');
+            claimBtn.disabled = true;
+            claimBtn.textContent = 'Đang phát quảng cáo...';
+        }
+
+        if (isSuccess && typeof this.onRewardSuccess === 'function') {
+            const cb = this.onRewardSuccess;
+            this.onRewardSuccess = null;
+            cb();
+        } else {
+            this.onRewardSuccess = null;
+            if (!isSuccess) {
+                this.showToast('Bạn đã bỏ qua quảng cáo nên chưa nhận được quà!');
+            }
+        }
+    }
+
+    /**
+     * Quảng cáo xen kẽ (Interstitial) giữa các ván chơi
+     */
+    showInterstitial(onComplete) {
+        if (this.isRealAds && typeof window.adBreak === 'function') {
+            window.adBreak({
+                type: 'next',
+                name: 'restart_game',
+                beforeAd: () => {},
+                afterAd: () => {
+                    if (onComplete) onComplete();
+                }
+            });
+            return;
+        }
+
+        // Chế độ thường: Tiếp tục chơi ngay
+        if (onComplete) onComplete();
+    }
+
+    showToast(message) {
+        let toast = document.getElementById('game-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'game-toast';
+            document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        toast.className = 'toast show';
+        setTimeout(() => {
+            toast.className = 'toast';
+        }, 2800);
+    }
+}
+
+window.adManager = new AdManager();
+
+
+/**
+ * MiniGame: Cừu & Cừu (Match-3 Layer Stacking Game)
+ * Động cơ game chính: Quản lý va chạm đa tầng, Khay 7 ô, Quyền trợ giúp & Hệ thống chủ đề
+ */
+class MiniGameEngine {
+    constructor() {
+        this.currentThemeId = localStorage.getItem('sheep_theme') || 'vietnam_food';
+        this.currentLevel = 1; // 1: Dễ (Tutorial), 2: Địa ngục (Hell)
+        this.boardTiles = []; // Các thẻ trên bàn cờ
+        this.trayTiles = []; // Các thẻ đang trong khay chứa (tối đa 7)
+        this.stashTiles = []; // Các thẻ đang ở bục chờ tạm thời (Trợ giúp 1)
+        this.history = []; // Lịch sử các bước đi để phục vụ Undo
+
+        this.tileWidth = 50; // px
+        this.tileHeight = 56; // px
+
+        // Quyền trợ giúp: mỗi quyền có 1 lượt miễn phí ban đầu, sau đó xem quảng cáo
+        this.powerups = {
+            stash: { count: 1, name: 'Bốc 3 thẻ ra ngoài' },
+            undo: { count: 1, name: 'Hoàn tác bước đi' },
+            shuffle: { count: 1, name: 'Xáo trộn thẻ bài' }
+        };
+
+        this.isAnimating = false;
+        this.isGameOver = false;
+        this.score = 0;
+        this.combo = 0;
+        this.wins = parseInt(localStorage.getItem('sheep_wins') || '0', 10);
+
+        this.initDOM();
+        this.bindEvents();
+        this.applyTheme(this.currentThemeId);
+        this.startLevel(1);
+    }
+
+    initDOM() {
+        this.boardEl = document.getElementById('game-board');
+        this.trayEl = document.getElementById('game-tray');
+        this.stashEl = document.getElementById('game-stash');
+        this.levelBadge = document.getElementById('level-badge');
+        this.scoreEl = document.getElementById('score-display');
+        this.winsEl = document.getElementById('wins-display');
+        this.themeNameEl = document.getElementById('current-theme-name');
+        this.confettiCanvas = document.getElementById('confetti-canvas');
+
+        if (this.winsEl) this.winsEl.textContent = this.wins;
+    }
+
+    bindEvents() {
+        // Nút Quyền Trợ Giúp
+        document.getElementById('btn-powerup-stash').addEventListener('click', () => this.useStashPowerup());
+        document.getElementById('btn-powerup-undo').addEventListener('click', () => this.useUndoPowerup());
+        document.getElementById('btn-powerup-shuffle').addEventListener('click', () => this.useShufflePowerup());
+
+        // Nút Âm Thanh
+        const soundBtn = document.getElementById('btn-sound-toggle');
+        if (soundBtn) {
+            soundBtn.addEventListener('click', () => {
+                const isEnabled = window.soundManager.toggle();
+                soundBtn.textContent = isEnabled ? '🔊' : '🔇';
+                soundBtn.classList.toggle('muted', !isEnabled);
+            });
+        }
+
+        // Nút Chọn Chủ Đề
+        const themeBtn = document.getElementById('btn-theme-modal');
+        if (themeBtn) {
+            themeBtn.addEventListener('click', () => this.openThemeModal());
+        }
+
+        // Nút Hướng Dẫn & Chính Sách
+        const helpBtn = document.getElementById('btn-help-modal');
+        if (helpBtn) {
+            helpBtn.addEventListener('click', () => {
+                document.getElementById('help-modal').classList.remove('hidden');
+            });
+        }
+
+        const privacyBtn = document.getElementById('btn-privacy-modal');
+        if (privacyBtn) {
+            privacyBtn.addEventListener('click', () => {
+                document.getElementById('privacy-modal').classList.remove('hidden');
+            });
+        }
+
+        // Nút Chơi Lại / Tiếp Tục
+        document.getElementById('btn-restart-game').addEventListener('click', () => {
+            document.getElementById('game-over-modal').classList.add('hidden');
+            window.adManager.showInterstitial(() => {
+                this.startLevel(this.currentLevel);
+            });
+        });
+
+        document.getElementById('btn-revive-game').addEventListener('click', () => {
+            window.adManager.showRewardedAd('Hồi sinh & Xóa 3 thẻ', () => {
+                this.reviveGame();
+            });
+        });
+
+        // Nút Khoe Chiến Tích & Chia Sẻ Mạng Xã Hội
+        const shareHeaderBtn = document.getElementById('btn-share-modal');
+        if (shareHeaderBtn) {
+            shareHeaderBtn.addEventListener('click', () => this.openShareModal('header'));
+        }
+
+        const shareWinBtn = document.getElementById('btn-share-win');
+        if (shareWinBtn) {
+            shareWinBtn.addEventListener('click', () => {
+                this.openShareModal(this.currentLevel === 2 ? 'win_level_2' : 'win_level_1');
+            });
+        }
+
+        const shareGameOverBtn = document.getElementById('btn-share-gameover');
+        if (shareGameOverBtn) {
+            shareGameOverBtn.addEventListener('click', () => this.openShareModal('game_over'));
+        }
+
+        // Các nút trong Modal Chia Sẻ
+        document.getElementById('btn-native-share')?.addEventListener('click', () => this.shareNative());
+        document.getElementById('btn-share-facebook')?.addEventListener('click', () => this.shareFacebook());
+        document.getElementById('btn-share-zalo')?.addEventListener('click', () => this.shareZalo());
+        document.getElementById('btn-copy-link')?.addEventListener('click', () => this.copyShareLink());
+
+        document.getElementById('btn-next-level').addEventListener('click', () => {
+            document.getElementById('win-modal').classList.add('hidden');
+            this.startLevel(2);
+        });
+
+        document.getElementById('btn-replay-win').addEventListener('click', () => {
+            document.getElementById('win-modal').classList.add('hidden');
+            this.startLevel(1);
+        });
+
+        // Xử lý các nút đóng Modal chung
+        document.querySelectorAll('.modal-close-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const modal = e.target.closest('.modal-backdrop');
+                if (modal) modal.classList.add('hidden');
+            });
+        });
+    }
+
+    /**
+     * Chuyển đổi và áp dụng chủ đề mới
+     */
+    applyTheme(themeId) {
+        const theme = window.GAME_THEMES[themeId];
+        if (!theme) return;
+
+        this.currentThemeId = themeId;
+        localStorage.setItem('sheep_theme', themeId);
+
+        if (this.themeNameEl) {
+            this.themeNameEl.textContent = `${theme.badge} ${theme.name}`;
+        }
+
+        document.documentElement.style.setProperty('--primary-color', theme.primaryColor);
+        document.documentElement.style.setProperty('--accent-color', theme.accentColor);
+        document.body.style.background = theme.bgGradient;
+
+        // Cập nhật lại các thẻ đang hiển thị nếu có
+        this.boardTiles.forEach(tile => {
+            const item = theme.items.find(i => i.id === tile.itemId) || theme.items[0];
+            tile.icon = item.icon;
+            tile.name = item.name;
+            if (tile.el) {
+                const iconEl = tile.el.querySelector('.tile-icon');
+                if (iconEl) iconEl.textContent = item.icon;
+            }
+        });
+
+        this.trayTiles.forEach(tile => {
+            const item = theme.items.find(i => i.id === tile.itemId) || theme.items[0];
+            tile.icon = item.icon;
+            if (tile.el) {
+                const iconEl = tile.el.querySelector('.tile-icon');
+                if (iconEl) iconEl.textContent = item.icon;
+            }
+        });
+    }
+
+    openThemeModal() {
+        const modal = document.getElementById('theme-modal');
+        const listEl = document.getElementById('theme-options-list');
+        listEl.innerHTML = '';
+
+        Object.values(window.GAME_THEMES).forEach(theme => {
+            const card = document.createElement('div');
+            card.className = `theme-option-card ${theme.id === this.currentThemeId ? 'active' : ''}`;
+            card.innerHTML = `
+                <div class="theme-card-icon">${theme.badge}</div>
+                <div class="theme-card-info">
+                    <h4>${theme.name}</h4>
+                    <p>${theme.description}</p>
+                    <div class="theme-card-preview">
+                        ${theme.items.slice(0, 5).map(i => `<span>${i.icon}</span>`).join(' ')}
+                    </div>
+                </div>
+            `;
+            card.onclick = () => {
+                this.applyTheme(theme.id);
+                modal.classList.add('hidden');
+                window.soundManager.playClick();
+            };
+            listEl.appendChild(card);
+        });
+
+        modal.classList.remove('hidden');
+    }
+
+    /**
+     * Bắt đầu một màn chơi mới
+     */
+    startLevel(levelNumber) {
+        this.currentLevel = levelNumber;
+        this.isGameOver = false;
+        this.isAnimating = false;
+        this.boardTiles = [];
+        this.trayTiles = [];
+        this.stashTiles = [];
+        this.history = [];
+        this.combo = 0;
+
+        if (this.levelBadge) {
+            this.levelBadge.textContent = levelNumber === 1 ? 'Màn 1: Tập Sự' : 'Màn 2: Thách Thức';
+            this.levelBadge.className = `level-badge level-${levelNumber}`;
+        }
+
+        this.updatePowerupButtonsUI();
+        this.renderTray();
+        this.renderStash();
+
+        const theme = window.GAME_THEMES[this.currentThemeId];
+
+        if (levelNumber === 1) {
+            this.generateLevel1(theme);
+        } else {
+            this.generateLevel2(theme);
+        }
+
+        this.renderBoard();
+        this.updateOverlaps();
+    }
+
+    /**
+     * Tạo dữ liệu Màn 1 (Dễ, 9 hoặc 12 thẻ, xếp 2 tầng đơn giản)
+     */
+    generateLevel1(theme) {
+        const items = theme.items.slice(0, 3); // Chọn 3 loại
+        const pool = [];
+        // Mỗi loại 3 thẻ -> Tổng cộng 9 thẻ
+        items.forEach(item => {
+            for (let i = 0; i < 3; i++) {
+                pool.push({ itemId: item.id, icon: item.icon, name: item.name });
+            }
+        });
+        this.shuffleArray(pool);
+
+        const boardWidth = (this.boardEl && this.boardEl.clientWidth > 250) ? this.boardEl.clientWidth : 360;
+        const boardHeight = (this.boardEl && this.boardEl.clientHeight > 250) ? this.boardEl.clientHeight : 380;
+        const centerX = boardWidth / 2 - this.tileWidth / 2;
+        const centerY = boardHeight / 2 - this.tileHeight / 2 - 10;
+
+        const layout = [
+            // Tầng 0 (Bên dưới)
+            { x: centerX - 60, y: centerY - 50, layer: 0 },
+            { x: centerX + 60, y: centerY - 50, layer: 0 },
+            { x: centerX - 60, y: centerY + 50, layer: 0 },
+            { x: centerX + 60, y: centerY + 50, layer: 0 },
+            { x: centerX, y: centerY - 70, layer: 0 },
+            { x: centerX, y: centerY + 70, layer: 0 },
+
+            // Tầng 1 (Đè nhẹ lên giữa)
+            { x: centerX - 30, y: centerY, layer: 1 },
+            { x: centerX + 30, y: centerY, layer: 1 },
+            { x: centerX, y: centerY, layer: 2 }
+        ];
+
+        this.boardTiles = pool.map((item, idx) => ({
+            id: `tile_1_${idx}`,
+            itemId: item.itemId,
+            icon: item.icon,
+            name: item.name,
+            x: layout[idx].x,
+            y: layout[idx].y,
+            layer: layout[idx].layer,
+            isBlocked: false,
+            el: null
+        }));
+    }
+
+    /**
+     * Tạo dữ liệu Màn 2 (Địa ngục: Nhiều tầng chồng chéo, các chồng bài phụ bên cạnh)
+     * Đảm bảo TOÀN BỘ số lượng thẻ luôn là BỘI SỐ CỦA 3
+     */
+    generateLevel2(theme) {
+        const boardWidth = (this.boardEl && this.boardEl.clientWidth > 250) ? this.boardEl.clientWidth : 360;
+        const boardHeight = (this.boardEl && this.boardEl.clientHeight > 250) ? this.boardEl.clientHeight : 380;
+        const centerX = boardWidth / 2 - this.tileWidth / 2;
+        const centerY = boardHeight / 2 - this.tileHeight / 2 - 25;
+
+        const positions = [];
+
+        // 1. Tháp kim tự tháp trung tâm 5 tầng
+        // Tầng 0: 5x5 ô (cách nhau 38px)
+        for (let r = -2; r <= 2; r++) {
+            for (let c = -2; c <= 2; c++) {
+                if (Math.abs(r) + Math.abs(c) <= 3) {
+                    positions.push({ x: centerX + c * 38, y: centerY + r * 40, layer: 0 });
+                }
+            }
+        }
+
+        // Tầng 1: 4x4 ô (lệch nửa ô 19px)
+        for (let r = -1.5; r <= 1.5; r++) {
+            for (let c = -1.5; c <= 1.5; c++) {
+                positions.push({ x: centerX + c * 38, y: centerY + r * 40, layer: 1 });
+            }
+        }
+
+        // Tầng 2: 3x3 ô
+        for (let r = -1; r <= 1; r++) {
+            for (let c = -1; c <= 1; c++) {
+                positions.push({ x: centerX + c * 38, y: centerY + r * 40, layer: 2 });
+            }
+        }
+
+        // Tầng 3: 2x2 ô
+        for (let r = -0.5; r <= 0.5; r++) {
+            for (let c = -0.5; c <= 0.5; c++) {
+                positions.push({ x: centerX + c * 38, y: centerY + r * 40, layer: 3 });
+            }
+        }
+
+        // Tầng 4: Đỉnh tháp
+        positions.push({ x: centerX, y: centerY, layer: 4 });
+
+        // 2. Hai cột bài dự phòng hai bên cánh (Side Stacks)
+        // Cánh trái
+        for (let i = 0; i < 4; i++) {
+            positions.push({ x: 16 + i * 4, y: centerY + 60 + i * 4, layer: i });
+            positions.push({ x: 16 + i * 4, y: centerY - 60 - i * 4, layer: i });
+        }
+        // Cánh phải
+        for (let i = 0; i < 4; i++) {
+            positions.push({ x: boardWidth - this.tileWidth - 16 - i * 4, y: centerY + 60 + i * 4, layer: i });
+            positions.push({ x: boardWidth - this.tileWidth - 16 - i * 4, y: centerY - 60 - i * 4, layer: i });
+        }
+
+        // Đảm bảo tổng số vị trí là bội số của 3
+        const remainder = positions.length % 3;
+        if (remainder !== 0) {
+            positions.splice(positions.length - remainder, remainder);
+        }
+
+        const totalTiles = positions.length;
+        const totalSets = totalTiles / 3;
+
+        // Chọn các vật phẩm từ bộ chủ đề
+        const availableItems = [...theme.items];
+        this.shuffleArray(availableItems);
+
+        // Phân bổ thẻ: mỗi loại có 3 hoặc 6 hoặc 9 thẻ
+        const pool = [];
+        let itemIndex = 0;
+        for (let s = 0; s < totalSets; s++) {
+            const item = availableItems[itemIndex % availableItems.length];
+            for (let k = 0; k < 3; k++) {
+                pool.push({ itemId: item.id, icon: item.icon, name: item.name });
+            }
+            itemIndex++;
+        }
+
+        this.shuffleArray(pool);
+
+        this.boardTiles = positions.map((pos, idx) => ({
+            id: `tile_2_${idx}`,
+            itemId: pool[idx].itemId,
+            icon: pool[idx].icon,
+            name: pool[idx].name,
+            x: Math.round(pos.x),
+            y: Math.round(pos.y),
+            layer: pos.layer,
+            isBlocked: false,
+            el: null
+        }));
+    }
+
+    /**
+     * Thuật toán kiểm tra che khuất tầng (Overlap Collision)
+     * Thẻ A bị chặn nếu có thẻ B ở tầng cao hơn (layer_B > layer_A) và đè lên A
+     */
+    updateOverlaps() {
+        for (let i = 0; i < this.boardTiles.length; i++) {
+            const tileA = this.boardTiles[i];
+            let isCovered = false;
+
+            for (let j = 0; j < this.boardTiles.length; j++) {
+                if (i === j) continue;
+                const tileB = this.boardTiles[j];
+
+                if (tileB.layer > tileA.layer) {
+                    const dx = Math.abs(tileB.x - tileA.x);
+                    const dy = Math.abs(tileB.y - tileA.y);
+
+                    // Khoảng cách an toàn để tính là đè lên nhau
+                    if (dx < this.tileWidth - 6 && dy < this.tileHeight - 6) {
+                        isCovered = true;
+                        break;
+                    }
+                }
+            }
+
+            tileA.isBlocked = isCovered;
+            if (tileA.el) {
+                if (isCovered) {
+                    tileA.el.classList.add('blocked');
+                    tileA.el.classList.remove('free');
+                } else {
+                    tileA.el.classList.remove('blocked');
+                    tileA.el.classList.add('free');
+                }
+            }
+        }
+    }
+
+    renderBoard() {
+        this.boardEl.innerHTML = '';
+        this.boardTiles.forEach(tile => {
+            const el = document.createElement('div');
+            el.className = 'game-tile free';
+            el.style.left = `${tile.x}px`;
+            el.style.top = `${tile.y}px`;
+            el.style.zIndex = tile.layer * 10 + 2;
+            el.innerHTML = `
+                <div class="tile-inner">
+                    <span class="tile-icon">${tile.icon}</span>
+                </div>
+            `;
+
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.onTileClick(tile);
+            });
+
+            tile.el = el;
+            this.boardEl.appendChild(el);
+        });
+    }
+
+    /**
+     * Xử lý khi người chơi bấm vào 1 thẻ bài
+     */
+    onTileClick(tile) {
+        if (this.isAnimating || this.isGameOver) return;
+        if (tile.isBlocked) {
+            // Hiệu ứng rung nhẹ khi bấm nhầm thẻ bị khóa
+            if (tile.el) {
+                tile.el.classList.add('shake');
+                setTimeout(() => {
+                    if (tile.el) tile.el.classList.remove('shake');
+                }, 300);
+            }
+            return;
+        }
+
+        if (this.trayTiles.length >= 7) return;
+
+        window.soundManager.playClick();
+
+        // Ghi lại lịch sử để hỗ trợ tính năng Hoàn Tác (Undo)
+        this.history.push({
+            type: 'move_to_tray',
+            tile: { ...tile }
+        });
+
+        // Xóa thẻ khỏi danh sách bàn cờ
+        const boardIndex = this.boardTiles.findIndex(t => t.id === tile.id);
+        if (boardIndex !== -1) {
+            this.boardTiles.splice(boardIndex, 1);
+        }
+
+        // Xóa phần tử DOM trên bàn cờ
+        if (tile.el && tile.el.parentNode) {
+            tile.el.parentNode.removeChild(tile.el);
+        }
+
+        // Đưa thẻ vào khay chứa & cập nhật trạng thái các thẻ bên dưới
+        this.addTileToTray(tile);
+        this.updateOverlaps();
+        window.soundManager.playDrop();
+
+        this.isAnimating = true;
+        setTimeout(() => {
+            this.checkTrayMatches();
+            this.isAnimating = false;
+        }, 150);
+    }
+
+    /**
+     * Thêm thẻ vào khay chứa và tự động gom nhóm các thẻ giống nhau đứng cạnh nhau
+     */
+    addTileToTray(tile) {
+        // Tìm xem trong khay đã có thẻ cùng loại chưa để xếp cạnh nhau
+        let insertIndex = -1;
+        for (let i = this.trayTiles.length - 1; i >= 0; i--) {
+            if (this.trayTiles[i].itemId === tile.itemId) {
+                insertIndex = i + 1;
+                break;
+            }
+        }
+
+        if (insertIndex !== -1) {
+            this.trayTiles.splice(insertIndex, 0, tile);
+        } else {
+            this.trayTiles.push(tile);
+        }
+
+        this.renderTray();
+    }
+
+    renderTray() {
+        this.trayEl.innerHTML = '';
+        for (let i = 0; i < 7; i++) {
+            const slot = document.createElement('div');
+            slot.className = 'tray-slot';
+
+            if (this.trayTiles[i]) {
+                const tile = this.trayTiles[i];
+                const tileEl = document.createElement('div');
+                tileEl.className = 'game-tile in-tray';
+                tileEl.innerHTML = `
+                    <div class="tile-inner">
+                        <span class="tile-icon">${tile.icon}</span>
+                    </div>
+                `;
+                slot.appendChild(tileEl);
+            }
+
+            this.trayEl.appendChild(slot);
+        }
+    }
+
+    /**
+     * Kiểm tra điều kiện Ghép 3 (Match-3) trong khay chứa
+     */
+    checkTrayMatches() {
+        const counts = {};
+        this.trayTiles.forEach(tile => {
+            counts[tile.itemId] = (counts[tile.itemId] || 0) + 1;
+        });
+
+        // Tìm loại thẻ đã đủ 3
+        let matchedItemId = null;
+        for (const itemId in counts) {
+            if (counts[itemId] >= 3) {
+                matchedItemId = itemId;
+                break;
+            }
+        }
+
+        if (matchedItemId) {
+            window.soundManager.playMatch();
+            this.combo++;
+            this.score += 30 * this.combo;
+            if (this.scoreEl) this.scoreEl.textContent = this.score;
+
+            // Hiệu ứng nổ thẻ
+            const matchSlots = [];
+            const newTray = [];
+            this.trayTiles.forEach((tile, index) => {
+                if (tile.itemId === matchedItemId) {
+                    matchSlots.push(index);
+                } else {
+                    newTray.push(tile);
+                }
+            });
+
+            // Gắn class hiệu ứng nổ cho các ô
+            const slots = this.trayEl.querySelectorAll('.tray-slot');
+            matchSlots.forEach(idx => {
+                if (slots[idx] && slots[idx].firstChild) {
+                    slots[idx].firstChild.classList.add('match-explode');
+                }
+            });
+
+            setTimeout(() => {
+                this.trayTiles = newTray;
+                this.renderTray();
+                this.checkGameStatus();
+            }, 220);
+        } else {
+            this.combo = 0;
+            this.checkGameStatus();
+        }
+    }
+
+    /**
+     * Kiểm tra Thắng hoặc Thua ván chơi
+     */
+    checkGameStatus() {
+        // Điều kiện Thắng: Hết sạch thẻ trên bàn cờ VÀ khay trống VÀ bục chờ trống
+        if (this.boardTiles.length === 0 && this.trayTiles.length === 0 && this.stashTiles.length === 0) {
+            this.triggerVictory();
+            return;
+        }
+
+        // Điều kiện Thua: Đầy cả 7 ô trong khay
+        if (this.trayTiles.length >= 7) {
+            this.triggerGameOver();
+        }
+    }
+
+    triggerVictory() {
+        this.isGameOver = true;
+        window.soundManager.playWin();
+
+        if (this.currentLevel === 1) {
+            // Màn 1 thắng -> Chuyển màn 2
+            const modal = document.getElementById('win-modal');
+            const title = document.getElementById('win-title');
+            const desc = document.getElementById('win-desc');
+            const nextBtn = document.getElementById('btn-next-level');
+
+            title.textContent = '🎉 VƯỢT QUA MÀN 1!';
+            desc.textContent = 'Quá đỉnh! Nhưng thử thách thực sự Màn 2 (Chỉ 0.1% người thắng) mới bắt đầu!';
+            nextBtn.classList.remove('hidden');
+            modal.classList.remove('hidden');
+        } else {
+            // Màn 2 thắng -> Kỷ lục thế giới!
+            this.wins++;
+            localStorage.setItem('sheep_wins', this.wins);
+            if (this.winsEl) this.winsEl.textContent = this.wins;
+
+            const modal = document.getElementById('win-modal');
+            const title = document.getElementById('win-title');
+            const desc = document.getElementById('win-desc');
+            const nextBtn = document.getElementById('btn-next-level');
+
+            title.textContent = '🏆 HUYỀN THOẠI CHIẾN THẮNG!';
+            desc.textContent = `Bạn đã xuất sắc chinh phục Màn 2 của game! Tổng số chiến thắng: ${this.wins}`;
+            nextBtn.classList.add('hidden');
+            modal.classList.remove('hidden');
+
+            this.launchConfetti();
+        }
+    }
+
+    triggerGameOver() {
+        this.isGameOver = true;
+        window.soundManager.playGameOver();
+        const modal = document.getElementById('game-over-modal');
+        if (modal) modal.classList.remove('hidden');
+    }
+
+    /**
+     * Hồi sinh người chơi khi xem xong quảng cáo
+     */
+    reviveGame() {
+        document.getElementById('game-over-modal').classList.add('hidden');
+        this.isGameOver = false;
+
+        // Bốc 3 thẻ từ khay chuyển lên bục chờ tạm thời để giải phóng khay
+        if (this.trayTiles.length >= 3) {
+            const rescued = this.trayTiles.splice(0, 3);
+            this.stashTiles.push(...rescued);
+        } else {
+            this.stashTiles.push(...this.trayTiles);
+            this.trayTiles = [];
+        }
+
+        this.renderTray();
+        this.renderStash();
+        window.soundManager.playPowerup();
+    }
+
+    // ==========================================
+    // CÁC QUYỀN TRỢ GIÚP (POWER-UPS)
+    // ==========================================
+
+    /**
+     * Trợ giúp 1: Rút 3 thẻ từ khay lên bục chờ (Stash)
+     */
+    useStashPowerup() {
+        if (this.isGameOver) return;
+
+        const moveTilesToStash = () => {
+            const countToMove = Math.min(3, this.trayTiles.length);
+            if (countToMove > 0) {
+                const moved = this.trayTiles.splice(0, countToMove);
+                this.stashTiles.push(...moved);
+                this.renderTray();
+                this.renderStash();
+                window.soundManager.playPowerup();
+            }
+            this.updatePowerupButtonsUI();
+        };
+
+        // Nếu người chơi còn lượt miễn phí
+        if (this.powerups.stash.count > 0) {
+            if (this.trayTiles.length === 0) {
+                window.adManager.showToast('Khay đang trống, hãy dùng khi khay có thẻ nhé!');
+                return;
+            }
+            this.powerups.stash.count--;
+            moveTilesToStash();
+            window.adManager.showToast('📦 Đã bốc 3 thẻ lên bục chờ!');
+            return;
+        }
+
+        // Nếu hết lượt miễn phí -> Xem quảng cáo nhận thưởng
+        if (this.trayTiles.length > 0) {
+            // Khi khay đang có thẻ: Xem xong quảng cáo sẽ bốc 3 thẻ NGAY LẬP TỨC
+            window.adManager.showRewardedAd('Bốc 3 thẻ ra ngoài', () => {
+                moveTilesToStash();
+                window.adManager.showToast('🎉 Đã giải cứu khay: Bốc 3 thẻ thành công!');
+            });
+        } else {
+            // Khi khay đang trống: Xem quảng cáo để tích lũy +1 lượt dự trữ
+            window.adManager.showRewardedAd('Nhận 1 lượt Bốc 3 thẻ dự trữ', () => {
+                this.powerups.stash.count++;
+                this.updatePowerupButtonsUI();
+                window.soundManager.playPowerup();
+                window.adManager.showToast('🎁 Đã nhận thêm 1 lượt Bốc 3 thẻ dự trữ!');
+            });
+        }
+    }
+
+    renderStash() {
+        if (!this.stashEl) return;
+        this.stashEl.innerHTML = '';
+
+        const wrapper = document.getElementById('stash-wrapper');
+        const countEl = document.getElementById('stash-count');
+        const hintEl = document.getElementById('stash-scroll-hint');
+
+        // Nếu bục chờ trống -> Ẩn toàn bộ để giải phóng không gian cho bàn cờ
+        if (this.stashTiles.length === 0) {
+            if (wrapper) wrapper.style.display = 'none';
+            return;
+        }
+
+        // Khi có thẻ trên bục chờ -> Hiện khung bục chờ
+        if (wrapper) wrapper.style.display = 'flex';
+        if (countEl) countEl.textContent = this.stashTiles.length;
+        if (hintEl) {
+            hintEl.style.display = this.stashTiles.length > 5 ? 'inline' : 'none';
+        }
+
+        this.stashTiles.forEach((tile, index) => {
+            const tileEl = document.createElement('div');
+            tileEl.className = 'game-tile in-stash';
+            tileEl.innerHTML = `
+                <div class="tile-inner">
+                    <span class="tile-icon">${tile.icon}</span>
+                </div>
+            `;
+            // Người chơi có thể bấm lại vào thẻ ở bục chờ để đưa vào khay
+            tileEl.addEventListener('click', () => {
+                if (this.trayTiles.length < 7) {
+                    this.stashTiles.splice(index, 1);
+                    this.renderStash();
+                    this.addTileToTray(tile);
+                    this.checkTrayMatches();
+                    window.soundManager.playClick();
+                }
+            });
+            this.stashEl.appendChild(tileEl);
+        });
+
+        // Tự động cuộn sang phải để người chơi nhìn thấy thẻ mới nhất vừa bốc ra
+        setTimeout(() => {
+            if (this.stashEl) {
+                this.stashEl.scrollLeft = this.stashEl.scrollWidth;
+            }
+        }, 50);
+    }
+
+    /**
+     * Trợ giúp 2: Hoàn tác 1 bước đi gần nhất (Undo)
+     */
+    useUndoPowerup() {
+        if (this.isGameOver) return;
+
+        const performUndo = () => {
+            const lastAction = this.history.pop();
+            if (lastAction && lastAction.type === 'move_to_tray') {
+                const tileData = lastAction.tile;
+
+                // Tìm và bỏ thẻ đó khỏi khay
+                const trayIdx = this.trayTiles.findIndex(t => t.id === tileData.id);
+                if (trayIdx !== -1) {
+                    this.trayTiles.splice(trayIdx, 1);
+                }
+
+                // Đưa thẻ trở lại bàn cờ
+                this.boardTiles.push(tileData);
+                this.renderBoard();
+                this.renderTray();
+                this.updateOverlaps();
+                window.soundManager.playPowerup();
+            }
+            this.updatePowerupButtonsUI();
+        };
+
+        // Nếu còn lượt miễn phí
+        if (this.powerups.undo.count > 0) {
+            if (this.history.length === 0) {
+                window.adManager.showToast('Chưa có bước đi nào để hoàn tác!');
+                return;
+            }
+            this.powerups.undo.count--;
+            performUndo();
+            window.adManager.showToast('↩️ Đã hoàn tác 1 bước!');
+            return;
+        }
+
+        // Nếu hết lượt -> Xem quảng cáo
+        if (this.history.length > 0) {
+            window.adManager.showRewardedAd('Hoàn tác bước đi gần nhất', () => {
+                performUndo();
+                window.adManager.showToast('🎉 Hoàn tác bước đi thành công!');
+            });
+        } else {
+            window.adManager.showRewardedAd('Nhận 1 lượt Hoàn tác dự trữ', () => {
+                this.powerups.undo.count++;
+                this.updatePowerupButtonsUI();
+                window.soundManager.playPowerup();
+                window.adManager.showToast('🎁 Đã nhận thêm 1 lượt Hoàn tác dự trữ!');
+            });
+        }
+    }
+
+    /**
+     * Trợ giúp 3: Xáo trộn toàn bộ thẻ còn lại trên bàn (Shuffle)
+     */
+    useShufflePowerup() {
+        if (this.isGameOver) return;
+
+        const performShuffle = () => {
+            const items = this.boardTiles.map(t => ({
+                itemId: t.itemId,
+                icon: t.icon,
+                name: t.name
+            }));
+            this.shuffleArray(items);
+
+            this.boardTiles.forEach((tile, idx) => {
+                tile.itemId = items[idx].itemId;
+                tile.icon = items[idx].icon;
+                tile.name = items[idx].name;
+            });
+
+            this.renderBoard();
+            this.updateOverlaps();
+            window.soundManager.playPowerup();
+            this.updatePowerupButtonsUI();
+        };
+
+        // Nếu còn lượt miễn phí
+        if (this.powerups.shuffle.count > 0) {
+            if (this.boardTiles.length <= 1) {
+                window.adManager.showToast('Không đủ thẻ trên bàn để xáo trộn!');
+                return;
+            }
+            this.powerups.shuffle.count--;
+            performShuffle();
+            window.adManager.showToast('🔀 Đã xáo trộn thẻ!');
+            return;
+        }
+
+        // Nếu hết lượt -> Xem quảng cáo
+        if (this.boardTiles.length > 1) {
+            window.adManager.showRewardedAd('Xáo trộn toàn bộ thẻ', () => {
+                performShuffle();
+                window.adManager.showToast('🎉 Đã xáo trộn thẻ thành công!');
+            });
+        } else {
+            window.adManager.showRewardedAd('Nhận 1 lượt Xáo trộn dự trữ', () => {
+                this.powerups.shuffle.count++;
+                this.updatePowerupButtonsUI();
+                window.soundManager.playPowerup();
+                window.adManager.showToast('🎁 Đã nhận thêm 1 lượt Xáo trộn dự trữ!');
+            });
+        }
+    }
+
+    updatePowerupButtonsUI() {
+        const updateBadge = (id, count) => {
+            const el = document.getElementById(id);
+            if (el) {
+                if (count > 0) {
+                    el.textContent = count;
+                    el.className = 'powerup-badge free-badge';
+                } else {
+                    el.textContent = '📺 Ads';
+                    el.className = 'powerup-badge ad-badge';
+                }
+            }
+        };
+
+        updateBadge('badge-stash', this.powerups.stash.count);
+        updateBadge('badge-undo', this.powerups.undo.count);
+        updateBadge('badge-shuffle', this.powerups.shuffle.count);
+    }
+
+    shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    /**
+     * Hiệu ứng pháo hoa chúc mừng chiến thắng (Confetti Animation)
+     */
+    launchConfetti() {
+        if (!this.confettiCanvas) return;
+        const canvas = this.confettiCanvas;
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const colors = ['#f39c12', '#e74c3c', '#2ecc71', '#3498db', '#9b59b6', '#fd79a8'];
+
+        for (let i = 0; i < 120; i++) {
+            particles.push({
+                x: canvas.width / 2,
+                y: canvas.height / 2,
+                r: Math.random() * 6 + 4,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                vx: (Math.random() - 0.5) * 14,
+                vy: (Math.random() - 0.7) * 16,
+                gravity: 0.28,
+                rotation: Math.random() * 360,
+                vRot: (Math.random() - 0.5) * 10
+            });
+        }
+
+        let animationFrame;
+        const render = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += p.gravity;
+                p.rotation += p.vRot;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate((p.rotation * Math.PI) / 180);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.r, -p.r, p.r * 2, p.r * 2);
+                ctx.restore();
+            });
+
+            if (particles.some(p => p.y < canvas.height)) {
+                animationFrame = requestAnimationFrame(render);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                cancelAnimationFrame(animationFrame);
+            }
+        };
+
+        render();
+    }
+
+    // ==========================================
+    // TÍNH NĂNG KHOE CHIẾN TÍCH & CHIA SẺ MẠNG XÃ HỘI
+    // ==========================================
+
+    openShareModal(context = 'general') {
+        const modal = document.getElementById('share-modal');
+        if (!modal) return;
+
+        const levelText = this.currentLevel === 1 ? 'Màn 1' : 'Màn 2';
+        const levelEl = document.getElementById('share-stat-level');
+        const scoreEl = document.getElementById('share-stat-score');
+        const winsEl = document.getElementById('share-stat-wins');
+
+        if (levelEl) levelEl.textContent = levelText;
+        if (scoreEl) scoreEl.textContent = this.score;
+        if (winsEl) winsEl.textContent = this.wins;
+
+        const iconEl = document.getElementById('share-trophy-icon');
+        const titleEl = document.getElementById('share-card-title');
+        const quoteEl = document.getElementById('share-quote-text');
+
+        let challengeText = '';
+
+        if (context === 'win_level_2') {
+            if (iconEl) iconEl.textContent = '👑';
+            if (titleEl) titleEl.textContent = 'HUYỀN THOẠI CHIẾN THẮNG!';
+            challengeText = `🏆 Tôi vừa chính thức PHÁ ĐẢO Màn 2 Siêu Ghép Thẻ với ${this.score} điểm! Tỉ lệ người thắng chỉ 0.1%. Bạn có dám thách thức kỷ lục này không? 🎮`;
+        } else if (context === 'game_over') {
+            if (iconEl) iconEl.textContent = '🔥';
+            if (titleEl) titleEl.textContent = 'THÁCH ĐẤU GIẢI CỨU!';
+            challengeText = `😱 Bàn cờ Màn 2 này quá hiểm hóc! Tôi đạt ${this.score} điểm mà vẫn bị đầy khay. Có ai vào giải cứu bàn này giùm tôi không? 🎮`;
+        } else if (context === 'win_level_1') {
+            if (iconEl) iconEl.textContent = '🎉';
+            if (titleEl) titleEl.textContent = 'VƯỢT QUA MÀN 1!';
+            challengeText = `🚀 Tôi vừa vượt qua Màn 1 cực mượt! Giờ chuẩn bị chinh phục Màn 2 địa ngục. Vào chơi đọ điểm với tôi nhé! 🎮`;
+        } else {
+            if (iconEl) iconEl.textContent = '🎮';
+            if (titleEl) titleEl.textContent = 'SIÊU THỬ THÁCH GHÉP THẺ';
+            challengeText = `🔥 Trò chơi Siêu Ghép Thẻ 2026 cực kỳ gây nghiện! Kỷ lục hiện tại của tôi: ${this.score} điểm (${this.wins} trận thắng). Cùng vào so tài nhé! 🚀`;
+        }
+
+        if (quoteEl) quoteEl.textContent = `"${challengeText}"`;
+        this.currentShareText = challengeText;
+
+        modal.classList.remove('hidden');
+        window.soundManager.playPowerup();
+    }
+
+    getShareUrl() {
+        return window.location.href;
+    }
+
+    shareNative() {
+        const shareData = {
+            title: 'Siêu Thử Thách Ghép Thẻ 2026',
+            text: this.currentShareText || 'Chơi game ghép thẻ cực cuốn cùng tôi nhé!',
+            url: this.getShareUrl()
+        };
+
+        if (navigator.share) {
+            navigator.share(shareData).catch(() => {});
+        } else {
+            this.copyShareLink();
+        }
+    }
+
+    shareFacebook() {
+        const url = encodeURIComponent(this.getShareUrl());
+        const quote = encodeURIComponent(this.currentShareText || '');
+        const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${quote}`;
+        window.open(fbUrl, '_blank', 'width=600,height=500');
+    }
+
+    shareZalo() {
+        this.copyShareLink(true);
+    }
+
+    copyShareLink(isForZalo = false) {
+        const text = `${this.currentShareText || 'Chơi game ghép thẻ cực cuốn!'}\n👉 Chơi ngay tại: ${this.getShareUrl()}`;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
+                if (isForZalo) {
+                    window.adManager.showToast('💬 Đã sao chép! Hãy dán vào Zalo gửi cho bạn bè nhé!');
+                    setTimeout(() => {
+                        window.open('https://chat.zalo.me/', '_blank');
+                    }, 500);
+                } else {
+                    window.adManager.showToast('📋 Đã sao chép lời thách đấu và link game!');
+                }
+            }).catch(() => {
+                this.fallbackCopy(text);
+            });
+        } else {
+            this.fallbackCopy(text);
+        }
+    }
+
+    fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            window.adManager.showToast('📋 Đã sao chép lời thách đấu và link!');
+        } catch (e) {
+            window.adManager.showToast('Không thể tự động sao chép, hãy chọn thủ công!');
+        }
+        document.body.removeChild(textarea);
+    }
+}
+
+// Khởi tạo Game khi trang tải xong
+window.addEventListener('DOMContentLoaded', () => {
+    window.gameEngine = new MiniGameEngine();
+    window.adManager.init();
+});
+
+  //]]>
+  </script>
+</body>
+</html>

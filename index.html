@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Siêu Thử Thách Ghép Thẻ - Web Game Hấp Dẫn 2026</title>
+    
+    <!-- Meta SEO & Chia Sẻ Mạng Xã Hội -->
+    <meta name="description" content="Trò chơi ghép thẻ 3 ô thử thách trí tuệ cực kỳ gây nghiện. Vượt qua Màn 1 dễ ợt và thử sức với Màn 2 chỉ 0.1% người chiến thắng!">
+    <meta name="keywords" content="web game, cừu và cừu, sheep a sheep, game ghep the, game html5, game giai tri, mini game">
+    <meta property="og:title" content="Siêu Thử Thách Ghép Thẻ - Liệu bạn có vượt qua nổi Màn 2?">
+    <meta property="og:description" content="Trò chơi ghép 3 thẻ gây nghiện với nhiều chủ đề: Ẩm thực Việt, Thú cưng, Trái cây, Bánh ngọt. Chơi ngay miễn phí!">
+    <meta property="og:type" content="website">
+
+    <!-- CSS Liên kết -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Mã kết nối Google AdSense chính thức của bạn (pub-7959926217130088) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7959926217130088" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div class="app-layout">
+        <!-- Vị trí Quảng Cáo Banner Bên Trái (Dành cho Máy tính / Desktop) -->
+        <aside class="desktop-side-ad left" aria-label="Quảng cáo">
+            <span class="ad-label">Quảng cáo</span>
+            <div class="ad-placeholder-box">
+                <!-- Vị trí đặt mã Google AdSense Skyscraper (160x600) -->
+                <!-- <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-..." data-ad-slot="..."></ins> -->
+                <p>📍 <strong>Google AdSense</strong></p>
+                <p style="margin-top: 8px;">Banner Dọc 160x600</p>
+                <p style="margin-top: 12px; font-size: 11px; opacity: 0.8;">Sẽ tự động hiển thị khi người chơi truy cập bằng máy tính</p>
+            </div>
+        </aside>
+
+        <!-- Khung Game Chính (Thiết kế tối ưu cho Điện Thoại & Màn Hình Dọc) -->
+        <main class="game-container">
+            <!-- Header trên cùng -->
+            <header class="game-header">
+                <div class="header-left">
+                    <button id="btn-theme-modal" class="theme-pill-btn" title="Đổi chủ đề hình ảnh">
+                        <span id="current-theme-name">🍜 Ẩm thực Việt</span>
+                    </button>
+                </div>
+
+                <div class="header-center">
+                    <div id="level-badge" class="level-badge level-1">Màn 1: Tập Sự</div>
+                    <div class="header-stats">
+                        🏆 Thắng: <span id="wins-display">0</span> | Điểm: <span id="score-display">0</span>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <button id="btn-share-modal" class="btn-icon" title="Khoe chiến tích & Rủ bạn bè" style="background: #e8f0fe; color: #1a73e8; font-size: 16px;">📢</button>
+                    <button id="btn-sound-toggle" class="btn-icon" title="Bật/Tắt âm thanh">🔊</button>
+                    <button id="btn-help-modal" class="btn-icon" title="Hướng dẫn chơi">❓</button>
+                    <button id="btn-privacy-modal" class="btn-icon" title="Chính sách bảo mật">🛡️</button>
+                </div>
+            </header>
+
+            <!-- Vùng Chơi Game -->
+            <section class="game-play-area">
+                <!-- Bàn cờ các thẻ bài xếp tầng -->
+                <div class="board-wrapper">
+                    <div id="game-board"></div>
+                </div>
+
+                <!-- Bục chờ tạm thời (Khi dùng quyền Rút 3 thẻ) - Vuốt ngang khi có nhiều thẻ -->
+                <div class="stash-wrapper" id="stash-wrapper" style="display: none;">
+                    <div class="stash-hint-bar">
+                        <span>📦 Bục chờ (<strong id="stash-count">0</strong> thẻ)</span>
+                        <span id="stash-scroll-hint" style="color: #d35400; font-size: 11px;">👈 Vuốt ngang 👉</span>
+                    </div>
+                    <div class="stash-container" id="game-stash" title="Khu vực giữ thẻ tạm thời (Chạm vào thẻ để đưa lại khay)"></div>
+                </div>
+
+                <!-- Khay chứa 7 ô -->
+                <div class="tray-wrapper">
+                    <div class="game-tray" id="game-tray"></div>
+                </div>
+
+                <!-- Thanh Quyền Trợ Giúp (Gắn kèm lượt xem quảng cáo) -->
+                <div class="powerups-bar">
+                    <!-- Trợ giúp 1: Bốc 3 thẻ ra ngoài -->
+                    <button id="btn-powerup-stash" class="powerup-btn" title="Chuyển 3 thẻ từ khay lên bục chờ">
+                        <div class="powerup-icon-box">
+                            <span>📦</span>
+                            <span id="badge-stash" class="powerup-badge free-badge">1</span>
+                        </div>
+                        <span class="powerup-label">Bốc 3 thẻ</span>
+                    </button>
+
+                    <!-- Trợ giúp 2: Hoàn tác 1 bước -->
+                    <button id="btn-powerup-undo" class="powerup-btn" title="Hoàn tác thẻ vừa bấm nhầm">
+                        <div class="powerup-icon-box">
+                            <span>↩️</span>
+                            <span id="badge-undo" class="powerup-badge free-badge">1</span>
+                        </div>
+                        <span class="powerup-label">Hoàn tác</span>
+                    </button>
+
+                    <!-- Trợ giúp 3: Xáo trộn toàn bộ thẻ -->
+                    <button id="btn-powerup-shuffle" class="powerup-btn" title="Đảo ngẫu nhiên các thẻ còn lại">
+                        <div class="powerup-icon-box">
+                            <span>🔀</span>
+                            <span id="badge-shuffle" class="powerup-badge free-badge">1</span>
+                        </div>
+                        <span class="powerup-label">Xáo trộn</span>
+                    </button>
+                </div>
+
+                <!-- Vùng Banner Quảng Cáo Chân Trang (Chuẩn Mobile 320x50) -->
+                <div class="mobile-ad-banner" aria-label="Quảng cáo">
+                    <span class="ad-label">Quảng cáo</span>
+                    <div class="banner-ad-box">
+                        <!-- Vị trí đặt mã Google AdSense Mobile Banner (320x50 hoặc Responsive) -->
+                        <!-- <ins class="adsbygoogle" style="display:inline-block;width:320px;height:50px" data-ad-client="ca-pub-..." data-ad-slot="..."></ins> -->
+                        <span>📍 <strong>Google AdSense Banner</strong> (320x50)</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Vị trí Quảng Cáo Banner Bên Phải (Dành cho Máy tính / Desktop) -->
+        <aside class="desktop-side-ad right" aria-label="Quảng cáo">
+            <span class="ad-label">Quảng cáo</span>
+            <div class="ad-placeholder-box">
+                <!-- Vị trí đặt mã Google AdSense Skyscraper (160x600) -->
+                <p>📍 <strong>Google AdSense</strong></p>
+                <p style="margin-top: 8px;">Banner Dọc 160x600</p>
+                <p style="margin-top: 12px; font-size: 11px; opacity: 0.8;">Tối ưu hóa doanh thu hiển thị trên màn hình rộng</p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- ==================== CÁC MODAL HỆ THỐNG ==================== -->
+
+    <!-- 1. Modal Chọn Chủ Đề (Themes) -->
+    <div id="theme-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>🎨 Chọn Chủ Đề Yêu Thích</h3>
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="theme-options-list" id="theme-options-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Modal Hướng Dẫn Chơi -->
+    <div id="help-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>📖 Hướng Dẫn Chơi</h3>
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body" style="font-size: 14px; line-height: 1.6; color: #4b6584;">
+                <p><strong>1. Mục tiêu:</strong> Ăn hết toàn bộ các thẻ bài trên bàn cờ.</p>
+                <p style="margin-top: 8px;"><strong>2. Quy tắc chọn thẻ:</strong> Bạn chỉ có thể bấm vào những thẻ nằm ở lớp trên cùng (thẻ sáng rõ). Thẻ bị đè mờ bên dưới sẽ mở khóa khi thẻ trên nó được giải phóng.</p>
+                <p style="margin-top: 8px;"><strong>3. Ghép 3 (Match-3):</strong> Mỗi khi trong khay 7 ô có đủ <strong>3 thẻ giống nhau</strong>, chúng sẽ tự động nổ biến mất và giải phóng chỗ trống.</p>
+                <p style="margin-top: 8px;"><strong>4. Thua cuộc:</strong> Nếu khay bị đầy cả 7 ô mà không có bộ 3 nào để triệt tiêu, bạn sẽ thua!</p>
+                <p style="margin-top: 8px;"><strong>5. Quyền trợ giúp:</strong> Đừng quên tận dụng 3 quyền năng: Bốc 3 thẻ ra ngoài, Hoàn tác bước nhầm và Xáo trộn bài!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary modal-close-btn" style="width: 100%;">Đã Hiểu, Chiến Thôi! 🔥</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Modal Chính Sách Bảo Mật (Chuẩn điều kiện Google AdSense) -->
+    <div id="privacy-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>🛡️ Chính Sách & Điều Khoản</h3>
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body" style="font-size: 13px; line-height: 1.6; color: #4b6584;">
+                <h4 style="color: #2c3e50; margin-bottom: 6px;">Chính Sách Quyền Riêng Tư (Privacy Policy)</h4>
+                <p>Website này tôn trọng quyền riêng tư của người dùng. Trò chơi không thu thập thông tin cá nhân danh tính của bạn. Dữ liệu kỷ lục điểm số và chủ đề được lưu trữ hoàn toàn nội bộ trên trình duyệt của bạn (LocalStorage).</p>
+                <h4 style="color: #2c3e50; margin: 12px 0 6px;">Quảng Cáo Google AdSense</h4>
+                <p>Trang web này sử dụng dịch vụ quảng cáo của bên thứ ba bao gồm Google AdSense. Google sử dụng cookie để phân phối quảng cáo dựa trên các lượt truy cập trước đó của người dùng vào trang web này hoặc các trang web khác trên Internet.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary modal-close-btn" style="width: 100%;">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Modal Thua Cuộc (Game Over) -->
+    <div id="game-over-modal" class="modal-backdrop hidden">
+        <div class="modal-card" style="text-align: center;">
+            <div class="modal-body" style="padding-top: 30px;">
+                <div style="font-size: 58px; margin-bottom: 10px;">😭</div>
+                <h2 style="font-size: 22px; color: #eb3b5a; margin-bottom: 8px;">Khay Đã Bị Đầy!</h2>
+                <p style="font-size: 14px; color: #778ca3; margin-bottom: 20px;">
+                    Chỉ còn một chút nữa thôi là thắng rồi! Bạn có muốn hồi sinh để tiếp tục không?
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button id="btn-revive-game" class="btn-primary" style="background: linear-gradient(135deg, #20bf6b 0%, #0fb9b1 100%);">
+                        💖 Hồi Sinh Ngay (Xem Ads)
+                    </button>
+                    <button id="btn-share-gameover" class="btn-secondary" style="border: 1.5px dashed #4b6584; font-weight: 700; color: #2d3436;">
+                        📢 Rủ Bạn Bè Vào "Cứu Bàn"
+                    </button>
+                    <button id="btn-restart-game" class="btn-secondary">
+                        🔄 Chơi Lại Ván Mới
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Modal Chiến Thắng (Victory) -->
+    <div id="win-modal" class="modal-backdrop hidden">
+        <div class="modal-card" style="text-align: center;">
+            <div class="modal-body" style="padding-top: 30px;">
+                <div style="font-size: 64px; margin-bottom: 12px;">🏆</div>
+                <h2 id="win-title" style="font-size: 22px; color: #20bf6b; margin-bottom: 8px;">CHIẾN THẮNG!</h2>
+                <p id="win-desc" style="font-size: 14px; color: #778ca3; margin-bottom: 24px;">
+                    Bạn đã xuất sắc vượt qua màn chơi!
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button id="btn-share-win" class="btn-primary" style="background: linear-gradient(135deg, #1877F2 0%, #0068FF 100%);">
+                        📢 Khoe Chiến Tích & Thách Bạn Bè 🚀
+                    </button>
+                    <button id="btn-next-level" class="btn-primary">
+                        🚀 Khiêu Chiến Màn 2 (Địa Ngục)
+                    </button>
+                    <button id="btn-replay-win" class="btn-secondary">
+                        🔄 Chơi Lại Từ Màn 1
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. Modal Giả Lập Quảng Cáo Nhận Thưởng (Rewarded Ad Simulator) -->
+    <div id="rewarded-ad-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="ad-reward-title" style="font-size: 15px;">Xem quảng cáo để nhận thưởng</h3>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="ad-label" style="background: #fed330; color: #000; padding: 2px 6px; border-radius: 4px;">Ads</span>
+                    <button id="ad-cancel-btn" class="modal-close-btn" title="Bỏ qua quảng cáo">&times;</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="ad-sim-content">
+                    <div class="ad-video-mock">
+                        <div class="ad-timer-pill" id="ad-timer">5s</div>
+                        <div style="font-size: 44px; margin-bottom: 6px;">🎬</div>
+                        <p style="font-size: 14px; font-weight: 600;">Google AdSense / H5 Video Ad</p>
+                        <p style="font-size: 12px; opacity: 0.7; margin-top: 4px;">(Đang phát video tài trợ...)</p>
+                    </div>
+                    <div class="ad-progress-wrapper">
+                        <div class="ad-progress-bar" id="ad-progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="ad-claim-btn" class="btn-primary" style="width: 100%;" disabled>
+                    Đang phát quảng cáo...
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. Modal Khoe Chiến Tích & Chia Sẻ Mạng Xã Hội -->
+    <div id="share-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>🏆 Khoe Chiến Tích & Rủ Bạn Bè</h3>
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Thẻ Chiến Tích Tự Hào -->
+                <div class="share-trophy-card">
+                    <div class="trophy-badge" id="share-trophy-icon">👑</div>
+                    <h4 id="share-card-title">Siêu Ghép Thẻ 2026</h4>
+                    <p id="share-card-subtitle" style="font-size: 12px; color: #636e72; margin: 4px 0 10px;">Thách thức chỉ 0.1% người vượt qua Màn 2!</p>
+                    <div class="share-stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Cấp Độ</span>
+                            <strong class="stat-value" id="share-stat-level">Màn 1</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Điểm Số</span>
+                            <strong class="stat-value" id="share-stat-score">0</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Tổng Thắng</span>
+                            <strong class="stat-value" id="share-stat-wins">0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lời thách đấu mẫu -->
+                <div class="share-quote-box">
+                    <p id="share-quote-text" style="font-size: 13px; line-height: 1.5; color: #2d3436; font-style: italic;"></p>
+                </div>
+
+                <!-- Nhóm các nút chia sẻ -->
+                <div class="share-buttons-group">
+                    <!-- Nút mở menu chia sẻ của điện thoại (Zalo, Tin nhắn, TikTok...) -->
+                    <button id="btn-native-share" class="share-social-btn native-share-btn">
+                        <span>📲 Gửi Cho Bạn Bè (Zalo, Messenger, TikTok...)</span>
+                    </button>
+
+                    <div class="social-row">
+                        <button id="btn-share-facebook" class="share-social-btn fb-btn">
+                            <span>📘 Facebook</span>
+                        </button>
+                        <button id="btn-share-zalo" class="share-social-btn zalo-btn">
+                            <span>💬 Zalo</span>
+                        </button>
+                    </div>
+
+                    <!-- Nút Sao Chép Link & Lời Mời -->
+                    <button id="btn-copy-link" class="share-social-btn copy-btn">
+                        <span>📋 Sao Chép Lời Thách Đấu & Link</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Canvas bắn pháo hoa chúc mừng -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Các file kịch bản JS -->
+    <script src="js/audio.js"></script>
+    <script src="js/themes.js"></script>
+    <script src="js/ads.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
