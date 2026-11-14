@@ -902,7 +902,40 @@ body {
     border-left: 4px solid #ffb300;
     padding: 10px 12px;
     border-radius: 6px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
+}
+
+/* Khung preview ảnh chia sẻ động */
+#share-image-preview-wrap {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+    min-height: 72px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+#share-image-loading {
+    color: #999;
+    font-size: 13px;
+    padding: 20px;
+    text-align: center;
+}
+
+#share-image-preview {
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+}
+
+/* Nút Facebook */
+.fb-btn {
+    background: #1877f2;
+    color: #ffffff;
 }
 
 .share-buttons-group {

@@ -6,12 +6,42 @@
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
   <title><data:blog.pageTitle/></title>
   <b:include data="blog" name="all-head-content"/>
-  <!-- OpenGraph Meta Tags: Hiển thị hình ảnh & tiêu đề bắt mắt khi chia sẻ Facebook, Zalo -->
+  <!-- OpenGraph Meta Tags: Động theo từng cấp độ Màn 1 -> Màn 7 khi chia sẻ lên Facebook, Zalo -->
   <meta property="og:type" content="website"/>
-  <meta property="og:title" content="Siêu Ghép Thẻ - Thử thách chỉ 0.1% người thắng Màn 2!"/>
-  <meta property="og:description" content="Trò chơi ghép thẻ 3 ô cực kỳ gây nghiện với 4 chủ đề siêu cute! Bạn có dám phá đảo Màn 2 không? Chơi ngay miễn phí!"/>
-  <meta property="og:url" content="https://game-ghep-the-vui.blogspot.com"/>
-  <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi66tdzxS9PXFvCIiTTRB6-gNzjz157diEFLBBxl06YMmNZTiEYXQ2I_fCBx5eFCu1nvx6yxoG1-lSePVLfFZ9Isit0p0uUh2Hz15xAojLMKpLEdYvNHyGV21tQNaGyJzCNwpei7h6_q2JlTwcsJ-xM87QSoFMmawRQ7eVAjyfEWfuFstHpwDzXTDKsEMs/s1376/banner_facebook.jpg"/>
+  <meta property="og:site_name" content="Siêu Ghép Thẻ"/>
+  <b:if cond='data:view.url contains "man-1" or data:view.url contains "level=1"'>
+    <meta property="og:title" content="Siêu Ghép Thẻ 🌱 Màn 1: Tập Sự - Dễ thế này bạn có qua được không?"/>
+    <meta property="og:description" content="Tôi vừa hoàn thành Màn 1 cực mượt! Thách bạn vào đọ điểm xem ai nhanh hơn nhé! 🎮"/>
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiozPin2-gT6qttrUY4xcq_9Qr92M08CvJ3gbkqvI7d0UUwAV3zMiFHThwGgA-bpLYE6MwCcgVIMPbjGnUfnwoFKq3EBBwD7RpsQLanlThy3D4VD9vu2IYl4dVBxt9wwzmZvzAzrOyFlfpj8MsPDH2QkwKp7UYl7Qe-dNyKYB9vhn34gO16P3L8ENFJRhI/s1376/level1.jpg"/>
+  <b:elseif cond='data:view.url contains "man-2" or data:view.url contains "level=2"'/>
+    <meta property="og:title" content="Siêu Ghép Thẻ 🌿 Màn 2: Học Việc - Căng não hơn rồi đấy!"/>
+    <meta property="og:description" content="Đã vượt Màn 2! Bắt đầu khó nhằn hơn nhiều. Bạn có dám thử sức không? 🎮"/>
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGaOmtgNLadhmi9k9jakuxVN5LjSrAjrPUgdnMNyqQAzbOFgmpJgu-kpLoq9blZZ3uJG30Dq_bWzcQgFYexCvg5708NozdjSxjLVpukWGiZnp3Rcm49e9Dj9muhIc7zcbA8XBWF8Q0Bhv12Z79FS4K1Hb4mFsrYJsyEC_gmJ4-oA8CVRViSPEqBA-FSjk/s1376/level2.jpg"/>
+  <b:elseif cond='data:view.url contains "man-3" or data:view.url contains "level=3"'/>
+    <meta property="og:title" content="Siêu Ghép Thẻ ⭐ Màn 3: Có Kinh Nghiệm - Top 50% người chơi!"/>
+    <meta property="og:description" content="Màn 3 3 tầng thẻ hiểm hóc mà tôi vẫn vượt qua! Bạn có theo kịp tôi không? ⭐"/>
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmj04s0p5EgkVIJhMLNIsSOoW8Ruk4nWSQQo4GltscTpVU_fE2HoLWBlQynEYaQP1KCHCpRZIJiOtR8dNbkRPCP-JBorO4Rjn1j8GFsS6qaQ_PpzsUmly_rfX_-LiKLoec8wrXe2xGkEDUzWTnFAyktyQaOS6J4HWqKi_uRQk4evqSkOYASaRk8QbHv8Y/s1376/level3.jpg"/>
+  <b:elseif cond='data:view.url contains "man-4" or data:view.url contains "level=4"'/>
+    <meta property="og:title" content="Siêu Ghép Thẻ 🌟 Màn 4: Thách Thức - 80% người chơi BỎ CUỘC!"/>
+    <meta property="og:description" content="Chỉ 20% người vượt qua Màn 4! Bạn có đủ trình độ để giải bàn cờ hiểm này không? 🎮"/>
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSh43hu3qgXgAjJkO_FVuowP9_p5QBVAx2BHjUSYXCpZgriMxDY2ua48dYWq4CdJHiK43hojlg26eXjMUlFWlB6dpTLYZjlBZ4B94WrzVch0d-H3xBwu82UvIJA-1euitFj7RAwTVddgjYCCn-FcDbidhIXMYDiZ1DwutHubhniZ6tRh49gKZ7CC4X6Pc/s1376/level4.jpg"/>
+  <b:elseif cond='data:view.url contains "man-5" or data:view.url contains "level=5"'/>
+    <meta property="og:title" content="Siêu Ghép Thẻ 💎 Màn 5: Chuyên Gia - TOP 10% Cao Thủ!"/>
+    <meta property="og:description" content="Đẳng cấp hiếm có! Tôi đã vào TOP 10% cao thủ Siêu Ghép Thẻ! Bạn có làm được không? 💎"/>
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEibfwuZltplkrDR1HRDrnp1DUk2FuCh_Woaq8WdA-bqMpXkgrLGcWFaxdv1Au9oz1Bw2walAXQEwJUjno_KeaUd1t28oA02Tb7FKE9RMYgthdZKP05gEpTxMo6kUnRw_tvF13LQOuygN1LltRxLiqTsKceQKXiZDd6R9nfK64WjnAwc9a2c_LkC-i8XJYw/s1376/level5.jpg"/>
+  <b:elseif cond='data:view.url contains "man-6" or data:view.url contains "level=6"'/>
+    <meta property="og:title" content="Siêu Ghép Thẻ 🔥 Màn 6: Siêu Cấp - ĐỊA NGỤC CHỈ 5% QUA ĐƯỢC!"/>
+    <meta property="og:description" content="Màn chơi cực kỳ hiểm hóc! Chỉ 5% người gan dạ vượt qua. Vào giải cứu bàn này giùm tôi! 🔥"/>
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcm8v5PmB7SzWGlMcJ6z-Y538SE3nd9RajiLoPurw70tI-fBYVSiJ47eFLBuWVYUYyNGwXyJ8CE2yWSFwH2jkufCjx1eUyn5q_B9tb_VUbq8vCQTSNG5Yj-Gx4q0VBvXPVc96gpqD6HQPKsdKTyWNRi94f-EvFV1CVMrHaLmimIOgGJQ1UsJQUwJxH13s/s1376/level6.jpg"/>
+  <b:elseif cond='data:view.url contains "man-7" or data:view.url contains "level=7"'/>
+    <meta property="og:title" content="Siêu Ghép Thẻ 👑 Màn 7: HUYỀN THOẠI - 0.1% KHÔNG THỂ CHINH PHỤC!"/>
+    <meta property="og:description" content="🏆 TÔI ĐÃ PHÁ ĐẢO MÀN 7 HUYỀN THOẠI! Tỉ lệ thắng chỉ 0.1%. Bạn có tin không??? 👑"/>
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhrGfPEGMnETTyZhchaoBOsXs5rnGsSBHvXQkIqI-0tTy0u3spTR7OuSfr2cZI6Vut0PWmYMVtIOaZGac9qgBHC5_MMXaCgyOWP9WJmQbpOsdwvI_CIXneOq5wGQltaf1JkM3XXgjtcnWnpKNZYRZSlqL6lKj7qhGnRLdtXhfc0FDNhoPte1q4v1Jr-2T0/s1200/level7.jpg"/>
+  <b:else/>
+    <meta property="og:title" content="Siêu Ghép Thẻ - Thử thách 7 màn chơi cực cuốn!"/>
+    <meta property="og:description" content="Trò chơi ghép thẻ 3 ô cực kỳ gây nghiện với 7 cấp độ tăng dần! Bạn có dám thách thức không? Chơi ngay miễn phí!"/>
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi66tdzxS9PXFvCIiTTRB6-gNzjz157diEFLBBxl06YMmNZTiEYXQ2I_fCBx5eFCu1nvx6yxoG1-lSePVLfFZ9Isit0p0uUh2Hz15xAojLMKpLEdYvNHyGV21tQNaGyJzCNwpei7h6_q2JlTwcsJ-xM87QSoFMmawRQ7eVAjyfEWfuFstHpwDzXTDKsEMs/s1376/banner_facebook.jpg"/>
+  </b:if>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <!-- Google AdSense -->
@@ -921,7 +951,40 @@ body {
     border-left: 4px solid #ffb300;
     padding: 10px 12px;
     border-radius: 6px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
+}
+
+/* Khung preview ảnh chia sẻ động */
+#share-image-preview-wrap {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+    min-height: 72px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+#share-image-loading {
+    color: #999;
+    font-size: 13px;
+    padding: 20px;
+    text-align: center;
+}
+
+#share-image-preview {
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+}
+
+/* Nút Facebook */
+.fb-btn {
+    background: #1877f2;
+    color: #ffffff;
 }
 
 .share-buttons-group {
@@ -1253,8 +1316,8 @@ body {
                 <!-- Thẻ Chiến Tích Tự Hào -->
                 <div class="share-trophy-card">
                     <div class="trophy-badge" id="share-trophy-icon">👑</div>
-                    <h4 id="share-card-title">Siêu Ghép Thẻ 2026</h4>
-                    <p id="share-card-subtitle" style="font-size: 12px; color: #636e72; margin: 4px 0 10px;">Thách thức chỉ 0.1% người vượt qua Màn 2!</p>
+                    <h4 id="share-card-title">Siêu Ghép Thẻ</h4>
+                    <p id="share-card-subtitle" style="font-size: 12px; color: #636e72; margin: 4px 0 10px;">Thách thức chỉ 0.1% người vượt qua Màn 7!</p>
                     <div class="share-stats-grid">
                         <div class="stat-item">
                             <span class="stat-label">Cấp Độ</span>
@@ -1271,6 +1334,12 @@ body {
                     </div>
                 </div>
 
+                <!-- Preview ảnh chia sẻ động theo cấp độ -->
+                <div id="share-image-preview-wrap" style="margin: 10px 0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.18); min-height: 80px; display:flex; align-items:center; justify-content:center; background:#f0f0f0;">
+                    <div id="share-image-loading" style="color:#999; font-size:13px; padding:16px;">⏳ Đang tạo ảnh theo cấp độ...</div>
+                    <img id="share-image-preview" src="" alt="Ảnh chia sẻ" style="display:none; width:100%; border-radius:12px;" />
+                </div>
+
                 <!-- Lời thách đấu mẫu -->
                 <div class="share-quote-box">
                     <p id="share-quote-text" style="font-size: 13px; line-height: 1.5; color: #2d3436; font-style: italic;"></p>
@@ -1278,12 +1347,13 @@ body {
 
                 <!-- Nhóm các nút chia sẻ -->
                 <div class="share-buttons-group">
-                    <!-- Nút mở menu chia sẻ của điện thoại (Zalo, Tin nhắn, TikTok...) -->
+                    <!-- Nút mở menu chia sẻ của điện thoại -->
                     <button id="btn-native-share" class="share-social-btn native-share-btn">
                         <span>📲 Gửi Cho Bạn Bè (Zalo, Messenger, TikTok...)</span>
                     </button>
 
                     <div class="social-row">
+                        <!-- Facebook: mở hộp thoại chia sẻ có ảnh banner và lời khiêu khích -->
                         <button id="btn-share-facebook" class="share-social-btn fb-btn">
                             <span>📘 Facebook</span>
                         </button>
@@ -1291,6 +1361,11 @@ body {
                             <span>💬 Zalo</span>
                         </button>
                     </div>
+
+                    <!-- Tải ảnh về máy để dán thủ công -->
+                    <button id="btn-download-share-img" class="share-social-btn" style="background: linear-gradient(135deg,#6c5ce7,#a29bfe); color:#fff; border:none;">
+                        <span>⬇️ Tải Ảnh Về Máy (Dán Vào Facebook)</span>
+                    </button>
 
                     <!-- Nút Sao Chép Link &amp; Lời Mời -->
                     <button id="btn-copy-link" class="share-social-btn copy-btn">
@@ -1811,6 +1886,293 @@ window.adManager = new AdManager();
 
 
 /**
+ * share-image.js — Sinh ảnh chia sẻ động theo cấp độ bằng Canvas API
+ * Mỗi màn có màu sắc, emoji, bố cục riêng để tăng tính viral khi share Facebook/Zalo
+ */
+
+const SHARE_IMAGE_CONFIGS = {
+    1: {
+        bgColors:    ['#11998e', '#38ef7d'],
+        accentColor: '#ffffff',
+        badge:       '🌱',
+        levelLabel:  'MÀN 1: TẬP SỰ',
+        tagline:     'Bước đầu chinh phục!',
+        rarity:      'Người mới bắt đầu',
+        tiles:       ['🍜','🧋','🥖','🍚','🫓'],
+        rarityColor: '#a8edcb',
+        glow:        'rgba(56,239,125,0.4)'
+    },
+    2: {
+        bgColors:    ['#1a6b5c', '#43b89c'],
+        accentColor: '#ffffff',
+        badge:       '🌿',
+        levelLabel:  'MÀN 2: HỌC VIỆC',
+        tagline:     'Đang vào guồng rồi!',
+        rarity:      'Top 70% người chơi',
+        tiles:       ['🐱','🐶','🐰','🐼','🦊'],
+        rarityColor: '#a8e6cf',
+        glow:        'rgba(67,184,156,0.4)'
+    },
+    3: {
+        bgColors:    ['#1565c0', '#42a5f5'],
+        accentColor: '#ffffff',
+        badge:       '⭐',
+        levelLabel:  'MÀN 3: CÓ KINH NGHIỆM',
+        tagline:     'Tư duy sắc bén!',
+        rarity:      'Top 50% người chơi',
+        tiles:       ['🍉','🍇','🥭','🍍','🍋'],
+        rarityColor: '#90caf9',
+        glow:        'rgba(66,165,245,0.4)'
+    },
+    4: {
+        bgColors:    ['#e65100', '#ffa726'],
+        accentColor: '#ffffff',
+        badge:       '🌟',
+        levelLabel:  'MÀN 4: THÁCH THỨC',
+        tagline:     'Chỉ 20% người vượt qua!',
+        rarity:      'Top 20% người chơi',
+        tiles:       ['🧁','🍰','🍩','🍪','🎂'],
+        rarityColor: '#ffe082',
+        glow:        'rgba(255,167,38,0.5)'
+    },
+    5: {
+        bgColors:    ['#4a148c', '#7b1fa2'],
+        accentColor: '#ffffff',
+        badge:       '💎',
+        levelLabel:  'MÀN 5: CHUYÊN GIA',
+        tagline:     'Đẳng cấp hiếm có!',
+        rarity:      'Top 10% người chơi',
+        tiles:       ['🍜','🐱','🍉','🧁','🍜'],
+        rarityColor: '#ce93d8',
+        glow:        'rgba(123,31,162,0.5)'
+    },
+    6: {
+        bgColors:    ['#b71c1c', '#ef5350'],
+        accentColor: '#ffffff',
+        badge:       '🔥',
+        levelLabel:  'MÀN 6: SIÊU CẤP',
+        tagline:     'Siêu đẳng! Chỉ 5% đạt được!',
+        rarity:      'Top 5% người chơi',
+        tiles:       ['🧋','🦊','🥭','🍩','🎂'],
+        rarityColor: '#ef9a9a',
+        glow:        'rgba(239,83,80,0.6)'
+    },
+    7: {
+        bgColors:    ['#1a0533', '#6a1a8a'],
+        accentColor: '#ffd700',
+        badge:       '👑',
+        levelLabel:  'MÀN 7: HUYỀN THOẠI',
+        tagline:     'Chỉ 0.1% người làm được!!!',
+        rarity:      'HUYỀN THOẠI',
+        tiles:       ['👑','💎','🔥','⭐','🏆'],
+        rarityColor: '#ffd700',
+        glow:        'rgba(255,215,0,0.6)'
+    }
+};
+
+/**
+ * Vẽ văn bản có xuống dòng tự động
+ */
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+    const words = text.split(' ');
+    let line = '';
+    let currentY = y;
+    words.forEach((word, n) => {
+        const testLine = line + word + ' ';
+        if (ctx.measureText(testLine).width > maxWidth && n > 0) {
+            ctx.fillText(line.trim(), x, currentY);
+            line = word + ' ';
+            currentY += lineHeight;
+        } else {
+            line = testLine;
+        }
+    });
+    ctx.fillText(line.trim(), x, currentY);
+    return currentY;
+}
+
+/**
+ * Sinh ảnh chia sẻ dạng Canvas và trả về Promise<Blob>
+ * @param {number} level     — Cấp độ hiện tại (1–7)
+ * @param {number} score     — Điểm số người chơi
+ * @param {number} wins      — Tổng số lần thắng
+ * @param {string} themeEmoji — emoji đại diện chủ đề đang chọn (tùy chọn)
+ * @returns {Promise<Blob>}
+ */
+function generateShareImageBlob(level, score, wins, themeEmoji = '') {
+    return new Promise((resolve) => {
+        const cfg = SHARE_IMAGE_CONFIGS[level] || SHARE_IMAGE_CONFIGS[1];
+
+        const W = 1200, H = 630;
+        const canvas = document.createElement('canvas');
+        canvas.width  = W;
+        canvas.height = H;
+        const ctx = canvas.getContext('2d');
+
+        // ── 1. Background gradient ──────────────────────────────────────────
+        const grad = ctx.createLinearGradient(0, 0, W, H);
+        grad.addColorStop(0, cfg.bgColors[0]);
+        grad.addColorStop(1, cfg.bgColors[1]);
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, W, H);
+
+        // ── 2. Overlay vân trang trí (chấm mờ) ─────────────────────────────
+        ctx.save();
+        ctx.globalAlpha = 0.07;
+        for (let r = 0; r < H; r += 55) {
+            for (let c = 0; c < W; c += 55) {
+                ctx.beginPath();
+                ctx.arc(c, r, 20, 0, Math.PI * 2);
+                ctx.fillStyle = '#ffffff';
+                ctx.fill();
+            }
+        }
+        ctx.restore();
+
+        // ── 3. Khung sáng bên trái (accent strip) ──────────────────────────
+        const stripGrad = ctx.createLinearGradient(0, 0, 0, H);
+        stripGrad.addColorStop(0, 'rgba(255,255,255,0.18)');
+        stripGrad.addColorStop(1, 'rgba(255,255,255,0.03)');
+        ctx.fillStyle = stripGrad;
+        ctx.fillRect(0, 0, 8, H);
+
+        // ── 4. Hình trang trí góc phải — emoji thẻ bài ─────────────────────
+        ctx.save();
+        ctx.globalAlpha = 0.12;
+        const tileEmojis = cfg.tiles;
+        const tileFont = 90;
+        ctx.font = `${tileFont}px serif`;
+        const tilePositions = [
+            { x: W - 160, y: 120 }, { x: W - 90,  y: 220 },
+            { x: W - 200, y: 300 }, { x: W - 100, y: 420 },
+            { x: W - 170, y: 530 }
+        ];
+        tilePositions.forEach((pos, i) => {
+            ctx.fillText(tileEmojis[i % tileEmojis.length], pos.x, pos.y);
+        });
+        ctx.restore();
+
+        // ── 5. Logo / Tiêu đề game ──────────────────────────────────────────
+        ctx.save();
+        // Vòng sáng phía sau badge
+        const glowGrad = ctx.createRadialGradient(100, 100, 10, 100, 100, 90);
+        glowGrad.addColorStop(0, cfg.glow);
+        glowGrad.addColorStop(1, 'transparent');
+        ctx.fillStyle = glowGrad;
+        ctx.fillRect(10, 20, 180, 180);
+
+        ctx.font = 'bold 100px serif';
+        ctx.fillText(cfg.badge, 32, 130);
+        ctx.restore();
+
+        // Tên game
+        ctx.font = 'bold 56px "Arial", sans-serif';
+        ctx.fillStyle = cfg.accentColor;
+        ctx.shadowColor = 'rgba(0,0,0,0.5)';
+        ctx.shadowBlur  = 12;
+        ctx.fillText('SIÊU GHÉP THẺ', 170, 85);
+
+        // Tagline nhỏ dưới tên game
+        ctx.font = '28px "Arial", sans-serif';
+        ctx.fillStyle = 'rgba(255,255,255,0.75)';
+        ctx.shadowBlur  = 6;
+        ctx.fillText('🎮 game-ghep-the-vui.blogspot.com', 173, 125);
+
+        // ── 6. Thẻ cấp độ (level pill) ─────────────────────────────────────
+        ctx.shadowBlur = 0;
+        // Nền pill
+        ctx.save();
+        ctx.beginPath();
+        ctx.roundRect(44, 165, 680, 90, 20);
+        ctx.fillStyle = 'rgba(0,0,0,0.30)';
+        ctx.fill();
+        ctx.restore();
+
+        ctx.font = 'bold 46px "Arial", sans-serif';
+        ctx.fillStyle = cfg.accentColor;
+        ctx.shadowColor = 'rgba(0,0,0,0.6)';
+        ctx.shadowBlur  = 14;
+        ctx.fillText(cfg.levelLabel, 60, 224);
+
+        // ── 7. Tagline ──────────────────────────────────────────────────────
+        ctx.font = 'italic 32px "Arial", sans-serif';
+        ctx.fillStyle = 'rgba(255,255,255,0.90)';
+        ctx.shadowBlur = 8;
+        ctx.fillText(cfg.tagline, 60, 285);
+
+        // ── 8. Thống kê điểm số ─────────────────────────────────────────────
+        ctx.shadowBlur = 0;
+        // Panel nền
+        ctx.save();
+        ctx.beginPath();
+        ctx.roundRect(44, 318, 680, 160, 18);
+        ctx.fillStyle = 'rgba(0,0,0,0.28)';
+        ctx.fill();
+        ctx.restore();
+
+        // Nhãn + giá trị từng stat
+        const stats = [
+            { label: 'ĐIỂM SỐ',    value: String(score),         x: 100 },
+            { label: 'CHIẾN THẮNG', value: `${wins} lần`,         x: 310 },
+            { label: 'ĐỘ HIẾM',    value: cfg.rarity,            x: 530 }
+        ];
+        stats.forEach(s => {
+            ctx.font = '20px "Arial", sans-serif';
+            ctx.fillStyle = 'rgba(255,255,255,0.65)';
+            ctx.fillText(s.label, s.x, 358);
+
+            ctx.font = 'bold 36px "Arial", sans-serif';
+            ctx.fillStyle = s.label === 'ĐỘ HIẾM' ? cfg.rarityColor : '#ffffff';
+            ctx.shadowColor = 'rgba(0,0,0,0.5)';
+            ctx.shadowBlur  = 10;
+            ctx.fillText(s.value, s.x, 404);
+            ctx.shadowBlur  = 0;
+        });
+
+        // ── 9. Lời thách đấu (challenge quote) ─────────────────────────────
+        ctx.save();
+        ctx.beginPath();
+        ctx.roundRect(44, 500, 680, 100, 16);
+        ctx.fillStyle = 'rgba(255,255,255,0.12)';
+        ctx.fill();
+        ctx.restore();
+
+        ctx.font = 'bold 26px "Arial", sans-serif';
+        ctx.fillStyle = cfg.accentColor;
+        ctx.shadowBlur = 6;
+        const challengeMsg = level >= 7
+            ? '👑 Bạn có dám chinh phục Huyền Thoại không?'
+            : `🔥 Bạn đã đến được ${cfg.levelLabel} chưa?`;
+        wrapText(ctx, challengeMsg, 64, 545, 650, 34);
+        ctx.shadowBlur = 0;
+
+        // ── 10. Dải CTA bên dưới cùng ──────────────────────────────────────
+        const ctaGrad = ctx.createLinearGradient(0, 590, 0, 630);
+        ctaGrad.addColorStop(0, 'rgba(0,0,0,0.0)');
+        ctaGrad.addColorStop(1, 'rgba(0,0,0,0.5)');
+        ctx.fillStyle = ctaGrad;
+        ctx.fillRect(0, 590, W, 40);
+
+        ctx.font = '22px "Arial", sans-serif';
+        ctx.fillStyle = 'rgba(255,255,255,0.80)';
+        ctx.fillText('👉 Chơi miễn phí tại: game-ghep-the-vui.blogspot.com', 44, 622);
+
+        // ── 11. Xuất Blob ────────────────────────────────────────────────────
+        canvas.toBlob(blob => resolve(blob), 'image/jpeg', 0.92);
+    });
+}
+
+/**
+ * Tạo ObjectURL từ blob để preview hoặc tải xuống
+ */
+function createShareImageURL(level, score, wins) {
+    return generateShareImageBlob(level, score, wins).then(blob => URL.createObjectURL(blob));
+}
+
+window.ShareImageGenerator = { generateShareImageBlob, createShareImageURL };
+
+
+/**
  * MiniGame: Cừu & Cừu (Match-3 Layer Stacking Game)
  * Động cơ game chính: Quản lý va chạm đa tầng, Khay 7 ô, Quyền trợ giúp & Hệ thống chủ đề
  */
@@ -1827,45 +2189,70 @@ const LEVEL_CONFIGS = [
         numTypes: 3, maxLayers: 2,
         description: 'Khởi động nhẹ nhàng! Dành cho người mới bắt đầu.'
     },
-    // Màn 2: Học Việc — 4 loại, 12 thẻ, 2 tầng
+    // Màn 2: Học Việc — 4 loại, 18 thẻ, 3 tầng
     {
         name: 'Màn 2: Học Việc', badge: '🌿', cssClass: 'level-2',
-        numTypes: 4, maxLayers: 2,
-        description: 'Thêm loại thẻ, bắt đầu căng não hơn!'
+        numTypes: 4, maxLayers: 3,
+        description: '18 thẻ 3 tầng, bắt đầu cần quan sát kỹ hơn!'
     },
-    // Màn 3: Có Kinh Nghiệm — 4 loại, 12 thẻ, 3 tầng
+    // Màn 3: Có Kinh Nghiệm — 5 loại, 27 thẻ, 3 tầng + 2 cánh
     {
         name: 'Màn 3: Có Kinh Nghiệm', badge: '⭐', cssClass: 'level-3',
-        numTypes: 4, maxLayers: 3,
-        description: 'Nhiều tầng hơn — tư duy cẩn thận nhé!'
+        numTypes: 5, maxLayers: 3,
+        description: 'Xuất hiện cánh bài phụ — tính toán cẩn thận kẻo đầy khay!'
     },
-    // Màn 4: Thách Thức — 5 loại, 15 thẻ, 3 tầng
+    // Màn 4: Thách Thức — 6 loại, 36 thẻ, 4 tầng + cánh
     {
         name: 'Màn 4: Thách Thức', badge: '🌟', cssClass: 'level-4',
-        numTypes: 5, maxLayers: 3,
+        numTypes: 6, maxLayers: 4,
         description: 'Chỉ 20% người chơi vượt được màn này!'
     },
-    // Màn 5: Chuyên Gia — 5 loại, 15 thẻ, 4 tầng + cánh bên
+    // Màn 5: Chuyên Gia — 7 loại, 51 thẻ, 4 tầng dày đặc + 2 cánh đôi
     {
         name: 'Màn 5: Chuyên Gia', badge: '💎', cssClass: 'level-5',
-        numTypes: 5, maxLayers: 4,
-        description: 'Xuất hiện "cánh bài" hai bên — bẫy từ mọi hướng!'
+        numTypes: 7, maxLayers: 4,
+        description: 'TOP 10% Cao Thủ! Bẫy tầng sâu đòi hỏi tư duy logic cao.'
     },
-    // Màn 6: Siêu Cấp — 6 loại, 18 thẻ, 4 tầng + cánh bên lớn hơn
+    // Màn 6: Siêu Cấp — 8 loại, 66 thẻ, 5 tầng kịch tính
     {
         name: 'Màn 6: Siêu Cấp', badge: '🔥', cssClass: 'level-6',
-        numTypes: 6, maxLayers: 4,
-        description: 'Chỉ 5% người chơi đạt được đây!'
+        numTypes: 8, maxLayers: 5,
+        description: 'ĐỊA NGỤC CHỈ 5% QUA ĐƯỢC! Ranh giới trước khi chạm đỉnh Huyền Thoại.'
     },
-    // Màn 7: Huyền Thoại — 7+ loại, nhiều thẻ, 5 tầng full + cánh bên
+    // Màn 7: Huyền Thoại — MAX LEVEL 5 tầng full + cánh bên
     {
         name: 'Màn 7: Huyền Thoại', badge: '👑', cssClass: 'level-7',
-        numTypes: 7, maxLayers: 5,
+        numTypes: 8, maxLayers: 5,
         description: 'Chỉ 0.1% người chơi chinh phục được Huyền Thoại!'
     }
 ];
 
 const MAX_LEVEL = LEVEL_CONFIGS.length; // 7
+
+/**
+ * URL trang chia sẻ riêng cho từng màn trên Blogger.
+ * Mỗi trang có og:image riêng → Facebook/Zalo hiển thị ảnh đúng cấp độ.
+ * ★ Điền URL thực tế sau khi tạo trang Blogger xong ★
+ */
+const LEVEL_PAGE_URLS = {
+    1: 'https://game-ghep-the-vui.blogspot.com/p/man-1-tap-su.html',
+    2: 'https://game-ghep-the-vui.blogspot.com/p/man-2-hoc-viec.html',
+    3: 'https://game-ghep-the-vui.blogspot.com/p/man-3-co-kinh-nghiem.html',
+    4: 'https://game-ghep-the-vui.blogspot.com/p/man-4-thach-thuc.html',
+    5: 'https://game-ghep-the-vui.blogspot.com/p/man-5-chuyen-gia.html',
+    6: 'https://game-ghep-the-vui.blogspot.com/p/man-6-sieu-cap.html',
+    7: 'https://game-ghep-the-vui.blogspot.com/p/man-7-huyen-thoai.html',
+};
+
+const LEVEL_BANNER_URLS = {
+    1: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiozPin2-gT6qttrUY4xcq_9Qr92M08CvJ3gbkqvI7d0UUwAV3zMiFHThwGgA-bpLYE6MwCcgVIMPbjGnUfnwoFKq3EBBwD7RpsQLanlThy3D4VD9vu2IYl4dVBxt9wwzmZvzAzrOyFlfpj8MsPDH2QkwKp7UYl7Qe-dNyKYB9vhn34gO16P3L8ENFJRhI/s1376/level1.jpg',
+    2: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGaOmtgNLadhmi9k9jakuxVN5LjSrAjrPUgdnMNyqQAzbOFgmpJgu-kpLoq9blZZ3uJG30Dq_bWzcQgFYexCvg5708NozdjSxjLVpukWGiZnp3Rcm49e9Dj9muhIc7zcbA8XBWF8Q0Bhv12Z79FS4K1Hb4mFsrYJsyEC_gmJ4-oA8CVRViSPEqBA-FSjk/s1376/level2.jpg',
+    3: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmj04s0p5EgkVIJhMLNIsSOoW8Ruk4nWSQQo4GltscTpVU_fE2HoLWBlQynEYaQP1KCHCpRZIJiOtR8dNbkRPCP-JBorO4Rjn1j8GFsS6qaQ_PpzsUmly_rfX_-LiKLoec8wrXe2xGkEDUzWTnFAyktyQaOS6J4HWqKi_uRQk4evqSkOYASaRk8QbHv8Y/s1376/level3.jpg',
+    4: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSh43hu3qgXgAjJkO_FVuowP9_p5QBVAx2BHjUSYXCpZgriMxDY2ua48dYWq4CdJHiK43hojlg26eXjMUlFWlB6dpTLYZjlBZ4B94WrzVch0d-H3xBwu82UvIJA-1euitFj7RAwTVddgjYCCn-FcDbidhIXMYDiZ1DwutHubhniZ6tRh49gKZ7CC4X6Pc/s1376/level4.jpg',
+    5: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEibfwuZltplkrDR1HRDrnp1DUk2FuCh_Woaq8WdA-bqMpXkgrLGcWFaxdv1Au9oz1Bw2walAXQEwJUjno_KeaUd1t28oA02Tb7FKE9RMYgthdZKP05gEpTxMo6kUnRw_tvF13LQOuygN1LltRxLiqTsKceQKXiZDd6R9nfK64WjnAwc9a2c_LkC-i8XJYw/s1376/level5.jpg',
+    6: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcm8v5PmB7SzWGlMcJ6z-Y538SE3nd9RajiLoPurw70tI-fBYVSiJ47eFLBuWVYUYyNGwXyJ8CE2yWSFwH2jkufCjx1eUyn5q_B9tb_VUbq8vCQTSNG5Yj-Gx4q0VBvXPVc96gpqD6HQPKsdKTyWNRi94f-EvFV1CVMrHaLmimIOgGJQ1UsJQUwJxH13s/s1376/level6.jpg',
+    7: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhrGfPEGMnETTyZhchaoBOsXs5rnGsSBHvXQkIqI-0tTy0u3spTR7OuSfr2cZI6Vut0PWmYMVtIOaZGac9qgBHC5_MMXaCgyOWP9WJmQbpOsdwvI_CIXneOq5wGQltaf1JkM3XXgjtcnWnpKNZYRZSlqL6lKj7qhGnRLdtXhfc0FDNhoPte1q4v1Jr-2T0/s1200/level7.jpg',
+};
 
 class MiniGameEngine {
     constructor() {
@@ -1896,7 +2283,23 @@ class MiniGameEngine {
         this.initDOM();
         this.bindEvents();
         this.applyTheme(this.currentThemeId);
-        this.startLevel(1);
+        const initialLevel = this.detectLevelFromUrl();
+        this.startLevel(initialLevel);
+    }
+
+    detectLevelFromUrl() {
+        try {
+            const path = window.location.pathname.toLowerCase();
+            const search = window.location.search.toLowerCase();
+            const match = path.match(/man-(\d+)/) || search.match(/level=(\d+)/);
+            if (match) {
+                const lvl = parseInt(match[1], 10);
+                if (lvl >= 1 && lvl <= MAX_LEVEL) {
+                    return lvl;
+                }
+            }
+        } catch (e) {}
+        return 1;
     }
 
     initDOM() {
@@ -1986,6 +2389,7 @@ class MiniGameEngine {
         document.getElementById('btn-share-facebook')?.addEventListener('click', () => this.shareFacebook());
         document.getElementById('btn-share-zalo')?.addEventListener('click', () => this.shareZalo());
         document.getElementById('btn-copy-link')?.addEventListener('click', () => this.copyShareLink());
+        document.getElementById('btn-download-share-img')?.addEventListener('click', () => this.downloadShareImage());
 
         document.getElementById('btn-next-level').addEventListener('click', () => {
             document.getElementById('win-modal').classList.add('hidden');
@@ -2139,107 +2543,154 @@ class MiniGameEngine {
             positions.push({ x: cx, y: cy, layer: 2 });
 
         } else if (levelNumber === 2) {
-            // ── Màn 2: Hình thoi 2 tầng, 12 thẻ ────────────────────────────
-            // Tầng 0: hình thoi 8 thẻ
-            const diamond = [
-                { x: cx,      y: cy - 80 },
-                { x: cx - 50, y: cy - 40 }, { x: cx + 50, y: cy - 40 },
-                { x: cx - 80, y: cy      }, { x: cx + 80, y: cy      },
-                { x: cx - 50, y: cy + 40 }, { x: cx + 50, y: cy + 40 },
-                { x: cx,      y: cy + 80 }
-            ];
-            diamond.forEach(p => positions.push({ ...p, layer: 0 }));
-            // Tầng 1: hình thoi nhỏ 4 thẻ
-            positions.push({ x: cx - 28, y: cy - 30, layer: 1 });
-            positions.push({ x: cx + 28, y: cy - 30, layer: 1 });
-            positions.push({ x: cx - 28, y: cy + 30, layer: 1 });
-            positions.push({ x: cx + 28, y: cy + 30, layer: 1 });
+            // ── Màn 2: Hoa sen 3 tầng, 18 thẻ (4 loại thẻ) ─────────────────
+            // Tầng 0: 10 thẻ
+            for (let r of [-1, 0, 1]) {
+                for (let c of [-1, 0, 1]) {
+                    if (r !== 0 || c !== 0) {
+                        positions.push({ x: cx + c * 48, y: cy + r * 50, layer: 0 });
+                    }
+                }
+            }
+            positions.push({ x: cx - 96, y: cy, layer: 0 });
+            positions.push({ x: cx + 96, y: cy, layer: 0 });
+            // Tầng 1: 6 thẻ đè lên
+            positions.push({ x: cx, y: cy - 36, layer: 1 });
+            positions.push({ x: cx, y: cy + 36, layer: 1 });
+            positions.push({ x: cx - 36, y: cy, layer: 1 });
+            positions.push({ x: cx + 36, y: cy, layer: 1 });
+            positions.push({ x: cx - 24, y: cy - 24, layer: 1 });
+            positions.push({ x: cx + 24, y: cy + 24, layer: 1 });
+            // Tầng 2: 2 thẻ ở đỉnh giữa
+            positions.push({ x: cx - 14, y: cy, layer: 2 });
+            positions.push({ x: cx + 14, y: cy, layer: 2 });
 
         } else if (levelNumber === 3) {
-            // ── Màn 3: Lưới 3×3 tầng 0, 2×2 tầng 1, đỉnh tầng 2 — 14 thẻ → trim về 12 ──
-            const sp = 46;
-            for (let r = -1; r <= 1; r++)
-                for (let c = -1; c <= 1; c++)
-                    positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 0 });
-            // Tầng 1: 4 thẻ
-            [[-0.5,-0.5],[0.5,-0.5],[-0.5,0.5],[0.5,0.5]].forEach(([r,c]) =>
-                positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 1 }));
-            // Tầng 2: đỉnh 1 thẻ
-            positions.push({ x: cx, y: cy, layer: 2 });
-            // Thêm 2 thẻ cánh nhỏ (tầng 0) để = 15 → trim về bội 3
-            positions.push({ x: cx - 110, y: cy, layer: 0 });
-            positions.push({ x: cx + 110, y: cy, layer: 0 });
+            // ── Màn 3: Tháp trung tâm 3 tầng + 2 cánh bên, 27 thẻ (5 loại) ──
+            // Tầng 0: Lưới 3x3 = 9 thẻ
+            for (let r = -1; r <= 1; r++) {
+                for (let c = -1; c <= 1; c++) {
+                    positions.push({ x: cx + c * 44, y: cy + r * 46, layer: 0 });
+                }
+            }
+            // Tầng 1: Lưới 2x2 = 4 thẻ
+            for (let r of [-0.5, 0.5]) {
+                for (let c of [-0.5, 0.5]) {
+                    positions.push({ x: cx + c * 44, y: cy + r * 46, layer: 1 });
+                }
+            }
+            // Tầng 2: 3 thẻ tam giác
+            positions.push({ x: cx, y: cy - 20, layer: 2 });
+            positions.push({ x: cx - 20, y: cy + 20, layer: 2 });
+            positions.push({ x: cx + 20, y: cy + 20, layer: 2 });
+            // Tầng 3: 1 thẻ đỉnh chóp
+            positions.push({ x: cx, y: cy, layer: 3 });
+            // Cánh trái: 5 thẻ xếp bậc
+            for (let i = 0; i < 5; i++) {
+                positions.push({ x: 18 + (i % 2) * 6, y: cy - 50 + i * 24, layer: i });
+            }
+            // Cánh phải: 5 thẻ xếp bậc
+            for (let i = 0; i < 5; i++) {
+                positions.push({ x: boardWidth - this.tileWidth - 18 - (i % 2) * 6, y: cy - 50 + i * 24, layer: i });
+            }
 
         } else if (levelNumber === 4) {
-            // ── Màn 4: Tháp 3 tầng 4×4→3×3→2×2 + thêm cánh nhỏ ─────────────
-            const sp = 42;
-            // Tầng 0: hình bầu dục (diamond 4×4)
-            for (let r = -1; r <= 1; r++)
-                for (let c = -1; c <= 1; c++)
-                    positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 0 });
-            positions.push({ x: cx - sp * 2, y: cy, layer: 0 });
-            positions.push({ x: cx + sp * 2, y: cy, layer: 0 });
-            positions.push({ x: cx, y: cy - sp * 2, layer: 0 });
-            positions.push({ x: cx, y: cy + sp * 2, layer: 0 });
-            // Tầng 1: 2×2
-            [[-0.5,-0.5],[0.5,-0.5],[-0.5,0.5],[0.5,0.5]].forEach(([r,c]) =>
-                positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 1 }));
-            // Tầng 2: đỉnh
-            positions.push({ x: cx, y: cy, layer: 2 });
+            // ── Màn 4: Tháp 4 tầng + 2 cánh, 36 thẻ (6 loại thẻ) ───────────
+            // Tầng 0: 14 thẻ
+            for (let r = -1; r <= 1; r++) {
+                for (let c = -1; c <= 1; c++) {
+                    positions.push({ x: cx + c * 42, y: cy + r * 44, layer: 0 });
+                }
+            }
+            for (let [r, c] of [[-2, 0], [2, 0], [0, -2], [0, 2], [-1.5, -1.5]]) {
+                positions.push({ x: cx + c * 42, y: cy + r * 44, layer: 0 });
+            }
+            // Tầng 1: 9 thẻ
+            for (let [r, c] of [[-0.5, -0.5], [0.5, -0.5], [-0.5, 0.5], [0.5, 0.5], [0, -1], [0, 1], [-1, 0], [1, 0], [0, 0]]) {
+                positions.push({ x: cx + c * 38, y: cy + r * 40, layer: 1 });
+            }
+            // Tầng 2: 4 thẻ
+            for (let [r, c] of [[-0.5, -0.5], [0.5, -0.5], [-0.5, 0.5], [0.5, 0.5]]) {
+                positions.push({ x: cx + c * 34, y: cy + r * 36, layer: 2 });
+            }
+            // Tầng 3: 1 thẻ
+            positions.push({ x: cx, y: cy, layer: 3 });
+            // Cánh trái: 4 thẻ
+            for (let i = 0; i < 4; i++) {
+                positions.push({ x: 16 + i * 4, y: cy - 40 + i * 26, layer: i });
+            }
+            // Cánh phải: 4 thẻ
+            for (let i = 0; i < 4; i++) {
+                positions.push({ x: boardWidth - this.tileWidth - 16 - i * 4, y: cy - 40 + i * 26, layer: i });
+            }
 
         } else if (levelNumber === 5) {
-            // ── Màn 5: Tháp kim tự tháp 4 tầng + cánh bên nhỏ ──────────────
-            const sp = 40;
-            // Tầng 0: 3×3
-            for (let r = -1; r <= 1; r++)
-                for (let c = -1; c <= 1; c++)
-                    positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 0 });
-            // Thêm viền tầng 0
-            [[-2,0],[2,0],[0,-2],[0,2],[-1,-2],[1,-2],[-1,2],[1,2]].forEach(([r,c]) =>
-                positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 0 }));
-            // Tầng 1: 2×2
-            [[-0.5,-0.5],[0.5,-0.5],[-0.5,0.5],[0.5,0.5]].forEach(([r,c]) =>
-                positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 1 }));
-            // Tầng 2: đỉnh 1 thẻ
-            positions.push({ x: cx, y: cy, layer: 2 });
-            // Tầng 3: siêu đỉnh
-            positions.push({ x: cx, y: cy - sp * 0.5, layer: 3 });
-            // Cánh trái
-            for (let i = 0; i < 3; i++) {
-                positions.push({ x: 20 + i * 4, y: cy - 40 + i * 4, layer: i });
-                positions.push({ x: 20 + i * 4, y: cy + 40 - i * 4, layer: i });
+            // ── Màn 5: Tháp kim tự tháp dày đặc + 2 cánh đôi, 51 thẻ (7 loại) ──
+            // Tầng 0: 16 thẻ
+            for (let r = -2; r <= 2; r++) {
+                for (let c = -2; c <= 2; c++) {
+                    if (Math.abs(r) + Math.abs(c) <= 3 && !(r === 0 && c === 0)) {
+                        positions.push({ x: cx + c * 40, y: cy + r * 42, layer: 0 });
+                    }
+                }
             }
-            // Cánh phải
-            for (let i = 0; i < 3; i++) {
-                positions.push({ x: boardWidth - this.tileWidth - 20 - i * 4, y: cy - 40 + i * 4, layer: i });
-                positions.push({ x: boardWidth - this.tileWidth - 20 - i * 4, y: cy + 40 - i * 4, layer: i });
+            // Tầng 1: 9 thẻ lệch
+            for (let r of [-1, 0, 1]) {
+                for (let c of [-1, 0, 1]) {
+                    positions.push({ x: cx + (c - 0.5) * 36, y: cy + (r - 0.5) * 38, layer: 1 });
+                }
+            }
+            // Tầng 2: 5 thẻ
+            for (let [r, c] of [[-0.5, -0.5], [0.5, -0.5], [-0.5, 0.5], [0.5, 0.5], [0, 0]]) {
+                positions.push({ x: cx + c * 34, y: cy + r * 36, layer: 2 });
+            }
+            // Tầng 3: 2 thẻ đỉnh
+            positions.push({ x: cx - 16, y: cy, layer: 3 });
+            positions.push({ x: cx + 16, y: cy, layer: 3 });
+            // Cánh trái & phải 2 cột
+            for (let i = 0; i < 4; i++) {
+                positions.push({ x: 16 + i * 3, y: cy - 55 + i * 6, layer: i });
+                positions.push({ x: 16 + i * 3, y: cy + 35 - i * 6, layer: i });
+                positions.push({ x: boardWidth - this.tileWidth - 16 - i * 3, y: cy - 55 + i * 6, layer: i });
+                positions.push({ x: boardWidth - this.tileWidth - 16 - i * 3, y: cy + 35 - i * 6, layer: i });
             }
 
         } else if (levelNumber === 6) {
-            // ── Màn 6: Tháp 4 tầng lớn hơn + cánh bên dày hơn ─────────────
-            const sp = 38;
-            // Tầng 0: hình bầu dục, 13 thẻ
-            for (let r = -2; r <= 2; r++)
-                for (let c = -2; c <= 2; c++)
-                    if (Math.abs(r) + Math.abs(c) <= 3)
-                        positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 0 });
-            // Tầng 1: 3×3 lệch nửa ô
-            [[-1,-1],[-1,0],[-1,1],[0,-1],[0,0],[0,1],[1,-1],[1,0],[1,1]].forEach(([r,c]) =>
-                positions.push({ x: cx + (c - 0.5) * sp, y: cy + (r - 0.5) * sp, layer: 1 }));
-            // Tầng 2: 2×2
-            [[-0.5,-0.5],[0.5,-0.5],[-0.5,0.5],[0.5,0.5]].forEach(([r,c]) =>
-                positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 2 }));
-            // Tầng 3: đỉnh
-            positions.push({ x: cx, y: cy, layer: 3 });
-            // Cánh trái 4 cột
-            for (let i = 0; i < 4; i++) {
-                positions.push({ x: 16 + i * 4, y: cy + 55 + i * 4, layer: i });
-                positions.push({ x: 16 + i * 4, y: cy - 55 - i * 4, layer: i });
+            // ── Màn 6: Tháp 5 tầng kịch tính + 4 cột cánh bên, 66 thẻ (8 loại) ──
+            // Tầng 0: 18 thẻ
+            for (let r = -2; r <= 2; r++) {
+                for (let c = -2; c <= 2; c++) {
+                    if (Math.abs(r) + Math.abs(c) <= 3) {
+                        positions.push({ x: cx + c * 38, y: cy + r * 40, layer: 0 });
+                    }
+                }
             }
-            // Cánh phải 4 cột
+            positions.push({ x: cx, y: cy - 110, layer: 0 });
+            positions.push({ x: cx, y: cy + 110, layer: 0 });
+            positions.push({ x: cx - 110, y: cy, layer: 0 });
+            positions.push({ x: cx + 110, y: cy, layer: 0 });
+            // Tầng 1: 12 thẻ
+            for (let r of [-1.5, -0.5, 0.5, 1.5]) {
+                for (let c of [-1, 0, 1]) {
+                    positions.push({ x: cx + c * 38, y: cy + r * 38, layer: 1 });
+                }
+            }
+            // Tầng 2: 8 thẻ
+            for (let [r, c] of [[-1, -1], [1, -1], [-1, 1], [1, 1], [-0.5, 0], [0.5, 0], [0, -0.5], [0, 0.5]]) {
+                positions.push({ x: cx + c * 34, y: cy + r * 34, layer: 2 });
+            }
+            // Tầng 3: 4 thẻ
+            for (let [r, c] of [[-0.5, -0.5], [0.5, -0.5], [-0.5, 0.5], [0.5, 0.5]]) {
+                positions.push({ x: cx + c * 30, y: cy + r * 30, layer: 3 });
+            }
+            // Tầng 4: 1 thẻ đỉnh cao nhất
+            positions.push({ x: cx, y: cy, layer: 4 });
+            // Cánh trái & phải 4 cột bài
             for (let i = 0; i < 4; i++) {
-                positions.push({ x: boardWidth - this.tileWidth - 16 - i * 4, y: cy + 55 + i * 4, layer: i });
-                positions.push({ x: boardWidth - this.tileWidth - 16 - i * 4, y: cy - 55 - i * 4, layer: i });
+                positions.push({ x: 16 + i * 3, y: cy - 60 + i * 6, layer: i });
+                positions.push({ x: 16 + i * 3, y: cy + 40 - i * 6, layer: i });
+                positions.push({ x: boardWidth - this.tileWidth - 16 - i * 3, y: cy - 60 + i * 6, layer: i });
+                positions.push({ x: boardWidth - this.tileWidth - 16 - i * 3, y: cy + 40 - i * 6, layer: i });
             }
 
         } else {
@@ -2992,7 +3443,7 @@ class MiniGameEngine {
         } else {
             if (iconEl) iconEl.textContent = '🎮';
             if (titleEl) titleEl.textContent = 'SIÊU THỬ THÁCH GHÉP THẺ';
-            challengeText = `🔥 Trò chơi Siêu Ghép Thẻ 2026 cực kỳ gây nghiện! Kỷ lục hiện tại của tôi: ${this.score} điểm (${this.wins} trận thắng). Cùng vào so tài nhé! 🚀`;
+            challengeText = `🔥 Trò chơi Siêu Ghép Thẻ cực kỳ gây nghiện! Kỷ lục hiện tại của tôi: ${this.score} điểm (${this.wins} trận thắng). Cùng vào so tài nhé! 🚀`;
         }
 
         if (quoteEl) quoteEl.textContent = `"${challengeText}"`;
@@ -3000,21 +3451,86 @@ class MiniGameEngine {
 
         modal.classList.remove('hidden');
         window.soundManager.playPowerup();
+
+        // Sinh ảnh theo cấp độ bất đồng bộ
+        this._generateShareImagePreview();
+    }
+
+    /**
+     * Sinh ảnh preview trong share modal theo cấp độ hiện tại
+     * @private
+     */
+    _generateShareImagePreview() {
+        const loadingEl = document.getElementById('share-image-loading');
+        const previewEl = document.getElementById('share-image-preview');
+        if (!loadingEl || !previewEl) return;
+
+        // Nếu có link banner CDN thật của màn này -> hiển thị ngay lập tức!
+        const cdnBanner = LEVEL_BANNER_URLS[this.currentLevel];
+        if (cdnBanner) {
+            previewEl.src = cdnBanner;
+            previewEl.style.display = 'block';
+            loadingEl.style.display = 'none';
+            return;
+        }
+
+        // Fallback tạo ảnh động Canvas nếu chưa có CDN banner
+        if (!window.ShareImageGenerator) return;
+
+        if (this._shareImageURL) {
+            URL.revokeObjectURL(this._shareImageURL);
+            this._shareImageURL = null;
+        }
+
+        loadingEl.style.display = 'block';
+        previewEl.style.display = 'none';
+
+        window.ShareImageGenerator.generateShareImageBlob(
+            this.currentLevel, this.score, this.wins
+        ).then(blob => {
+            this._shareImageBlob = blob;
+            const url = URL.createObjectURL(blob);
+            this._shareImageURL = url;
+
+            previewEl.src = url;
+            previewEl.style.display = 'block';
+            loadingEl.style.display = 'none';
+        }).catch(() => {
+            loadingEl.textContent = '(Không thể tạo ảnh preview)';
+        });
     }
 
     getShareUrl() {
-        return window.location.href;
+        // Trả về URL trang chia sẻ riêng của màn hiện tại
+        // → Facebook sẽ đọc og:image từ trang đó → hiển thị ảnh đúng cấp độ
+        return LEVEL_PAGE_URLS[this.currentLevel] || 'https://game-ghep-the-vui.blogspot.com/';
     }
 
     shareNative() {
-        const shareData = {
-            title: 'Siêu Thử Thách Ghép Thẻ 2026',
-            text: this.currentShareText || 'Chơi game ghép thẻ cực cuốn cùng tôi nhé!',
-            url: this.getShareUrl()
+        const text = this.currentShareText || 'Chơi game ghép thẻ cực cuốn cùng tôi nhé!';
+        const url  = this.getShareUrl();
+
+        // Thử share kèm file ảnh trước (iOS Safari / Android Chrome hỗ trợ)
+        const tryShareWithImage = () => {
+            if (this._shareImageBlob && navigator.canShare) {
+                const file = new File([this._shareImageBlob], `sieu-ghep-the-man${this.currentLevel}.jpg`, { type: 'image/jpeg' });
+                if (navigator.canShare({ files: [file] })) {
+                    return navigator.share({ files: [file], title: 'Siêu Ghép Thẻ', text, url });
+                }
+            }
+            return null;
         };
 
         if (navigator.share) {
-            navigator.share(shareData).catch(() => {});
+            const withImageShare = tryShareWithImage();
+            if (withImageShare) {
+                withImageShare.catch(() => {
+                    // Fallback: share text + link nếu share ảnh thất bại
+                    navigator.share({ title: 'Siêu Ghép Thẻ', text, url }).catch(() => {});
+                });
+            } else {
+                navigator.share({ title: 'Siêu Ghép Thẻ', text, url }).catch(() => {});
+            }
         } else {
             this.copyShareLink();
         }
@@ -3025,6 +3541,32 @@ class MiniGameEngine {
         const quote = encodeURIComponent(this.currentShareText || '');
         const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${quote}`;
         window.open(fbUrl, '_blank', 'width=600,height=500');
+    }
+
+    downloadShareImage() {
+        const cdnBanner = LEVEL_BANNER_URLS[this.currentLevel];
+        if (cdnBanner) {
+            window.open(cdnBanner, '_blank');
+            window.adManager.showToast('🖼️ Đang mở ảnh chất lượng cao! Bạn có thể lưu ảnh và đăng bài nhé!');
+            return;
+        }
+
+        if (!this._shareImageBlob) {
+            window.adManager.showToast('⏳ Ảnh đang tạo, vui lòng thử lại sau giây lát!');
+            return;
+        }
+        this._downloadShareImageFile();
+        window.adManager.showToast('📥 Đã tải ảnh về! Mở Facebook và đính kèm ảnh vừa tải để đăng nhé!');
+    }
+
+    /** @private */
+    _downloadShareImageFile() {
+        const a = document.createElement('a');
+        a.href = this._shareImageURL || URL.createObjectURL(this._shareImageBlob);
+        a.download = `sieu-ghep-the-man${this.currentLevel}.jpg`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     }
 
     shareZalo() {
