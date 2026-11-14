@@ -2,10 +2,63 @@
  * MiniGame: Cừu & Cừu (Match-3 Layer Stacking Game)
  * Động cơ game chính: Quản lý va chạm đa tầng, Khay 7 ô, Quyền trợ giúp & Hệ thống chủ đề
  */
+
+/**
+ * CẤU HÌNH ĐỘ KHÓ TỪNG MÀN
+ * Mỗi màn định nghĩa: tên hiển thị, số loại thẻ, số tầng, cấu hình layout
+ * Người chơi sẽ trải qua 7 màn tăng dần từ Tutorial → Huyền Thoại
+ */
+const LEVEL_CONFIGS = [
+    // Màn 1: Tập Sự — 3 loại, 9 thẻ, 2 tầng đơn giản (Tutorial)
+    {
+        name: 'Màn 1: Tập Sự', badge: '🌱', cssClass: 'level-1',
+        numTypes: 3, maxLayers: 2,
+        description: 'Khởi động nhẹ nhàng! Dành cho người mới bắt đầu.'
+    },
+    // Màn 2: Học Việc — 4 loại, 12 thẻ, 2 tầng
+    {
+        name: 'Màn 2: Học Việc', badge: '🌿', cssClass: 'level-2',
+        numTypes: 4, maxLayers: 2,
+        description: 'Thêm loại thẻ, bắt đầu căng não hơn!'
+    },
+    // Màn 3: Có Kinh Nghiệm — 4 loại, 12 thẻ, 3 tầng
+    {
+        name: 'Màn 3: Có Kinh Nghiệm', badge: '⭐', cssClass: 'level-3',
+        numTypes: 4, maxLayers: 3,
+        description: 'Nhiều tầng hơn — tư duy cẩn thận nhé!'
+    },
+    // Màn 4: Thách Thức — 5 loại, 15 thẻ, 3 tầng
+    {
+        name: 'Màn 4: Thách Thức', badge: '🌟', cssClass: 'level-4',
+        numTypes: 5, maxLayers: 3,
+        description: 'Chỉ 20% người chơi vượt được màn này!'
+    },
+    // Màn 5: Chuyên Gia — 5 loại, 15 thẻ, 4 tầng + cánh bên
+    {
+        name: 'Màn 5: Chuyên Gia', badge: '💎', cssClass: 'level-5',
+        numTypes: 5, maxLayers: 4,
+        description: 'Xuất hiện "cánh bài" hai bên — bẫy từ mọi hướng!'
+    },
+    // Màn 6: Siêu Cấp — 6 loại, 18 thẻ, 4 tầng + cánh bên lớn hơn
+    {
+        name: 'Màn 6: Siêu Cấp', badge: '🔥', cssClass: 'level-6',
+        numTypes: 6, maxLayers: 4,
+        description: 'Chỉ 5% người chơi đạt được đây!'
+    },
+    // Màn 7: Huyền Thoại — 7+ loại, nhiều thẻ, 5 tầng full + cánh bên
+    {
+        name: 'Màn 7: Huyền Thoại', badge: '👑', cssClass: 'level-7',
+        numTypes: 7, maxLayers: 5,
+        description: 'Chỉ 0.1% người chơi chinh phục được Huyền Thoại!'
+    }
+];
+
+const MAX_LEVEL = LEVEL_CONFIGS.length; // 7
+
 class MiniGameEngine {
     constructor() {
         this.currentThemeId = localStorage.getItem('sheep_theme') || 'vietnam_food';
-        this.currentLevel = 1; // 1: Dễ (Tutorial), 2: Địa ngục (Hell)
+        this.currentLevel = 1; // 1 → MAX_LEVEL
         this.boardTiles = []; // Các thẻ trên bàn cờ
         this.trayTiles = []; // Các thẻ đang trong khay chứa (tối đa 7)
         this.stashTiles = []; // Các thẻ đang ở bục chờ tạm thời (Trợ giúp 1)
@@ -107,7 +160,7 @@ class MiniGameEngine {
         const shareWinBtn = document.getElementById('btn-share-win');
         if (shareWinBtn) {
             shareWinBtn.addEventListener('click', () => {
-                this.openShareModal(this.currentLevel === 2 ? 'win_level_2' : 'win_level_1');
+                this.openShareModal(this.currentLevel >= MAX_LEVEL ? 'win_level_2' : 'win_level_1');
             });
         }
 
@@ -124,7 +177,7 @@ class MiniGameEngine {
 
         document.getElementById('btn-next-level').addEventListener('click', () => {
             document.getElementById('win-modal').classList.add('hidden');
-            this.startLevel(2);
+            this.startLevel(this.currentLevel + 1);
         });
 
         document.getElementById('btn-replay-win').addEventListener('click', () => {
@@ -210,10 +263,10 @@ class MiniGameEngine {
     }
 
     /**
-     * Bắt đầu một màn chơi mới
+     * Bắt đầu một màn chơi mới (hỗ trợ 7 màn tăng dần)
      */
     startLevel(levelNumber) {
-        this.currentLevel = levelNumber;
+        this.currentLevel = Math.min(Math.max(1, levelNumber), MAX_LEVEL);
         this.isGameOver = false;
         this.isAnimating = false;
         this.boardTiles = [];
@@ -230,9 +283,10 @@ class MiniGameEngine {
         };
         this.reviveClaimed = false;
 
+        const cfg = LEVEL_CONFIGS[this.currentLevel - 1];
         if (this.levelBadge) {
-            this.levelBadge.textContent = levelNumber === 1 ? 'Màn 1: Tập Sự' : 'Màn 2: Thách Thức';
-            this.levelBadge.className = `level-badge level-${levelNumber}`;
+            this.levelBadge.textContent = `${cfg.badge} ${cfg.name.replace('Màn ' + this.currentLevel + ': ', '')}`;
+            this.levelBadge.className = `level-badge ${cfg.cssClass}`;
         }
 
         this.updatePowerupButtonsUI();
@@ -240,153 +294,202 @@ class MiniGameEngine {
         this.renderStash();
 
         const theme = window.GAME_THEMES[this.currentThemeId];
-
-        if (levelNumber === 1) {
-            this.generateLevel1(theme);
-        } else {
-            this.generateLevel2(theme);
-        }
+        this.generateLevel(this.currentLevel, theme, cfg);
 
         this.renderBoard();
         this.updateOverlaps();
     }
 
     /**
-     * Tạo dữ liệu Màn 1 (Dễ, 9 hoặc 12 thẻ, xếp 2 tầng đơn giản)
+     * Sinh bàn cờ theo cấu hình màn — tăng dần từ màn 1 đến màn 7
      */
-    generateLevel1(theme) {
-        const items = theme.items.slice(0, 3); // Chọn 3 loại
-        const pool = [];
-        // Mỗi loại 3 thẻ -> Tổng cộng 9 thẻ
-        items.forEach(item => {
-            for (let i = 0; i < 3; i++) {
-                pool.push({ itemId: item.id, icon: item.icon, name: item.name });
-            }
-        });
-        this.shuffleArray(pool);
-
-        const boardWidth = (this.boardEl && this.boardEl.clientWidth > 250) ? this.boardEl.clientWidth : 360;
+    generateLevel(levelNumber, theme, cfg) {
+        const boardWidth  = (this.boardEl && this.boardEl.clientWidth  > 250) ? this.boardEl.clientWidth  : 360;
         const boardHeight = (this.boardEl && this.boardEl.clientHeight > 250) ? this.boardEl.clientHeight : 380;
-        const centerX = boardWidth / 2 - this.tileWidth / 2;
-        const centerY = boardHeight / 2 - this.tileHeight / 2 - 10;
-
-        const layout = [
-            // Tầng 0 (Bên dưới)
-            { x: centerX - 60, y: centerY - 50, layer: 0 },
-            { x: centerX + 60, y: centerY - 50, layer: 0 },
-            { x: centerX - 60, y: centerY + 50, layer: 0 },
-            { x: centerX + 60, y: centerY + 50, layer: 0 },
-            { x: centerX, y: centerY - 70, layer: 0 },
-            { x: centerX, y: centerY + 70, layer: 0 },
-
-            // Tầng 1 (Đè nhẹ lên giữa)
-            { x: centerX - 30, y: centerY, layer: 1 },
-            { x: centerX + 30, y: centerY, layer: 1 },
-            { x: centerX, y: centerY, layer: 2 }
-        ];
-
-        this.boardTiles = pool.map((item, idx) => ({
-            id: `tile_1_${idx}`,
-            itemId: item.itemId,
-            icon: item.icon,
-            name: item.name,
-            x: layout[idx].x,
-            y: layout[idx].y,
-            layer: layout[idx].layer,
-            isBlocked: false,
-            el: null
-        }));
-    }
-
-    /**
-     * Tạo dữ liệu Màn 2 (Địa ngục: Nhiều tầng chồng chéo, các chồng bài phụ bên cạnh)
-     * Đảm bảo TOÀN BỘ số lượng thẻ luôn là BỘI SỐ CỦA 3
-     */
-    generateLevel2(theme) {
-        const boardWidth = (this.boardEl && this.boardEl.clientWidth > 250) ? this.boardEl.clientWidth : 360;
-        const boardHeight = (this.boardEl && this.boardEl.clientHeight > 250) ? this.boardEl.clientHeight : 380;
-        const centerX = boardWidth / 2 - this.tileWidth / 2;
-        const centerY = boardHeight / 2 - this.tileHeight / 2 - 25;
+        const cx = boardWidth  / 2 - this.tileWidth  / 2;
+        const cy = boardHeight / 2 - this.tileHeight / 2 - 15;
 
         const positions = [];
 
-        // 1. Tháp kim tự tháp trung tâm 5 tầng
-        // Tầng 0: 5x5 ô (cách nhau 38px)
-        for (let r = -2; r <= 2; r++) {
-            for (let c = -2; c <= 2; c++) {
-                if (Math.abs(r) + Math.abs(c) <= 3) {
-                    positions.push({ x: centerX + c * 38, y: centerY + r * 40, layer: 0 });
-                }
+        if (levelNumber === 1) {
+            // ── Màn 1: Kim tự tháp 2 tầng cực nhỏ, 9 thẻ ──────────────────
+            // Tầng 0: 6 thẻ hình vòng cung
+            const ring = [
+                { x: cx - 60, y: cy - 50 }, { x: cx + 60, y: cy - 50 },
+                { x: cx - 60, y: cy + 50 }, { x: cx + 60, y: cy + 50 },
+                { x: cx,      y: cy - 70 }, { x: cx,      y: cy + 70 }
+            ];
+            ring.forEach(p => positions.push({ ...p, layer: 0 }));
+            // Tầng 1: 2 thẻ giữa
+            positions.push({ x: cx - 28, y: cy, layer: 1 });
+            positions.push({ x: cx + 28, y: cy, layer: 1 });
+            // Tầng 2: đỉnh
+            positions.push({ x: cx, y: cy, layer: 2 });
+
+        } else if (levelNumber === 2) {
+            // ── Màn 2: Hình thoi 2 tầng, 12 thẻ ────────────────────────────
+            // Tầng 0: hình thoi 8 thẻ
+            const diamond = [
+                { x: cx,      y: cy - 80 },
+                { x: cx - 50, y: cy - 40 }, { x: cx + 50, y: cy - 40 },
+                { x: cx - 80, y: cy      }, { x: cx + 80, y: cy      },
+                { x: cx - 50, y: cy + 40 }, { x: cx + 50, y: cy + 40 },
+                { x: cx,      y: cy + 80 }
+            ];
+            diamond.forEach(p => positions.push({ ...p, layer: 0 }));
+            // Tầng 1: hình thoi nhỏ 4 thẻ
+            positions.push({ x: cx - 28, y: cy - 30, layer: 1 });
+            positions.push({ x: cx + 28, y: cy - 30, layer: 1 });
+            positions.push({ x: cx - 28, y: cy + 30, layer: 1 });
+            positions.push({ x: cx + 28, y: cy + 30, layer: 1 });
+
+        } else if (levelNumber === 3) {
+            // ── Màn 3: Lưới 3×3 tầng 0, 2×2 tầng 1, đỉnh tầng 2 — 14 thẻ → trim về 12 ──
+            const sp = 46;
+            for (let r = -1; r <= 1; r++)
+                for (let c = -1; c <= 1; c++)
+                    positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 0 });
+            // Tầng 1: 4 thẻ
+            [[-0.5,-0.5],[0.5,-0.5],[-0.5,0.5],[0.5,0.5]].forEach(([r,c]) =>
+                positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 1 }));
+            // Tầng 2: đỉnh 1 thẻ
+            positions.push({ x: cx, y: cy, layer: 2 });
+            // Thêm 2 thẻ cánh nhỏ (tầng 0) để = 15 → trim về bội 3
+            positions.push({ x: cx - 110, y: cy, layer: 0 });
+            positions.push({ x: cx + 110, y: cy, layer: 0 });
+
+        } else if (levelNumber === 4) {
+            // ── Màn 4: Tháp 3 tầng 4×4→3×3→2×2 + thêm cánh nhỏ ─────────────
+            const sp = 42;
+            // Tầng 0: hình bầu dục (diamond 4×4)
+            for (let r = -1; r <= 1; r++)
+                for (let c = -1; c <= 1; c++)
+                    positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 0 });
+            positions.push({ x: cx - sp * 2, y: cy, layer: 0 });
+            positions.push({ x: cx + sp * 2, y: cy, layer: 0 });
+            positions.push({ x: cx, y: cy - sp * 2, layer: 0 });
+            positions.push({ x: cx, y: cy + sp * 2, layer: 0 });
+            // Tầng 1: 2×2
+            [[-0.5,-0.5],[0.5,-0.5],[-0.5,0.5],[0.5,0.5]].forEach(([r,c]) =>
+                positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 1 }));
+            // Tầng 2: đỉnh
+            positions.push({ x: cx, y: cy, layer: 2 });
+
+        } else if (levelNumber === 5) {
+            // ── Màn 5: Tháp kim tự tháp 4 tầng + cánh bên nhỏ ──────────────
+            const sp = 40;
+            // Tầng 0: 3×3
+            for (let r = -1; r <= 1; r++)
+                for (let c = -1; c <= 1; c++)
+                    positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 0 });
+            // Thêm viền tầng 0
+            [[-2,0],[2,0],[0,-2],[0,2],[-1,-2],[1,-2],[-1,2],[1,2]].forEach(([r,c]) =>
+                positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 0 }));
+            // Tầng 1: 2×2
+            [[-0.5,-0.5],[0.5,-0.5],[-0.5,0.5],[0.5,0.5]].forEach(([r,c]) =>
+                positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 1 }));
+            // Tầng 2: đỉnh 1 thẻ
+            positions.push({ x: cx, y: cy, layer: 2 });
+            // Tầng 3: siêu đỉnh
+            positions.push({ x: cx, y: cy - sp * 0.5, layer: 3 });
+            // Cánh trái
+            for (let i = 0; i < 3; i++) {
+                positions.push({ x: 20 + i * 4, y: cy - 40 + i * 4, layer: i });
+                positions.push({ x: 20 + i * 4, y: cy + 40 - i * 4, layer: i });
+            }
+            // Cánh phải
+            for (let i = 0; i < 3; i++) {
+                positions.push({ x: boardWidth - this.tileWidth - 20 - i * 4, y: cy - 40 + i * 4, layer: i });
+                positions.push({ x: boardWidth - this.tileWidth - 20 - i * 4, y: cy + 40 - i * 4, layer: i });
+            }
+
+        } else if (levelNumber === 6) {
+            // ── Màn 6: Tháp 4 tầng lớn hơn + cánh bên dày hơn ─────────────
+            const sp = 38;
+            // Tầng 0: hình bầu dục, 13 thẻ
+            for (let r = -2; r <= 2; r++)
+                for (let c = -2; c <= 2; c++)
+                    if (Math.abs(r) + Math.abs(c) <= 3)
+                        positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 0 });
+            // Tầng 1: 3×3 lệch nửa ô
+            [[-1,-1],[-1,0],[-1,1],[0,-1],[0,0],[0,1],[1,-1],[1,0],[1,1]].forEach(([r,c]) =>
+                positions.push({ x: cx + (c - 0.5) * sp, y: cy + (r - 0.5) * sp, layer: 1 }));
+            // Tầng 2: 2×2
+            [[-0.5,-0.5],[0.5,-0.5],[-0.5,0.5],[0.5,0.5]].forEach(([r,c]) =>
+                positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 2 }));
+            // Tầng 3: đỉnh
+            positions.push({ x: cx, y: cy, layer: 3 });
+            // Cánh trái 4 cột
+            for (let i = 0; i < 4; i++) {
+                positions.push({ x: 16 + i * 4, y: cy + 55 + i * 4, layer: i });
+                positions.push({ x: 16 + i * 4, y: cy - 55 - i * 4, layer: i });
+            }
+            // Cánh phải 4 cột
+            for (let i = 0; i < 4; i++) {
+                positions.push({ x: boardWidth - this.tileWidth - 16 - i * 4, y: cy + 55 + i * 4, layer: i });
+                positions.push({ x: boardWidth - this.tileWidth - 16 - i * 4, y: cy - 55 - i * 4, layer: i });
+            }
+
+        } else {
+            // ── Màn 7: Huyền Thoại — tháp 5 tầng full + cánh bên lớn ───────
+            const sp = 38;
+            // Tầng 0: diamond 5×5 bầu dục lớn
+            for (let r = -2; r <= 2; r++)
+                for (let c = -2; c <= 2; c++)
+                    if (Math.abs(r) + Math.abs(c) <= 3)
+                        positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 0 });
+            // Tầng 1: 4×4 lệch
+            for (let r = -1.5; r <= 1.5; r++)
+                for (let c = -1.5; c <= 1.5; c++)
+                    positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 1 });
+            // Tầng 2: 3×3
+            for (let r = -1; r <= 1; r++)
+                for (let c = -1; c <= 1; c++)
+                    positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 2 });
+            // Tầng 3: 2×2
+            [[-0.5,-0.5],[0.5,-0.5],[-0.5,0.5],[0.5,0.5]].forEach(([r,c]) =>
+                positions.push({ x: cx + c * sp, y: cy + r * sp, layer: 3 }));
+            // Tầng 4: đỉnh
+            positions.push({ x: cx, y: cy, layer: 4 });
+            // Cánh trái
+            for (let i = 0; i < 4; i++) {
+                positions.push({ x: 16 + i * 4, y: cy + 60 + i * 4, layer: i });
+                positions.push({ x: 16 + i * 4, y: cy - 60 - i * 4, layer: i });
+            }
+            // Cánh phải
+            for (let i = 0; i < 4; i++) {
+                positions.push({ x: boardWidth - this.tileWidth - 16 - i * 4, y: cy + 60 + i * 4, layer: i });
+                positions.push({ x: boardWidth - this.tileWidth - 16 - i * 4, y: cy - 60 - i * 4, layer: i });
             }
         }
 
-        // Tầng 1: 4x4 ô (lệch nửa ô 19px)
-        for (let r = -1.5; r <= 1.5; r++) {
-            for (let c = -1.5; c <= 1.5; c++) {
-                positions.push({ x: centerX + c * 38, y: centerY + r * 40, layer: 1 });
-            }
-        }
-
-        // Tầng 2: 3x3 ô
-        for (let r = -1; r <= 1; r++) {
-            for (let c = -1; c <= 1; c++) {
-                positions.push({ x: centerX + c * 38, y: centerY + r * 40, layer: 2 });
-            }
-        }
-
-        // Tầng 3: 2x2 ô
-        for (let r = -0.5; r <= 0.5; r++) {
-            for (let c = -0.5; c <= 0.5; c++) {
-                positions.push({ x: centerX + c * 38, y: centerY + r * 40, layer: 3 });
-            }
-        }
-
-        // Tầng 4: Đỉnh tháp
-        positions.push({ x: centerX, y: centerY, layer: 4 });
-
-        // 2. Hai cột bài dự phòng hai bên cánh (Side Stacks)
-        // Cánh trái
-        for (let i = 0; i < 4; i++) {
-            positions.push({ x: 16 + i * 4, y: centerY + 60 + i * 4, layer: i });
-            positions.push({ x: 16 + i * 4, y: centerY - 60 - i * 4, layer: i });
-        }
-        // Cánh phải
-        for (let i = 0; i < 4; i++) {
-            positions.push({ x: boardWidth - this.tileWidth - 16 - i * 4, y: centerY + 60 + i * 4, layer: i });
-            positions.push({ x: boardWidth - this.tileWidth - 16 - i * 4, y: centerY - 60 - i * 4, layer: i });
-        }
-
-        // Đảm bảo tổng số vị trí là bội số của 3
+        // Trim/pad để tổng số thẻ là bội số của 3
         const remainder = positions.length % 3;
-        if (remainder !== 0) {
-            positions.splice(positions.length - remainder, remainder);
-        }
+        if (remainder !== 0) positions.splice(positions.length - remainder, remainder);
 
         const totalTiles = positions.length;
-        const totalSets = totalTiles / 3;
+        const totalSets  = totalTiles / 3;
 
-        // Chọn các vật phẩm từ bộ chủ đề
+        // Lấy numTypes loại thẻ từ chủ đề (đủ để lấp hết)
         const availableItems = [...theme.items];
         this.shuffleArray(availableItems);
+        const numTypes = Math.min(cfg.numTypes, availableItems.length);
 
-        // Phân bổ thẻ: mỗi loại có 3 hoặc 6 hoặc 9 thẻ
         const pool = [];
         let itemIndex = 0;
         for (let s = 0; s < totalSets; s++) {
-            const item = availableItems[itemIndex % availableItems.length];
-            for (let k = 0; k < 3; k++) {
+            const item = availableItems[itemIndex % numTypes];
+            for (let k = 0; k < 3; k++)
                 pool.push({ itemId: item.id, icon: item.icon, name: item.name });
-            }
             itemIndex++;
         }
-
         this.shuffleArray(pool);
 
         this.boardTiles = positions.map((pos, idx) => ({
-            id: `tile_2_${idx}`,
+            id: `tile_${levelNumber}_${idx}`,
             itemId: pool[idx].itemId,
-            icon: pool[idx].icon,
-            name: pool[idx].name,
+            icon:   pool[idx].icon,
+            name:   pool[idx].name,
             x: Math.round(pos.x),
             y: Math.round(pos.y),
             layer: pos.layer,
@@ -624,35 +727,36 @@ class MiniGameEngine {
         this.isGameOver = true;
         window.soundManager.playWin();
 
-        if (this.currentLevel === 1) {
-            // Màn 1 thắng -> Chuyển màn 2
-            const modal = document.getElementById('win-modal');
-            const title = document.getElementById('win-title');
-            const desc = document.getElementById('win-desc');
-            const nextBtn = document.getElementById('btn-next-level');
+        const cfg     = LEVEL_CONFIGS[this.currentLevel - 1];
+        const nextCfg = LEVEL_CONFIGS[this.currentLevel]; // undefined nếu là màn cuối
 
-            title.textContent = '🎉 VƯỢT QUA MÀN 1!';
-            desc.textContent = 'Quá đỉnh! Nhưng thử thách thực sự Màn 2 (Chỉ 0.1% người thắng) mới bắt đầu!';
+        const modal   = document.getElementById('win-modal');
+        const title   = document.getElementById('win-title');
+        const desc    = document.getElementById('win-desc');
+        const nextBtn = document.getElementById('btn-next-level');
+
+        if (nextCfg) {
+            // Còn màn tiếp theo
+            const progressMap = { 1:'🌟', 2:'⭐⭐', 3:'💪', 4:'🔥', 5:'💎', 6:'👑' };
+            const emojiProg   = progressMap[this.currentLevel] || '🎉';
+            title.textContent = `${emojiProg} VƯỢT QUA ${cfg.name.toUpperCase()}!`;
+            desc.textContent  = `Tuyệt vời! Tiếp theo: ${nextCfg.badge} ${nextCfg.name} — ${nextCfg.description}`;
+            nextBtn.textContent = `Chơi ${nextCfg.badge} ${nextCfg.name} →`;
             nextBtn.classList.remove('hidden');
-            modal.classList.remove('hidden');
         } else {
-            // Màn 2 thắng -> Kỷ lục thế giới!
+            // Màn 7 — Huyền Thoại
             this.wins++;
             localStorage.setItem('sheep_wins', this.wins);
             if (this.winsEl) this.winsEl.textContent = this.wins;
 
-            const modal = document.getElementById('win-modal');
-            const title = document.getElementById('win-title');
-            const desc = document.getElementById('win-desc');
-            const nextBtn = document.getElementById('btn-next-level');
-
-            title.textContent = '🏆 HUYỀN THOẠI CHIẾN THẮNG!';
-            desc.textContent = `Bạn đã xuất sắc chinh phục Màn 2 của game! Tổng số chiến thắng: ${this.wins}`;
+            title.textContent = '👑 HUYỀN THOẠI CHIẾN THẮNG!';
+            desc.textContent  = `Bạn đã chinh phục cả 7 màn! Chỉ 0.1% người chơi làm được điều này. Tổng chiến thắng: ${this.wins}`;
             nextBtn.classList.add('hidden');
-            modal.classList.remove('hidden');
-
             this.launchConfetti();
         }
+
+        modal.classList.remove('hidden');
+        this.launchConfetti();
     }
 
     triggerGameOver() {
@@ -1041,7 +1145,8 @@ class MiniGameEngine {
         const modal = document.getElementById('share-modal');
         if (!modal) return;
 
-        const levelText = this.currentLevel === 1 ? 'Màn 1' : 'Màn 2';
+        const cfg = LEVEL_CONFIGS[this.currentLevel - 1];
+        const levelText = cfg ? `${cfg.badge} ${cfg.name}` : `Màn ${this.currentLevel}`;
         const levelEl = document.getElementById('share-stat-level');
         const scoreEl = document.getElementById('share-stat-score');
         const winsEl = document.getElementById('share-stat-wins');
@@ -1050,24 +1155,28 @@ class MiniGameEngine {
         if (scoreEl) scoreEl.textContent = this.score;
         if (winsEl) winsEl.textContent = this.wins;
 
-        const iconEl = document.getElementById('share-trophy-icon');
+        const iconEl  = document.getElementById('share-trophy-icon');
         const titleEl = document.getElementById('share-card-title');
         const quoteEl = document.getElementById('share-quote-text');
 
         let challengeText = '';
 
         if (context === 'win_level_2') {
+            // Màn cuối (Huyền Thoại)
             if (iconEl) iconEl.textContent = '👑';
             if (titleEl) titleEl.textContent = 'HUYỀN THOẠI CHIẾN THẮNG!';
-            challengeText = `🏆 Tôi vừa chính thức PHÁ ĐẢO Màn 2 Siêu Ghép Thẻ với ${this.score} điểm! Tỉ lệ người thắng chỉ 0.1%. Bạn có dám thách thức kỷ lục này không? 🎮`;
+            challengeText = `👑 Tôi vừa chinh phục Màn 7: Huyền Thoại của Siêu Ghép Thẻ! ${this.score} điểm — Chỉ 0.1% người chơi làm được. Bạn có dám thử không? 🎮`;
         } else if (context === 'game_over') {
             if (iconEl) iconEl.textContent = '🔥';
             if (titleEl) titleEl.textContent = 'THÁCH ĐẤU GIẢI CỨU!';
-            challengeText = `😱 Bàn cờ Màn 2 này quá hiểm hóc! Tôi đạt ${this.score} điểm mà vẫn bị đầy khay. Có ai vào giải cứu bàn này giùm tôi không? 🎮`;
+            challengeText = `😱 Tôi bị thua ở ${levelText} với ${this.score} điểm! Bàn cờ này quá hiểm hóc — có ai vào giải cứu giùm tôi không? 🎮`;
         } else if (context === 'win_level_1') {
-            if (iconEl) iconEl.textContent = '🎉';
-            if (titleEl) titleEl.textContent = 'VƯỢT QUA MÀN 1!';
-            challengeText = `🚀 Tôi vừa vượt qua Màn 1 cực mượt! Giờ chuẩn bị chinh phục Màn 2 địa ngục. Vào chơi đọ điểm với tôi nhé! 🎮`;
+            // Thắng màn trung gian (1–6)
+            const nextCfg = LEVEL_CONFIGS[this.currentLevel]; // màn tiếp theo
+            if (iconEl) iconEl.textContent = cfg ? cfg.badge : '🎉';
+            if (titleEl) titleEl.textContent = `VƯỢT QUA ${cfg ? cfg.name.toUpperCase() : 'MÀN NÀY'}!`;
+            const nextHint = nextCfg ? ` Tiếp theo: ${nextCfg.badge} ${nextCfg.name}.` : '';
+            challengeText = `🚀 Tôi vừa vượt qua ${levelText} cực mượt với ${this.score} điểm!${nextHint} Vào chơi đọ điểm với tôi nhé! 🎮`;
         } else {
             if (iconEl) iconEl.textContent = '🎮';
             if (titleEl) titleEl.textContent = 'SIÊU THỬ THÁCH GHÉP THẺ';
