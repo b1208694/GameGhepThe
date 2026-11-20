@@ -11,7 +11,7 @@ class AdManager {
         // Trạng thái duyệt AdSense: 
         // Đặt false trong thời gian chờ duyệt để hiện "Quà tiếp sức" cực kỳ tự nhiên, không bị kì!
         // Đặt true khi Google duyệt xong để kích hoạt quảng cáo video nhận thưởng thật.
-        this.isAdsApproved = false;
+        this.isAdsApproved = true;
 
         this.onRewardSuccess = null;
         this.rewardTimer = null;

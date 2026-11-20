@@ -694,7 +694,6 @@ class MiniGameEngine {
         this.isAnimating = true;
         setTimeout(() => {
             this.checkTrayMatches();
-            this.isAnimating = false;
         }, 150);
     }
 
@@ -761,21 +760,21 @@ class MiniGameEngine {
         }
 
         if (matchedItemId) {
+            this.isAnimating = true;
             window.soundManager.playMatch();
             this.combo++;
             this.score += 30 * this.combo;
             if (this.scoreEl) this.scoreEl.textContent = this.score;
 
-            // Hiệu ứng nổ thẻ
+            // Chỉ nổ ĐÚNG 3 thẻ đầu tiên tìm thấy (tránh lỗi triệt tiêu 4-5 thẻ nếu bấm nhanh)
+            const matchTileIds = new Set();
             const matchSlots = [];
-            const newTray = [];
-            this.trayTiles.forEach((tile, index) => {
-                if (tile.itemId === matchedItemId) {
-                    matchSlots.push(index);
-                } else {
-                    newTray.push(tile);
+            for (let i = 0; i < this.trayTiles.length; i++) {
+                if (this.trayTiles[i].itemId === matchedItemId && matchTileIds.size < 3) {
+                    matchTileIds.add(this.trayTiles[i].id);
+                    matchSlots.push(i);
                 }
-            });
+            }
 
             // Gắn class hiệu ứng nổ cho các ô
             const slots = this.trayEl.querySelectorAll('.tray-slot');
@@ -786,12 +785,27 @@ class MiniGameEngine {
             });
 
             setTimeout(() => {
-                this.trayTiles = newTray;
+                // Lọc bỏ ĐÚNG 3 thẻ đã nổ, bảo toàn nguyên vẹn mọi thẻ khác
+                this.trayTiles = this.trayTiles.filter(t => !matchTileIds.has(t.id));
                 this.renderTray();
-                this.checkGameStatus();
+
+                // Kiểm tra xem trong khay còn bộ 3 nào khác cần nổ tiếp không (cascade combo)
+                const remainingCounts = {};
+                this.trayTiles.forEach(t => {
+                    remainingCounts[t.itemId] = (remainingCounts[t.itemId] || 0) + 1;
+                });
+                const hasMoreMatches = Object.values(remainingCounts).some(c => c >= 3);
+
+                if (hasMoreMatches) {
+                    this.checkTrayMatches();
+                } else {
+                    this.isAnimating = false;
+                    this.checkGameStatus();
+                }
             }, 220);
         } else {
             this.combo = 0;
+            this.isAnimating = false;
             this.checkGameStatus();
         }
     }
@@ -800,10 +814,36 @@ class MiniGameEngine {
      * Kiểm tra Thắng hoặc Thua ván chơi
      */
     checkGameStatus() {
-        // Điều kiện Thắng: Hết sạch thẻ trên bàn cờ VÀ khay trống VÀ bục chờ trống
+        // Điều kiện Thắng thông thường: Hết sạch thẻ trên bàn cờ VÀ khay trống VÀ bục chờ trống
         if (this.boardTiles.length === 0 && this.trayTiles.length === 0 && this.stashTiles.length === 0) {
             this.triggerVictory();
             return;
+        }
+
+        // Lưới bảo hiểm thông minh (Smart Safety Net):
+        // Nếu bàn cờ đã dọn sạch hoàn toàn (0 thẻ trên bàn)
+        if (this.boardTiles.length === 0) {
+            const allRemaining = [...this.trayTiles, ...this.stashTiles];
+            // Nếu tổng số thẻ còn lại <= 2 (không thể nào tạo thành bộ 3 nữa do lỗi ngoại cảnh)
+            if (allRemaining.length <= 2) {
+                this.trayTiles = [];
+                this.stashTiles = [];
+                this.renderTray();
+                this.renderStash();
+                this.triggerVictory();
+                return;
+            }
+
+            // Nếu các thẻ còn lại hoàn toàn không thể tạo thêm bất kỳ bộ 3 nào và khay đã đầy
+            const itemCounts = {};
+            allRemaining.forEach(t => {
+                itemCounts[t.itemId] = (itemCounts[t.itemId] || 0) + 1;
+            });
+            const canFormMatch = Object.values(itemCounts).some(cnt => cnt >= 3);
+            if (!canFormMatch && this.trayTiles.length >= 7) {
+                this.triggerGameOver();
+                return;
+            }
         }
 
         // Điều kiện Thua: Đầy cả 7 ô trong khay
@@ -896,7 +936,7 @@ class MiniGameEngine {
      * Trợ giúp 1: Rút 3 thẻ từ khay lên bục chờ (Stash)
      */
     useStashPowerup() {
-        if (this.isGameOver) return;
+        if (this.isAnimating || this.isGameOver) return;
 
         const moveTilesToStash = () => {
             const countToMove = Math.min(3, this.trayTiles.length);
@@ -983,12 +1023,16 @@ class MiniGameEngine {
             `;
             // Người chơi có thể bấm lại vào thẻ ở bục chờ để đưa vào khay
             tileEl.addEventListener('click', () => {
+                if (this.isAnimating || this.isGameOver) return;
                 if (this.trayTiles.length < 7) {
+                    this.isAnimating = true;
                     this.stashTiles.splice(index, 1);
                     this.renderStash();
                     this.addTileToTray(tile);
-                    this.checkTrayMatches();
                     window.soundManager.playClick();
+                    setTimeout(() => {
+                        this.checkTrayMatches();
+                    }, 100);
                 }
             });
             this.stashEl.appendChild(tileEl);
@@ -1006,7 +1050,7 @@ class MiniGameEngine {
      * Trợ giúp 2: Hoàn tác 1 bước đi gần nhất (Undo)
      */
     useUndoPowerup() {
-        if (this.isGameOver) return;
+        if (this.isAnimating || this.isGameOver) return;
 
         const performUndo = () => {
             const lastAction = this.history.pop();
@@ -1015,9 +1059,12 @@ class MiniGameEngine {
 
                 // Tìm và bỏ thẻ đó khỏi khay
                 const trayIdx = this.trayTiles.findIndex(t => t.id === tileData.id);
-                if (trayIdx !== -1) {
-                    this.trayTiles.splice(trayIdx, 1);
+                if (trayIdx === -1) {
+                    window.adManager.showToast('Không thể hoàn tác bước đi đã nổ thẻ!');
+                    this.updatePowerupButtonsUI();
+                    return;
                 }
+                this.trayTiles.splice(trayIdx, 1);
 
                 // Đưa thẻ trở lại bàn cờ
                 this.boardTiles.push(tileData);
@@ -1073,7 +1120,7 @@ class MiniGameEngine {
      * Trợ giúp 3: Xáo trộn toàn bộ thẻ còn lại trên bàn (Shuffle)
      */
     useShufflePowerup() {
-        if (this.isGameOver) return;
+        if (this.isAnimating || this.isGameOver) return;
 
         const performShuffle = () => {
             const items = this.boardTiles.map(t => ({
